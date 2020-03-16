@@ -13,6 +13,7 @@
 
 import numpy as np
 from scipy import linalg
+import matplotlib.pyplot as plt
 
 # # # # # # # # # # # # # # #
 # FUNCTIONS IMPLEMENTATION  #
@@ -80,19 +81,19 @@ def evaluate_probability(hamiltonian, time, psi_0, oracle_site):
 #Implements (numerical) probability distribution given time-range and time-step
 #Input: problem_hamiltonian, flat_state, oracle_site
 #Ouput: array of probability for FIXED gamma value
-def probability_distribution_time(laplacian, flat_state, oracle_site, time_range, time_step):
+def probability_distribution_time(laplacian, flat_state, oracle_site, time_range, time_step, gamma):
 
     #generate problem hamiltonian from laplacian
-    problem_hamiltonian = generate_problem_hamiltonian(laplacian, oracle_site, 1.5)
+    problem_hamiltonian = generate_problem_hamiltonian(laplacian, oracle_site, -gamma)
 
     #defining time steps
     step = float (time_range) / time_step
-    probability_distribution = np.empty([time_step+1, 2])
+    probability_distribution = np.empty([time_step+1, 1])
 
     #perform probability calculation
     for i in range(time_step+1):
         probability_distribution[i][0] = evaluate_probability(problem_hamiltonian, i*step, flat_state, oracle_site)
-        probability_distribution[i][1] = i*step
+        #probability_distribution[i][1] = i*step
     return probability_distribution
 
 
@@ -108,7 +109,7 @@ def probability_distribution_gamma(laplacian, flat_state, oracle_site, time, gam
     #perform probability calculation
     for i in range(gamma_steps+1):
         probability_distribution[i][0] = evaluate_probability(generate_problem_hamiltonian(laplacian, oracle_site,
-                                                                    gamma_steps*i), time, flat_state, oracle_site )
+                                                                    -gamma_steps*i), time, flat_state, oracle_site )
         probability_distribution[i][1] = step * i
     return probability_distribution
 
@@ -127,10 +128,14 @@ if dimension%2 == 0 :
 flat_state = np.empty([dimension, 1])
 flat_state.fill(1/np.sqrt(dimension))
 
+
 #Generate Hamiltonian of Loop graph
 laplacian = generate_loop_hamiltonian(dimension)
 problem_hamiltonian = generate_problem_hamiltonian(laplacian, oracle_site, 1.5)
 
-#probability = probability_distribution_time(laplacian, flat_state, oracle_site, 10, 100)
-probability = probability_distribution_gamma(laplacian, flat_state, oracle_site,1, 2, 30)
-print(probability)
+#Probability Distribution with variable time and variable gamma
+
+gamma = [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9]
+
+print(np.amax(probability_distribution_time(laplacian, flat_state, oracle_site, 1, 100, 6 )))
+print(np.amax(probability_distribution_time(laplacian, flat_state, oracle_site, 1, 100, 6 )))
