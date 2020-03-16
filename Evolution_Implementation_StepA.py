@@ -57,7 +57,7 @@ def generate_loop_hamiltonian(dimension):
 #Implementation of problem hamiltonian. Takes oracle site and gamma value at input
 def generate_problem_hamiltonian(problem_hamiltonian, oracle_site, gamma):
 
-    problem_hamiltonian[oracle_site][oracle_site] += gamma
+    problem_hamiltonian[oracle_site][oracle_site] = problem_hamiltonian[oracle_site][oracle_site] + gamma
     return problem_hamiltonian
 
 
@@ -131,11 +131,26 @@ flat_state.fill(1/np.sqrt(dimension))
 
 #Generate Hamiltonian of Loop graph
 laplacian = generate_loop_hamiltonian(dimension)
-problem_hamiltonian = generate_problem_hamiltonian(laplacian, oracle_site, 1.5)
+print(laplacian)
+problem_hamiltonian1 = generate_problem_hamiltonian(laplacian, oracle_site, 5)
+print(problem_hamiltonian1)
+problem_hamiltonian2 = generate_problem_hamiltonian(laplacian, oracle_site, 10)
+print(problem_hamiltonian2)
 
+
+#print(problem_hamiltonian1)
+#print(problem_hamiltonian2)
+
+
+test1 = evaluate_probability(problem_hamiltonian1, 5.5, flat_state, oracle_site)
+test2 = evaluate_probability(problem_hamiltonian2, 5.5, flat_state, oracle_site)
+print (test1)
+print (test2)
 #Probability Distribution with variable time and variable gamma
+#gamma = [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9]
+#for i in gamma:
+    #print (evaluate_probability(problem_hamiltonian, i, flat_state, oracle_site))
 
-gamma = [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9]
-
-print(np.amax(probability_distribution_time(laplacian, flat_state, oracle_site, 1, 100, 6 )))
-print(np.amax(probability_distribution_time(laplacian, flat_state, oracle_site, 1, 100, 6 )))
+#test1 = probability_distribution_time(laplacian, flat_state, oracle_site, 1, 100, 6 )
+#test2 = probability_distribution_time(laplacian, flat_state, oracle_site, 1, 100, 6 )
+#test = test1-test2
