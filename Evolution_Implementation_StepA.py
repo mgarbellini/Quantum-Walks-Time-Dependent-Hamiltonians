@@ -13,6 +13,7 @@
 
 import numpy as np
 from scipy import linalg
+from scipy.optimize import minimize
 import matplotlib.pyplot as plt
 
 # # # # # # # # # # # # # # #
@@ -55,22 +56,29 @@ def generate_loop_hamiltonian(dimension):
 
 
 #Implementation of problem hamiltonian. Takes oracle site and gamma value at input
-def generate_problem_hamiltonian(problem_hamiltonian, oracle_site, gamma):
+def generate_problem_hamiltonian(hamiltonian, oracle_site, gamma, dimension):
 
-    problem_hamiltonian[oracle_site][oracle_site] = problem_hamiltonian[oracle_site][oracle_site] + gamma
+    problem_hamiltonian = np.empty([dimension, dimension])
+    problem_hamiltonian = hamiltonian
+    problem_hamiltonian[oracle_site][oracle_site] +=  - gamma
     return problem_hamiltonian
 
 
 #Implementation of time evolution with time-independent hamiltonian
 #and evalute 'crossing-to-oracle' probability for a given time t
-def evaluate_probability(hamiltonian, time, psi_0, oracle_site):
+def evaluate_probability(hamiltonian, time, psi_0, oracle_site, dimension):
 
     #define oracle_site_state
     oracle_site_state = np.empty([dimension, 1])
     oracle_site_state.fill(0)
     oracle_site_state[oracle_site][0] = 1
 
+    #set to zero variables
+    probability = 0
+    psi_t = np.empty([dimension, 1])
+
     #define time-evolution
+    unitary_time_evolution = np.empty([dimension, dimension])
     unitary_time_evolution = linalg.expm(-(1j)*hamiltonian*time)
     psi_t = np.dot(unitary_time_evolution, psi_0)
     probability = np.dot(oracle_site_state.transpose(), psi_t)
@@ -84,7 +92,7 @@ def evaluate_probability(hamiltonian, time, psi_0, oracle_site):
 def probability_distribution_time(laplacian, flat_state, oracle_site, time_range, time_step, gamma):
 
     #generate problem hamiltonian from laplacian
-    problem_hamiltonian = generate_problem_hamiltonian(laplacian, oracle_site, -gamma)
+    problem_hamiltonian = generate_problem_hamiltonian(laplacian, oracle_site, gamma)
 
     #defining time steps
     step = float (time_range) / time_step
@@ -117,9 +125,10 @@ def probability_distribution_gamma(laplacian, flat_state, oracle_site, time, gam
 #   MAIN    #
 # # # # # # #
 
+
 #Define number of graph sites.
 #This also represents the space dimension (odd number expected)
-dimension = 3
+dimension = 5
 oracle_site = (dimension-1)/2
 if dimension%2 == 0 :
     exit('Error: even number of sites. Expected odd number!')
@@ -131,20 +140,11 @@ flat_state.fill(1/np.sqrt(dimension))
 
 #Generate Hamiltonian of Loop graph
 laplacian = generate_loop_hamiltonian(dimension)
-print(laplacian)
-problem_hamiltonian1 = generate_problem_hamiltonian(laplacian, oracle_site, 5)
-print(problem_hamiltonian1)
-problem_hamiltonian2 = generate_problem_hamiltonian(laplacian, oracle_site, 10)
-print(problem_hamiltonian2)
-
-
-#print(problem_hamiltonian1)
-#print(problem_hamiltonian2)
-
-
-test1 = evaluate_probability(problem_hamiltonian1, 5.5, flat_state, oracle_site)
-test2 = evaluate_probability(problem_hamiltonian2, 5.5, flat_state, oracle_site)
+#problem_hamiltonian1 = generate_problem_hamiltonian(laplacian, oracle_site, 1.66)
+test1 = evaluate_probability(generate_problem_hamiltonian(laplacian, oracle_site, 1.97, dimension), 10, flat_state, oracle_site, dimension)
 print (test1)
+
+test2 = evaluate_probability(generate_problem_hamiltonian(laplacian, oracle_site, 1.97, dimension), 10, flat_state, oracle_site, dimension)
 print (test2)
 #Probability Distribution with variable time and variable gamma
 #gamma = [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9]
