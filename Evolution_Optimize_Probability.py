@@ -98,14 +98,14 @@ def evaluate_probability(x, dimension):
 
 #Define number of graph sites.
 #This also represents the space dimension (odd number expected)
-dimension = (7,)
+dimension = (15,)
 #if dimension%2 == 0 :
 #    exit('Error: even number of sites. Expected odd number!')
 
 #Define lambda and time bounds
-bnds = ([0, 10], [0, 20])
+bnds = ([0, 2], [0, 10])
 
-x = np.array([2,10])
+x = np.array([1.5,8])
 
 
 result = minimize(evaluate_probability, x ,method='SLSQP', args=dimension, bounds=bnds)
@@ -114,8 +114,5 @@ result = minimize(evaluate_probability, x ,method='SLSQP', args=dimension, bound
 method='trust-constr'
 method='SLSQP'
 """
-x1 = np.array([1.39081, 11.07797])
-probability_1 = evaluate_probability(x1, 7)
 print(result.x)
 print(result.fun)
-print(probability_1)

@@ -1,0 +1,45 @@
+#Optimization results from Evolution_Optimize_Probability.py and Mathematica
+#results confronted
+
+MATHEMATICA COMPUTATIONS
+#dim #prob #gamma #time
+gamma [0,2] time [0,10]
+
+3   # 0.925926  2.      9.42478
+
+5   # 0.857669  1.97222 10.
+
+7   # 0.692488  1.60823 10.
+
+9   # 0.570929  1.91337 10.
+
+11  # 0.537120  0.97422 8.38183
+
+13  # 0.487473  1.11753 8.10069
+
+15  # 0.385051  1.04911 9.66957
+
+
+PYTHON COMPUTATIONS
+#dim #prob #gamma #time
+gamma [0,2] time [0,10]
+
+3
+
+5
+
+7
+
+9
+
+11
+
+13
+
+15
+
+17
+
+19
+
+21
