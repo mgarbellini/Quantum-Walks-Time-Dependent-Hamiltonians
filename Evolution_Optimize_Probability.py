@@ -13,13 +13,19 @@
 
 import numpy as np
 from scipy import linalg
-from scipy.optimize import minimize
+from scipy.optimize import minimize, basinhopping
+#from scipy.optimize import shgo
 
 import matplotlib.pyplot as plt
 
 # # # # # # # # # # # # # # #
 # FUNCTIONS IMPLEMENTATION  #
 # # # # # # # # # # # # # # #
+
+
+#global definition
+dimension = 3
+
 
 #Implementation of generate_hamiltonian function
 #this routine takes hilbert space dimension (n) as input
@@ -62,7 +68,7 @@ def generate_hamiltonian(dimension, gamma):
 
 #Implementation of time evolution with time-independent hamiltonian
 #and evalute 'crossing-to-oracle' probability for a given time t
-def evaluate_probability(x, dimension):
+def evaluate_probability(x):
 
     #generate_hamiltonian (really memory and time inefficient)
     hamiltonian = generate_hamiltonian(dimension, x[0])
@@ -98,21 +104,36 @@ def evaluate_probability(x, dimension):
 
 #Define number of graph sites.
 #This also represents the space dimension (odd number expected)
-dimension = (15,)
+
+#dimension = (17,)
 #if dimension%2 == 0 :
 #    exit('Error: even number of sites. Expected odd number!')
 
 #Define lambda and time bounds
 bnds = ([0, 2], [0, 10])
 
-x = np.array([1.5,8])
-
-
-result = minimize(evaluate_probability, x ,method='SLSQP', args=dimension, bounds=bnds)
+x = np.array([0, 0])
 
 """
-method='trust-constr'
-method='SLSQP'
+#result = minimize(evaluate_probability, x ,method='SLSQP', args=dimension, bounds=bnds)
+#result = optimize.shgo(evaluate_probability(x, dimension), bounds=bnds)
+minimizer_kwargs = dict(method="L-BFGS-B", bounds=bnds)
+result = basinhopping(evaluate_probability, x,  minimizer_kwargs=minimizer_kwargs,niter=1000)
+#print(result.x)
+#print(result.fun)
 """
-print(result.x)
-print(result.fun)
+
+
+#Probability over time with given gamma
+iterations = 10;
+prob_distribution = np.empty([iterations,2], dtype=np.float)
+time_interval = 10
+time_step = float (time_interval)/iterations
+x_eval = np.array([2,0], dtype=np.float)
+
+for i in range(iterations):
+    x_eval[1] += time_step
+    prob_distribution[i][1]=evaluate_probability(x_eval)
+    prob_distribution[i][0]= x_eval[1]
+
+print(prob_distribution)
