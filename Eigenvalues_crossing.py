@@ -63,17 +63,50 @@ def time_dependent_hamiltonian(dimension, gamma, time, T):
 
     return hamiltonian
 
+def compute_eigenvalues(dimension, gamma, time, TIME):
+
+    t_hamiltonian = time_dependent_hamiltonian(dimension, gamma, time, TIME)
+    eigenvalues, eigenvectors = linalg.eig(t_hamiltonian)
+    eigenvalues_sorted = np.sort(eigenvalues, axis=None)
+    return eigenvalues_sorted.real
+
+
 # # # # # # #
 #   MAIN    #
 # # # # # # #
 
-dimension = 5
-gamma = 1.6
-T = 10
 
+
+"""
 hamiltonian = generate_loop_hamiltonian(dimension) - gamma*generate_oracle_hamiltonian(dimension)
 t_hamiltonian = time_dependent_hamiltonian(dimension, gamma,3, T);
 eigenvalues, eigenvectors = linalg.eig(t_hamiltonian)
-
 eigenvalues_sorted = np.sort(eigenvalues, axis=None)
-print(eigenvalues_sorted)
+"""
+
+#eigenvalues = compute_eigenvalues(dimension, gamma, 5, T)
+#eigenvalues1 = compute_eigenvalues(dimension, gamma, 5, T)
+
+#np.insert(eigenvalues_sorted, [0], [1])
+
+dimension = 15
+gamma = 1.02212
+T = 10.
+
+#Eigenvalues plot
+sampling = 100
+time_step = float (T)/100
+time = 0
+eigenvalues = np.empty([sampling, dimension])
+eigenvalues_distribution = np.empty([sampling, dimension])
+for i in range(sampling):
+    time += time_step
+    eigenvalues[i] = compute_eigenvalues(dimension, gamma, time, T)
+
+time = 0
+for i in range(100):
+    time += time_step
+    eigenvalues_distribution = np.insert(eigenvalues,[i, 0], [7])
+
+#print(eigenvalues)
+np.savetxt('15_eigenvalues.txt', eigenvalues, fmt='%.3e')
