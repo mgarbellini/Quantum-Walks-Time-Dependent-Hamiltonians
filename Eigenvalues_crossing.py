@@ -67,6 +67,14 @@ def generate_oracle_hamiltonian(dimension, gamma):
 
     return hamiltonian
 
+def time_dependent_hamiltonian(dimension, gamma, time, T):
+
+    g = float (time)/T
+    hamiltonian = (1-g)*generate_loop_hamiltonian(dimension) - g*generate_oracle_hamiltonian(dimension, gamma)
+
+    return hamiltonian
+
+
 #Implementation of time evolution with time-independent hamiltonian
 #and evalute 'crossing-to-oracle' probability for a given time t
 def evaluate_probability(x):
@@ -103,8 +111,10 @@ def evaluate_probability(x):
 # # # # # # #
 
 dimension = 3
-gamma = 1
+gamma = 1.6
+T = 10
 
-hamiltonian = generate_loop_hamiltonian(dimension) + generate_oracle_hamiltonian(dimension, gamma)
+hamiltonian = generate_loop_hamiltonian(dimension) - generate_oracle_hamiltonian(dimension, gamma)
+t_hamiltonian = time_dependent_hamiltonian(dimension, gamma, 5, T);
 eigenvalues, eigenvectors = linalg.eig(hamiltonian)
 print(eigenvalues)
