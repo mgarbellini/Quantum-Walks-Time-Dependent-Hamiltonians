@@ -109,4 +109,4 @@ for i in range(100):
     eigenvalues_distribution = np.insert(eigenvalues,[i, 0], [7])
 
 #print(eigenvalues)
-np.savetxt('15_eigenvalues.txt', eigenvalues, fmt='%.3e')
+np.savetxt('15_quadratic.txt', eigenvalues, fmt='%.3e')
