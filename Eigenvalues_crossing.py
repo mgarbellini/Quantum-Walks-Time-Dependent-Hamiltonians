@@ -3,13 +3,6 @@
 # Universita degli Studi di Milano
 # matteo.garbellini@studenti.unimi.it
 
-
-#ADIABATIC QUANTUM WALKS
-#STEP A: Time evolution of circle graph witn n nodes
-
-
-
-
 import numpy as np
 from scipy import linalg
 from scipy.optimize import minimize, basinhopping
@@ -21,11 +14,6 @@ import matplotlib.pyplot as plt
 # FUNCTIONS IMPLEMENTATION  #
 # # # # # # # # # # # # # # #
 
-
-
-#Implementation of generate_hamiltonian function
-#this routine takes hilbert space dimension (n) as input
-#and outputs a nxn matrix corrisponding to H = L + gamma
 def generate_loop_hamiltonian(dimension):
 
     #generate diagonal matrix
@@ -56,65 +44,36 @@ def generate_loop_hamiltonian(dimension):
 
     #generate laplacian of loop
     hamiltonian = diag_matrix - adj_matrix
+
     return hamiltonian
 
-def generate_oracle_hamiltonian(dimension, gamma):
+def generate_oracle_hamiltonian(dimension):
 
     hamiltonian = np.empty([dimension, dimension])
     hamiltonian.fill(0)
     #generate problem_hamiltonian (i.e. adding oracle tipical energy to center site)
-    hamiltonian[(dimension-1)/2][(dimension-1)/2] +=  gamma
+    hamiltonian[(dimension-1)/2][(dimension-1)/2] =  1
 
     return hamiltonian
 
 def time_dependent_hamiltonian(dimension, gamma, time, T):
 
     g = float (time)/T
-    hamiltonian = (1-g)*generate_loop_hamiltonian(dimension) - g*generate_oracle_hamiltonian(dimension, gamma)
+    hamiltonian = (1-g)*generate_loop_hamiltonian(dimension) - g*gamma*generate_oracle_hamiltonian(dimension)
 
     return hamiltonian
-
-
-#Implementation of time evolution with time-independent hamiltonian
-#and evalute 'crossing-to-oracle' probability for a given time t
-def evaluate_probability(x):
-
-    #generate_hamiltonian (really memory and time inefficient)
-    hamiltonian = generate_hamiltonian(dimension, x[0])
-
-    #Generate so called 'flat-state'
-    psi_0 = np.empty([dimension, 1])
-    psi_0.fill(1/np.sqrt(dimension))
-
-    #define oracle_site_state
-    oracle_site_state = np.empty([dimension, 1])
-    oracle_site_state.fill(0)
-    oracle_site_state[(dimension-1)/2][0] = 1
-
-    #set to zero variables
-    probability = 0
-    psi_t = np.empty([dimension, 1])
-    psi_t.fill(0)
-
-    #define time-evolution
-    unitary_time_evolution = np.empty([dimension, dimension])
-    unitary_time_evolution.fill(0)
-    unitary_time_evolution = linalg.expm(-(1j)*hamiltonian*x[1])
-    psi_t = np.dot(unitary_time_evolution, psi_0)
-    probability = np.dot(oracle_site_state.transpose(), psi_t)
-
-    #return 'crossing' probability
-    return -np.abs(probability)**2
 
 # # # # # # #
 #   MAIN    #
 # # # # # # #
 
-dimension = 3
+dimension = 5
 gamma = 1.6
 T = 10
 
-hamiltonian = generate_loop_hamiltonian(dimension) - generate_oracle_hamiltonian(dimension, gamma)
-t_hamiltonian = time_dependent_hamiltonian(dimension, gamma, 5, T);
-eigenvalues, eigenvectors = linalg.eig(hamiltonian)
-print(eigenvalues)
+hamiltonian = generate_loop_hamiltonian(dimension) - gamma*generate_oracle_hamiltonian(dimension)
+t_hamiltonian = time_dependent_hamiltonian(dimension, gamma,3, T);
+eigenvalues, eigenvectors = linalg.eig(t_hamiltonian)
+
+eigenvalues_sorted = np.sort(eigenvalues, axis=None)
+print(eigenvalues_sorted)
