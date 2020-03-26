@@ -95,13 +95,13 @@ T = 10.
 
 #Eigenvalues plot
 sampling = 100
-time_step = float (T)/100
+time_step = float (T*T)/100
 time = 0
 eigenvalues = np.empty([sampling, dimension])
 eigenvalues_distribution = np.empty([sampling, dimension])
 for i in range(sampling):
     time += time_step
-    eigenvalues[i] = compute_eigenvalues(dimension, gamma, time, T)
+    eigenvalues[i] = compute_eigenvalues(dimension, gamma, time, T*T)
 
 time = 0
 for i in range(100):

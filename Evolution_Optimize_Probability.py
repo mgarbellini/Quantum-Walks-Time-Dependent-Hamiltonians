@@ -3,17 +3,11 @@
 # Universita degli Studi di Milano
 # matteo.garbellini@studenti.unimi.it
 
-
-#ADIABATIC QUANTUM WALKS
-#STEP A: Time evolution of circle graph witn n nodes
-
-
-#NOTA:
-#array[colonna][riga]
-
+import sys
 import numpy as np
 from scipy import linalg
 from scipy.optimize import minimize, basinhopping
+#import constrNMPy as cNM
 #from scipy.optimize import shgo
 
 import matplotlib.pyplot as plt
@@ -22,10 +16,8 @@ import matplotlib.pyplot as plt
 # FUNCTIONS IMPLEMENTATION  #
 # # # # # # # # # # # # # # #
 
-
 #global definition
-dimension = 3
-
+dimension = int(sys.argv[1])
 
 #Implementation of generate_hamiltonian function
 #this routine takes hilbert space dimension (n) as input
@@ -62,7 +54,8 @@ def generate_hamiltonian(dimension, gamma):
     hamiltonian = diag_matrix - adj_matrix
 
     #generate problem_hamiltonian (i.e. adding oracle tipical energy to center site)
-    hamiltonian[(dimension-1)/2][(dimension-1)/2] += - gamma
+    index = int((dimension-1)/2)
+    hamiltonian[index][index] += - gamma
 
     return hamiltonian
 
@@ -80,7 +73,7 @@ def evaluate_probability(x):
     #define oracle_site_state
     oracle_site_state = np.empty([dimension, 1])
     oracle_site_state.fill(0)
-    oracle_site_state[(dimension-1)/2][0] = 1
+    oracle_site_state[int((dimension-1)/2)][0] = 1
 
     #set to zero variables
     probability = 0
@@ -101,39 +94,14 @@ def evaluate_probability(x):
 #   MAIN    #
 # # # # # # #
 
-
-#Define number of graph sites.
-#This also represents the space dimension (odd number expected)
-
-#dimension = (17,)
-#if dimension%2 == 0 :
-#    exit('Error: even number of sites. Expected odd number!')
+if dimension%2 == 0 :
+    exit('Error: even number of sites. Expected odd number!')
 
 #Define lambda and time bounds
-bnds = ([0, 2], [0, 10])
-
-x = np.array([0, 0])
-
-"""
-#result = minimize(evaluate_probability, x ,method='SLSQP', args=dimension, bounds=bnds)
-#result = optimize.shgo(evaluate_probability(x, dimension), bounds=bnds)
+bnds = ([0, 3], [0, 10])
+x = np.array([1, 5])
 minimizer_kwargs = dict(method="L-BFGS-B", bounds=bnds)
 result = basinhopping(evaluate_probability, x,  minimizer_kwargs=minimizer_kwargs,niter=1000)
-#print(result.x)
-#print(result.fun)
-"""
-
-
-#Probability over time with given gamma
-iterations = 10;
-prob_distribution = np.empty([iterations,2], dtype=np.float)
-time_interval = 10
-time_step = float (time_interval)/iterations
-x_eval = np.array([2,0], dtype=np.float)
-
-for i in range(iterations):
-    x_eval[1] += time_step
-    prob_distribution[i][1]=evaluate_probability(x_eval)
-    prob_distribution[i][0]= x_eval[1]
-
-print(prob_distribution)
+print(dimension)
+print(result.x)
+print(-result.fun)
