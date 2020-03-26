@@ -99,7 +99,7 @@ if dimension%2 == 0 :
 
 #Define lambda and time bounds
 bnds = ([0, 3], [0, 10])
-x = np.array([1, 5])
+x = np.array([0.1, 1])
 minimizer_kwargs = dict(method="L-BFGS-B", bounds=bnds)
 result = basinhopping(evaluate_probability, x,  minimizer_kwargs=minimizer_kwargs,niter=1000)
 print(dimension)

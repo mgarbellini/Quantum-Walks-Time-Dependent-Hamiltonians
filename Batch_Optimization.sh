@@ -1,0 +1,16 @@
+#!/bin/bash
+python Evolution_Optimize_Probability.py 3
+python Evolution_Optimize_Probability.py 5
+python Evolution_Optimize_Probability.py 7
+python Evolution_Optimize_Probability.py 9
+python Evolution_Optimize_Probability.py 11
+python Evolution_Optimize_Probability.py 13
+python Evolution_Optimize_Probability.py 15
+python Evolution_Optimize_Probability.py 17
+python Evolution_Optimize_Probability.py 19
+python Evolution_Optimize_Probability.py 21
+python Evolution_Optimize_Probability.py 23
+python Evolution_Optimize_Probability.py 25
+python Evolution_Optimize_Probability.py 27
+python Evolution_Optimize_Probability.py 29
+python Evolution_Optimize_Probability.py 31
