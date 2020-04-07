@@ -98,10 +98,10 @@ if dimension%2 == 0 :
     exit('Error: even number of sites. Expected odd number!')
 
 #Define lambda and time bounds
-bnds = ([0, 4], [0, 20])
-x = np.array([0.1, 1])
+bnds = ([0, 3], [0, 15])
+x = np.array([2.10, 10])
 minimizer_kwargs = dict(method="L-BFGS-B", bounds=bnds)
-result = basinhopping(evaluate_probability, x,  minimizer_kwargs=minimizer_kwargs,niter=2500)
+result = basinhopping(evaluate_probability, x,  minimizer_kwargs=minimizer_kwargs,niter=10000)
 print(dimension)
 print(result.x)
 print(-result.fun)
