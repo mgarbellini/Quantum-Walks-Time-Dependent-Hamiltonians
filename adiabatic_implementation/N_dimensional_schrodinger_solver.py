@@ -143,16 +143,14 @@ for i in range(14):
 
     #first method
     method = 'BDF'
-    minimizer_kwargs = dict(method="L-BFGS-B", bounds=bnds, args=method)
     tic = time.perf_counter()
-    results = basinhopping(evaluate_probability, x,  minimizer_kwargs=minimizer_kwargs,niter=1)
+    psi_t = solve_schrodinger_equation(10, 2, method)
     benchmark[i,0] = time.perf_counter()-tic
 
     #second method
     method = 'RK45'
-    minimizer_kwargs = dict(method="L-BFGS-B", bounds=bnds, args=method)
     tic = time.perf_counter()
-    results = basinhopping(evaluate_probability, x,  minimizer_kwargs=minimizer_kwargs,niter=1)
+    psi_t = solve_schrodinger_equation(10, 2, method)
     benchmark[i,1] = time.perf_counter()-tic
 
     #print results for quick debugging
