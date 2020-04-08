@@ -1,3 +1,12 @@
 #!/bin/bash
 
-python Evolution_Optimize_Probability.py 5
+python N_dimensional_schrodinger_solver.py 3
+python N_dimensional_schrodinger_solver.py 5
+python N_dimensional_schrodinger_solver.py 7
+python N_dimensional_schrodinger_solver.py 9
+python N_dimensional_schrodinger_solver.py 11
+python N_dimensional_schrodinger_solver.py 13
+python N_dimensional_schrodinger_solver.py 15
+python N_dimensional_schrodinger_solver.py 17
+python N_dimensional_schrodinger_solver.py 19
+python N_dimensional_schrodinger_solver.py 21
