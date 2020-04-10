@@ -100,30 +100,77 @@ def compute_energy_diff(s, beta):
 
     return (energy[1]-energy[0])
 
+def compute_adiabatic_time(beta):
+
+    #SET DIMENSION
+    #GAMMA MAXIMIZATION
+    par_bnds = ([0, 1],)
+    x = 0.5
+    minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=beta)
+    minimization = basinhopping(compute_gamma, x,  minimizer_kwargs=minimizer_kwargs, niter=50)
+    gamma_max = -minimization.fun
+
+    #ENERGY MINIMUM
+    par_bnds = ([0, 1],)
+    x = 0.5
+    minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=beta)
+    minimization = basinhopping(compute_energy_diff, x,  minimizer_kwargs=minimizer_kwargs, niter=50)
+    energy_min = minimization.fun
+
+    #TIME BOUNDS FOR ADIABATIC THEOREM
+    adiabatic_time = gamma_max/(energy_min**2)
+
+    return adiabatic_time
 
 #Need to compute instaneaus eigenvalues and eigenstates of complete time
 #dependent hamiltonian (interested in only ground and 1st excited states)
 
-dimension = 27
-beta = 1.7
+beta_range = np.linspace(0.01, 4, num=100, endpoint=False)
+adiabatic_time_distribution = np.empty([100, 15])
+dimension_array  = [3,5,7,9,11,13,15,17,19,21,23,25,27,29]
+index = 0
+sum_toc = 0
+for i in beta_range:
+    tic = time.perf_counter()
+    adiabatic_time_distribution[index,0] = i
+    for j in range(14):
+        dimension = dimension_array[j]
+        adiabatic_time_distribution[index,j+1] = compute_adiabatic_time(i)
+    index += 1
+    toc = time.perf_counter() - tic
+    sum_toc += toc
+    time_remaining = int(((100 - index)*(sum_toc/index))/60)
+    print('Progress: ', index,'% # Est. Time Remaining: ',time_remaining, ' min')
 
-#GAMMA MAXIMIZATION
-par_bnds = ([0, 1],)
-x = 0.5
-minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=beta)
-minimization = basinhopping(compute_gamma, x,  minimizer_kwargs=minimizer_kwargs, niter=50)
-gamma_max = -minimization.fun
-print('Gamma max: ', gamma_max)
+np.savetxt('adiabatic_time_distribution.txt', adiabatic_time_distribution, fmt='%.3e')
+#dimension = 15
+#print(compute_adiabatic_time(5))
 
-#ENERGY MINIMUM
-par_bnds = ([0, 1],)
-x = 0.5
-minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=beta)
-minimization = basinhopping(compute_energy_diff, x,  minimizer_kwargs=minimizer_kwargs, niter=100)
-energy_min = minimization.fun
-print('Energy min: ',energy_min)
 
-#TIME BOUNDS FOR ADIABATIC THEOREM
-adiabatic_time = gamma_max/(energy_min**2)
 
-print('Adiabatic time: ',adiabatic_time)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#end

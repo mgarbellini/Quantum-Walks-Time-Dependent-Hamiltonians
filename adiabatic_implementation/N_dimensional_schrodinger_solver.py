@@ -12,7 +12,6 @@ from scipy.integrate import odeint, solve_ivp
 import matplotlib.pyplot as plt
 
 global dimension
-#dimension = int(sys.argv[1])
 
 def generate_hamiltonian(dimension, beta, time, TIME):
 
@@ -48,8 +47,7 @@ def generate_hamiltonian(dimension, beta, time, TIME):
 
 
     #generate time dependet hamiltonian
-    time_scalar_function = 1 - float(time)/TIME
-    time_hamiltonian = (time_scalar_function)*hamiltonian
+    time_hamiltonian = (1 - float(time)/TIME)*hamiltonian
 
     #generate problem_hamiltonian (i.e. adding oracle tipical energy to center site)
     index = int((dimension-1)/2)
@@ -73,7 +71,7 @@ def schrodinger_equation(t, y, beta, TIME):
 def solve_schrodinger_equation(time, beta, meth):
 
     y0 = np.empty(dimension, dtype=complex)
-    y0.fill(1/np.sqrt(dimension)+0*1j)
+    y0.fill(1/(np.sqrt(dimension)))
     t_i = 0.
     t_step_max = 0.01
     t_f = time
@@ -99,37 +97,55 @@ def evaluate_probability(x, method):
 
     #define time-evolution
     psi_t = solve_schrodinger_equation(x[1], x[0], method)
-    probability = np.dot(oracle_site_state.transpose(), psi_t)
+
+    #check psi_t normalization
+    normalization = np.dot(np.conj(psi_t), psi_t)
+
+    probability = np.dot(oracle_site_state.transpose(), psi_t/(np.sqrt(normalization)))
+    #print(np.abs(probability))
 
     #return 'crossing' probability
+    #if(-np.abs(probability)**2 < -1):
+        #print('Error: probability out of bounds: ', -np.abs(probability)**2)
     return -np.abs(probability)**2
 
-#main solver
-#x=[9, 3]
-#probability = evaluate_probability(x)
-#print(probability)
-
-
-#Define lambda and time bounds
-"""
-bnds = ([0, 4], [5, 20])
-x = np.array([2, 10])
-method = 'BDF'
-minimizer_kwargs = dict(method="L-BFGS-B", bounds=bnds, args=method)
-tic = time.perf_counter()
-result = basinhopping(evaluate_probability, x,  minimizer_kwargs=minimizer_kwargs,niter=1)
-computation_time = time.perf_counter() - tic
-print(dimension, "Computation time:", computation_time)
-"""
 #print(computation_time)
 #print(result.x)
 #print(-result.fun)
 
+#MINIMIZATION USING SINGLE ITERATIONS OPTIMIZE.MINIMIZE AND OPTIMIZE.BASINHOPPING
+#using different methods.
+#
 
-#PERFORM COMPUTATION TIME BENCHMARK FOR 'BDF' METHOD
-#AND RK45 METHOD USING A SINGLE ITERATION OF BASINHOPPING
-#OPTIMIZATION ALGORITHM
+par_bnds = ([0, 2], [120, 200])
+x0 = np.array([1.7,85])
+solver_method = 'RK45'
+minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=solver_method)
 
+dimension = 27
+
+print('# # # # dimension: ',dimension,' # # # # method: minimize, L-BFGS-B # # # #' )
+tic = time.perf_counter()
+minimization = minimize(evaluate_probability, x0, args=(solver_method,), method='L-BFGS-B', bounds=par_bnds )
+computation_time = time.perf_counter() - tic
+print(computation_time)
+print(minimization.x)
+print(-minimization.fun)
+
+print('# # # # dimension: ',dimension,' # # # # method: basinhopppint, niter=10, L-BFGS-B # # # #' )
+#BASINHOPPING
+
+tic = time.perf_counter()
+minimization = basinhopping(evaluate_probability, x0,  minimizer_kwargs=minimizer_kwargs,niter=1)
+computation_time = time.perf_counter() - tic
+print(computation_time)
+print(minimization.x)
+print(-minimization.fun)
+
+
+#PERFORM BENCHMARK FOR 'BDF' AND 'RK45' METHOD
+#FOR SCHRODINGER SOLVER
+"""
 benchmark = np.empty([14, 2])
 benchmark.fill(0)
 dimension_array = [3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29]
@@ -155,5 +171,4 @@ for i in range(14):
 
     #print results for quick debugging
     print(dimension, benchmark[i,0], benchmark[i,1])
-
-#end
+"""
