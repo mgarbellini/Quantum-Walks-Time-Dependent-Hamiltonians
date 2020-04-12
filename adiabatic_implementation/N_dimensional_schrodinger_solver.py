@@ -117,31 +117,52 @@ def evaluate_probability(x, method):
 #using different methods.
 #
 
-par_bnds = ([0, 2], [120, 200])
-x0 = np.array([1.7,85])
+par_bnds = ([0, 2], [0, 20])
+x0 = np.array([1.,10])
 solver_method = 'RK45'
 minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=solver_method)
 
-dimension = 27
 
-print('# # # # dimension: ',dimension,' # # # # method: minimize, L-BFGS-B # # # #' )
-tic = time.perf_counter()
-minimization = minimize(evaluate_probability, x0, args=(solver_method,), method='L-BFGS-B', bounds=par_bnds )
-computation_time = time.perf_counter() - tic
-print(computation_time)
-print(minimization.x)
-print(-minimization.fun)
 
-print('# # # # dimension: ',dimension,' # # # # method: basinhopppint, niter=10, L-BFGS-B # # # #' )
+computation_results = np.empty([3,5])
+computation_results.fill(0)
+
 #BASINHOPPING
 
-tic = time.perf_counter()
-minimization = basinhopping(evaluate_probability, x0,  minimizer_kwargs=minimizer_kwargs,niter=1)
-computation_time = time.perf_counter() - tic
-print(computation_time)
-print(minimization.x)
-print(-minimization.fun)
+#DIM 3
+dimension = 25
+par_bnds = ([0, 4], [0,300])
+minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=solver_method)
 
+tic = time.perf_counter()
+minimization = basinhopping(evaluate_probability, x0,  minimizer_kwargs=minimizer_kwargs,niter=25)
+computation_results[0, 4] = time.perf_counter() - tic
+computation_results[0, 0] = dimension
+computation_results[0, 1] = -minimization.fun
+computation_results[0, 2] = minimization.x[1]
+computation_results[0, 3] = minimization.x[0]
+print("Dimension ",dimension," done in ", int(computation_results[0,4]/60), " minuti")
+
+#DIM 5
+dimension = 27
+par_bnds = ([0, 4], [0,300])
+minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=solver_method)
+
+tic = time.perf_counter()
+minimization = basinhopping(evaluate_probability, x0,  minimizer_kwargs=minimizer_kwargs,niter=25)
+computation_results[1, 4] = time.perf_counter() - tic
+computation_results[1, 0] = dimension
+computation_results[1, 1] = -minimization.fun
+computation_results[1, 2] = minimization.x[1]
+computation_results[1, 3] = minimization.x[0]
+print("Dimension ",dimension," done in ", int(computation_results[1,4]/60), " minuti")
+
+
+
+#OUTPUT
+computation_results = np.around(computation_results, decimals=3)
+print(computation_results)
+np.savetxt('Adiabatic_Optimization_25_27.txt', computation_results, fmt='%.3e')
 
 #PERFORM BENCHMARK FOR 'BDF' AND 'RK45' METHOD
 #FOR SCHRODINGER SOLVER
