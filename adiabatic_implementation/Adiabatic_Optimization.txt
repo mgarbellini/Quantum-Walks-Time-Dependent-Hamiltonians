@@ -1,5 +1,5 @@
 Adiabatic Optimization using RK45 ODE Solver
-and Basinhopping 'L-BSF-L' minimization algorithm
+and Basinhopping 'L-BSFB-L' minimization algorithm
 
 #   prob   time   beta    comp_time(min)
 3   1.00	 8.999 	2.985 	<1
