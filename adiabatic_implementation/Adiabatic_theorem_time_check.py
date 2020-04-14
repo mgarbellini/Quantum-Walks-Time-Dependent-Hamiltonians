@@ -60,8 +60,6 @@ def generate_hamiltonian(beta, s, derivative):
         return hamiltonian_derivative
     else:
         return time_hamiltonian
-
-
 def compute_eigenvalues_eigenvectors(beta, s, eigen_s):
 
     t_hamiltonian = generate_hamiltonian(beta, s, 0)
@@ -74,7 +72,6 @@ def compute_eigenvalues_eigenvectors(beta, s, eigen_s):
         return eigenstates
     else:
         return eigenvalues.real
-
 def compute_gamma(s,beta):
 
     #find eigenstates
@@ -94,27 +91,28 @@ def compute_gamma(s,beta):
     gamma = np.dot(np.transpose((np.conj(phi1))), np.dot(hamiltonian_derivative, phi0))
     return -np.abs(gamma)
 
+
 def compute_energy_diff(s, beta):
 
     energy = compute_eigenvalues_eigenvectors(beta,s,0)
 
     return (energy[1]-energy[0])
-
+    
 def compute_adiabatic_time(beta):
 
     #SET DIMENSION
     #GAMMA MAXIMIZATION
     par_bnds = ([0, 1],)
     x = 0.5
-    minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=beta)
-    minimization = basinhopping(compute_gamma, x,  minimizer_kwargs=minimizer_kwargs, niter=50)
+    minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=(beta))
+    minimization = basinhopping(compute_gamma, x,  minimizer_kwargs=minimizer_kwargs, niter=25)
     gamma_max = -minimization.fun
 
     #ENERGY MINIMUM
     par_bnds = ([0, 1],)
     x = 0.5
-    minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=beta)
-    minimization = basinhopping(compute_energy_diff, x,  minimizer_kwargs=minimizer_kwargs, niter=50)
+    minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=(beta))
+    minimization = basinhopping(compute_energy_diff, x,  minimizer_kwargs=minimizer_kwargs, niter=25)
     energy_min = minimization.fun
 
     #TIME BOUNDS FOR ADIABATIC THEOREM
@@ -122,9 +120,29 @@ def compute_adiabatic_time(beta):
 
     return adiabatic_time
 
+def compute_predicted_time_min(beta):
+    #ENERGY MINIMUM
+    par_bnds = ([0, 1],)
+    x = 0.5
+    minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=(beta,0))
+    minimization = basinhopping(compute_energy_diff, x,  minimizer_kwargs=minimizer_kwargs, niter=50)
+    energy_min = minimization.fun
+
+    return energy_min
+
+def compute_predicted_time_max(beta):
+    #ENERGY MAXIMUM
+    par_bnds = ([0, 1],)
+    x = 0.5
+    minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=(beta,1))
+    minimization = basinhopping(compute_energy_diff, x,  minimizer_kwargs=minimizer_kwargs, niter=50)
+    energy_max = minimization.fun
+
+    return energy_max
+
 #Need to compute instaneaus eigenvalues and eigenstates of complete time
 #dependent hamiltonian (interested in only ground and 1st excited states)
-
+"""
 beta_range = np.linspace(0.01, 4, num=100, endpoint=False)
 adiabatic_time_distribution = np.empty([100, 15])
 dimension_array  = [3,5,7,9,11,13,15,17,19,21,23,25,27,29]
@@ -143,14 +161,38 @@ for i in beta_range:
     print('Progress: ', index,'% # Est. Time Remaining: ',time_remaining, ' min')
 
 np.savetxt('adiabatic_time_distribution.txt', adiabatic_time_distribution, fmt='%.3e')
-#dimension = 15
-#print(compute_adiabatic_time(5))
+"""
+
+#Check eigenvalues no-crossing
+"""
+dimension_array  = [3,5,7,9,11,13,15,17,19,21,23,25,27,29]
+eigenvalues_crossing = np.empty([14, 5])
+
+dimension = 27
+energy_max = compute_predicted_time_max(0.604)
+energy_min = compute_predicted_time_min(0.604)
+
+print(-energy_max, energy_min)
+print(-float(1)/energy_max,float(1)/energy_min )
+
+
+for i in range(14):
+    dimension = dimension_array[i]
+    eigenvalues_crossing[i, 0] = dimension
+"""
 
 
 
 
+#Adiabatic Time given beta
 
+dimension_array  = [3,5,7,9,11,13,15,17,19,21,23,25,27,29]
+beta_array = [2.985, 4.44, 3.899, 3.033, 2.054, 2.215, 1.47, 1.511, 1.507,0.918, 0.860, 0.707, 0.604, 0.618]
 
+for i in range(14):
+    dimension = dimension_array[i]
+    adiabatic_time = compute_adiabatic_time(beta_array[i])
+    print(dimension, adiabatic_time)
 
 
 

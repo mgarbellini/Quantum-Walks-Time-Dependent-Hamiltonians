@@ -124,18 +124,18 @@ minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=solver_method)
 
 
 
-computation_results = np.empty([3,5])
+computation_results = np.empty([2,5])
 computation_results.fill(0)
 
 #BASINHOPPING
 
 #DIM 3
-dimension = 25
-par_bnds = ([0, 4], [0,300])
+dimension = 5
+par_bnds = ([0, 5], [0,25])
 minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=solver_method)
 
 tic = time.perf_counter()
-minimization = basinhopping(evaluate_probability, x0,  minimizer_kwargs=minimizer_kwargs,niter=25)
+minimization = basinhopping(evaluate_probability, x0,  minimizer_kwargs=minimizer_kwargs,niter=100)
 computation_results[0, 4] = time.perf_counter() - tic
 computation_results[0, 0] = dimension
 computation_results[0, 1] = -minimization.fun
@@ -144,8 +144,8 @@ computation_results[0, 3] = minimization.x[0]
 print("Dimension ",dimension," done in ", int(computation_results[0,4]/60), " minuti")
 
 #DIM 5
-dimension = 27
-par_bnds = ([0, 4], [0,300])
+dimension = 29
+par_bnds = ([0, 4], [0,350])
 minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=solver_method)
 
 tic = time.perf_counter()
@@ -162,7 +162,7 @@ print("Dimension ",dimension," done in ", int(computation_results[1,4]/60), " mi
 #OUTPUT
 computation_results = np.around(computation_results, decimals=3)
 print(computation_results)
-np.savetxt('Adiabatic_Optimization_25_27.txt', computation_results, fmt='%.3e')
+np.savetxt('Adiabatic_Optimization_5_29.txt', computation_results, fmt='%.3e')
 
 #PERFORM BENCHMARK FOR 'BDF' AND 'RK45' METHOD
 #FOR SCHRODINGER SOLVER
