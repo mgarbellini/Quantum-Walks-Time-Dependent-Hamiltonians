@@ -7,13 +7,17 @@ import sys
 import time
 import numpy as np
 from scipy import linalg
-from scipy.optimize import minimize, basinhopping
+from scipy.optimize import minimize, basinhopping, shgo
 from scipy.integrate import odeint, solve_ivp
 import matplotlib.pyplot as plt
 
+#useful global variables, shouldn't be too inefficient
 global dimension
+global step_function
+global optimization_method = 'SHGO' #SHGO or BH (basinhopping)
 
-def generate_hamiltonian(dimension, beta, time, TIME):
+#routine to generate loop hamiltonian + oracle state
+def generate_hamiltonian(dimension, beta, time, T):
 
     #generate diagonal matrix
     diag_matrix = np.empty([dimension, dimension])
@@ -22,14 +26,12 @@ def generate_hamiltonian(dimension, beta, time, TIME):
         for j in range(dimension):
             if i == j:
                 diag_matrix[i,j] = 2
-            else:
-                diag_matrix[i,j] = 0
 
     #generate loop adjacency matrix
     adj_matrix = np.empty([dimension, dimension])
     adj_matrix.fill(0)
-    for i in range(dimension): #colonna
-        for j in range(dimension): #riga
+    for i in range(dimension):
+        for j in range(dimension):
             if i == j:
                 if i == 0 & j == 0:
                     adj_matrix[i,dimension-1] = 1
@@ -42,22 +44,35 @@ def generate_hamiltonian(dimension, beta, time, TIME):
                     adj_matrix[i,j+1] = 1
 
     #generate laplacian of loop
-    hamiltonian = diag_matrix - adj_matrix
+    laplacian = diag_matrix - adj_matrix
 
-
+    #generate time-stepping function g_T(t): let's consider three cases, ^1, ^1/2, 1^1/3
+    #Note: if t=0 the function is automatically set to zero. This prevents warning within the ODE solver
+    if(t==0):
+        g_T = 0
+    else:
+        if(step_function==1):
+            g_T = float(time)/T
+        elif(step_function==2):
+            g_T = np.sqrt(float(time)/T)
+        elif(step_function==3):
+            g_T = np.cbrt(float(time)/T)
+        else:
+            print("Error: step_function value not defined")
 
     #generate time dependet hamiltonian
-    time_hamiltonian = (1 - float(time)/TIME)*hamiltonian
+    hamiltonian = (1 - g_T)*laplacian
 
-    #generate problem_hamiltonian (i.e. adding oracle tipical energy to center site)
-    index = int((dimension-1)/2)
-    time_hamiltonian[index,index] += - (float(time)/TIME)*beta
+    #generate problem_hamiltonian (i.e. adding oracle to central site)
+    hamiltonian[int((dimension-1)/2),int((dimension-1)/2)] += - g_T*beta
 
-    return time_hamiltonian
+    return hamiltonian
 
-def schrodinger_equation(t, y, beta, TIME):
+#routine to implement schroedinger equation. returns d/dt(psi)
+#for the ODE solver
+def schrodinger_equation(t, y, beta, T):
 
-    H = generate_hamiltonian(dimension, beta, t, TIME)
+    H = generate_hamiltonian(dimension, beta, t, T)
     derivs = []
     psi = 0
     for i in range(dimension):
@@ -68,128 +83,98 @@ def schrodinger_equation(t, y, beta, TIME):
 
     return derivs
 
-def solve_schrodinger_equation(time, beta, meth):
+#schroedinger equation solver. returns psi(t)
+def solve_schrodinger_equation(time, beta):
 
     y0 = np.empty(dimension, dtype=complex)
     y0.fill(1/(np.sqrt(dimension)))
-    t_i = 0.
-    t_step_max = 0.01
-    t_f = time
-    psoln_solve_ivp = solve_ivp(schrodinger_equation, [t_i, t_f], y0, method=meth, args=(beta,time))
+
+    sh_solved = solve_ivp(schrodinger_equation, [0., time], y0, method='RK45', args=(beta,time))
     #for more precise results use method RK45 and max_step=t_step_max
     #for less precise results but faster computation use 'BDF'
     psi_t = np.empty(dimension,dtype=complex)
     for i in range(dimension):
-        psi_t[i] = psoln_solve_ivp.y[i, len(psoln_solve_ivp.y[i])-1]
+        psi_t[i] = sh_solved.y[i, len(sh_solved.y[i])-1]
 
     return psi_t
 
-def evaluate_probability(x, method):
+#routine to evaluate probability |<w|psi(t)>|^2
+def evaluate_probability(x, oracle_site_state):
 
-    #Generate so called 'flat-state'
-    psi_0 = np.empty([dimension, 1])
-    psi_0.fill(1/np.sqrt(dimension))
+    #define time-evolution
+    psi_t = solve_schrodinger_equation(x[1], x[0], method)
+
+    #psi_t normalization
+    normalization = np.dot(np.conj(psi_t), psi_t)
+
+    #probability evaluation
+    probability = np.dot(oracle_site_state.transpose(), psi_t/(np.sqrt(normalization)))
+    if(np.abs(probability)**2 > 1):
+        print('Error: probability out of bounds: ', np.abs(probability)**2)
+
+
+    return -np.abs(probability)**2
+
+
+#main
+def main():
 
     #define oracle_site_state
     oracle_site_state = np.empty([dimension, 1])
     oracle_site_state.fill(0)
     oracle_site_state[int((dimension-1)/2)][0] = 1
 
-    #define time-evolution
-    psi_t = solve_schrodinger_equation(x[1], x[0], method)
 
-    #check psi_t normalization
-    normalization = np.dot(np.conj(psi_t), psi_t)
+    #parameters
+    par_bnds = [(0, 4), (1, 120)]
+    BH_iters = 20
+    dimension = 13
 
-    probability = np.dot(oracle_site_state.transpose(), psi_t/(np.sqrt(normalization)))
-    #print(np.abs(probability))
+    #Optimization methods. This prevents commenting of unused code snippets
+    if(optimization_method == 'SHGO'):
 
-    #return 'crossing' probability
-    #if(-np.abs(probability)**2 < -1):
-        #print('Error: probability out of bounds: ', -np.abs(probability)**2)
-    return -np.abs(probability)**2
+        #count time
+        tic = time.perf_counter()
 
-#print(computation_time)
-#print(result.x)
-#print(-result.fun)
+        #maximize probability
+        maximized = shgo(evaluate_probability, par_bnds,n=100, iters=1,minimizer_kwargs=oracle_site_state,sampling_method='sobol')
 
-#MINIMIZATION USING SINGLE ITERATIONS OPTIMIZE.MINIMIZE AND OPTIMIZE.BASINHOPPING
-#using different methods.
-#
+        #computation time in minutes (rounded)
+        comp_time = int(time.perf_counter() - tic)/60
 
-par_bnds = ([0, 2], [0, 20])
-x0 = np.array([1.,10])
-solver_method = 'RK45'
-minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=solver_method)
+        #store results
+        comp_results = [dimension, -maximized.fun, maximized.x[0], maximized.x[1], comp_time]
 
+        #print computational comp_results
+        print(comp_results)
 
+    elif(optimization_method == 'BH'):
 
-computation_results = np.empty([2,5])
-computation_results.fill(0)
+        #initial values for minimization
+        x0 = np.array([1.,10])
 
-#BASINHOPPING
+        #BH arguments for minimization
+        #"L-BFGS-B" is the chosen minimization methods
+        minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=oracle_site_state)
 
-#DIM 3
-dimension = 5
-par_bnds = ([0, 5], [0,25])
-minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=solver_method)
+        #count time
+        tic = time.perf_counter()
 
-tic = time.perf_counter()
-minimization = basinhopping(evaluate_probability, x0,  minimizer_kwargs=minimizer_kwargs,niter=100)
-computation_results[0, 4] = time.perf_counter() - tic
-computation_results[0, 0] = dimension
-computation_results[0, 1] = -minimization.fun
-computation_results[0, 2] = minimization.x[1]
-computation_results[0, 3] = minimization.x[0]
-print("Dimension ",dimension," done in ", int(computation_results[0,4]/60), " minuti")
+        #maximize probability
+        maximized = basinhopping(evaluate_probability, x0,  minimizer_kwargs=minimizer_kwargs,niter=BH_iter)
 
-#DIM 5
-dimension = 29
-par_bnds = ([0, 4], [0,350])
-minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=solver_method)
+        #computation time in minutes (rounded)
+        comp_time = int(time.perf_counter() - tic)/60
 
-tic = time.perf_counter()
-minimization = basinhopping(evaluate_probability, x0,  minimizer_kwargs=minimizer_kwargs,niter=25)
-computation_results[1, 4] = time.perf_counter() - tic
-computation_results[1, 0] = dimension
-computation_results[1, 1] = -minimization.fun
-computation_results[1, 2] = minimization.x[1]
-computation_results[1, 3] = minimization.x[0]
-print("Dimension ",dimension," done in ", int(computation_results[1,4]/60), " minuti")
+        #store results
+        comp_results = [dimension, -maximized.fun, maximized.x[0], maximized.x[1], comp_time]
+
+        #print computational comp_results
+        print(comp_results)
+    else:
+        print("Error: minimization methods wrongly specified")
 
 
-
-#OUTPUT
-computation_results = np.around(computation_results, decimals=3)
-print(computation_results)
-np.savetxt('Adiabatic_Optimization_5_29.txt', computation_results, fmt='%.3e')
-
-#PERFORM BENCHMARK FOR 'BDF' AND 'RK45' METHOD
-#FOR SCHRODINGER SOLVER
-"""
-benchmark = np.empty([14, 2])
-benchmark.fill(0)
-dimension_array = [3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29]
-bnds = ([0, 4], [5, 20])
-x = np.array([2, 10])
-method = 'BDF'
-
-for i in range(14):
-    #set current system dimension
-    dimension = dimension_array[i]
-
-    #first method
-    method = 'BDF'
-    tic = time.perf_counter()
-    psi_t = solve_schrodinger_equation(10, 2, method)
-    benchmark[i,0] = time.perf_counter()-tic
-
-    #second method
-    method = 'RK45'
-    tic = time.perf_counter()
-    psi_t = solve_schrodinger_equation(10, 2, method)
-    benchmark[i,1] = time.perf_counter()-tic
-
-    #print results for quick debugging
-    print(dimension, benchmark[i,0], benchmark[i,1])
-"""
+if __name__ == "__main__":
+    main()
+#np.savetxt('Adiabatic_Optimization_5.txt', computation_results, fmt='%.3e')

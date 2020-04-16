@@ -60,6 +60,7 @@ def generate_hamiltonian(beta, s, derivative):
         return hamiltonian_derivative
     else:
         return time_hamiltonian
+
 def compute_eigenvalues_eigenvectors(beta, s, eigen_s):
 
     t_hamiltonian = generate_hamiltonian(beta, s, 0)
@@ -72,6 +73,7 @@ def compute_eigenvalues_eigenvectors(beta, s, eigen_s):
         return eigenstates
     else:
         return eigenvalues.real
+
 def compute_gamma(s,beta):
 
     #find eigenstates
@@ -91,13 +93,12 @@ def compute_gamma(s,beta):
     gamma = np.dot(np.transpose((np.conj(phi1))), np.dot(hamiltonian_derivative, phi0))
     return -np.abs(gamma)
 
-
 def compute_energy_diff(s, beta):
 
     energy = compute_eigenvalues_eigenvectors(beta,s,0)
 
     return (energy[1]-energy[0])
-    
+
 def compute_adiabatic_time(beta):
 
     #SET DIMENSION
@@ -183,7 +184,7 @@ for i in range(14):
 
 
 
-
+"""
 #Adiabatic Time given beta
 
 dimension_array  = [3,5,7,9,11,13,15,17,19,21,23,25,27,29]
@@ -193,7 +194,7 @@ for i in range(14):
     dimension = dimension_array[i]
     adiabatic_time = compute_adiabatic_time(beta_array[i])
     print(dimension, adiabatic_time)
-
+"""
 
 
 
