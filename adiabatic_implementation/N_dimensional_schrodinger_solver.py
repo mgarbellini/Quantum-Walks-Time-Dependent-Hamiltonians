@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 #useful global variables, shouldn't be too inefficient
 global dimension
 global step_function
-global optimization_method = 'SHGO' #SHGO or BH (basinhopping)
+global optimization_method  #SHGO or BH (basinhopping)
 
 #routine to generate loop hamiltonian + oracle state
 def generate_hamiltonian(dimension, beta, time, T):
@@ -47,9 +47,9 @@ def generate_hamiltonian(dimension, beta, time, T):
     laplacian = diag_matrix - adj_matrix
 
     #generate time-stepping function g_T(t): let's consider three cases, ^1, ^1/2, 1^1/3
-    #Note: if t=0 the function is automatically set to zero. This prevents warning within the ODE solver
-    if(t==0):
-        g_T = 0
+    #Note: if t=0 the function is automatically set to 'almost zero' (0.000001). This prevents warning within the ODE solver
+    if(time==0):
+        hamiltonian = laplacian
     else:
         if(step_function==1):
             g_T = float(time)/T
@@ -60,11 +60,11 @@ def generate_hamiltonian(dimension, beta, time, T):
         else:
             print("Error: step_function value not defined")
 
-    #generate time dependet hamiltonian
-    hamiltonian = (1 - g_T)*laplacian
+        #generate time dependet hamiltonian
+        hamiltonian = (1 - g_T)*laplacian
 
-    #generate problem_hamiltonian (i.e. adding oracle to central site)
-    hamiltonian[int((dimension-1)/2),int((dimension-1)/2)] += - g_T*beta
+        #generate problem_hamiltonian (i.e. adding oracle to central site)
+        hamiltonian[int((dimension-1)/2),int((dimension-1)/2)] += - g_T*beta
 
     return hamiltonian
 
@@ -102,7 +102,7 @@ def solve_schrodinger_equation(time, beta):
 def evaluate_probability(x, oracle_site_state):
 
     #define time-evolution
-    psi_t = solve_schrodinger_equation(x[1], x[0], method)
+    psi_t = solve_schrodinger_equation(x[1], x[0])
 
     #psi_t normalization
     normalization = np.dot(np.conj(psi_t), psi_t)
@@ -116,39 +116,39 @@ def evaluate_probability(x, oracle_site_state):
     return -np.abs(probability)**2
 
 
-#main
-def main():
-
-    #define oracle_site_state
-    oracle_site_state = np.empty([dimension, 1])
-    oracle_site_state.fill(0)
-    oracle_site_state[int((dimension-1)/2)][0] = 1
 
 
-    #parameters
-    par_bnds = [(0, 4), (1, 120)]
-    BH_iters = 20
-    dimension = 13
+#parameters
+par_bnds = [(0, 4), (1, 40)]
+BH_iter = 50
+dimension = 7
+optimization_method = 'BH'
+step_function = 1
 
-    #Optimization methods. This prevents commenting of unused code snippets
-    if(optimization_method == 'SHGO'):
+#define oracle_site_state
+oracle_site_state = np.empty([dimension, 1])
+oracle_site_state.fill(0)
+oracle_site_state[int((dimension-1)/2)][0] = 1
 
-        #count time
-        tic = time.perf_counter()
+#Optimization methods. This prevents commenting of unused code snippets
+if(optimization_method == 'SHGO'):
 
-        #maximize probability
-        maximized = shgo(evaluate_probability, par_bnds,n=100, iters=1,minimizer_kwargs=oracle_site_state,sampling_method='sobol')
+    #count time
+    tic = time.perf_counter()
 
-        #computation time in minutes (rounded)
-        comp_time = int(time.perf_counter() - tic)/60
+    #maximize probability
+    maximized = shgo(evaluate_probability, par_bnds,n=100, iters=1, args=(oracle_site_state,),sampling_method='sobol')
 
-        #store results
-        comp_results = [dimension, -maximized.fun, maximized.x[0], maximized.x[1], comp_time]
+    #computation time in minutes (rounded)
+    comp_time = int((time.perf_counter() - tic)/60)
 
-        #print computational comp_results
-        print(comp_results)
+    #store results
+    comp_results = [dimension, -maximized.fun, maximized.x[0], maximized.x[1], comp_time]
 
-    elif(optimization_method == 'BH'):
+    #print computational comp_results
+    print(comp_results)
+
+elif(optimization_method == 'BH'):
 
         #initial values for minimization
         x0 = np.array([1.,10])
@@ -171,10 +171,7 @@ def main():
 
         #print computational comp_results
         print(comp_results)
-    else:
+else:
         print("Error: minimization methods wrongly specified")
 
-
-if __name__ == "__main__":
-    main()
 #np.savetxt('Adiabatic_Optimization_5.txt', computation_results, fmt='%.3e')
