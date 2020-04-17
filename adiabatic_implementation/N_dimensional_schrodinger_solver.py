@@ -7,14 +7,13 @@ import sys
 import time
 import numpy as np
 from scipy import linalg
-from scipy.optimize import minimize, basinhopping, shgo
+from scipy.optimize import minimize, basinhopping, shgo, dual_annealing
 from scipy.integrate import odeint, solve_ivp
 import matplotlib.pyplot as plt
 
 #useful global variables, shouldn't be too inefficient
 global dimension
 global step_function
-global optimization_method  #SHGO or BH (basinhopping)
 
 #routine to generate loop hamiltonian + oracle state
 def generate_hamiltonian(dimension, beta, time, T):
@@ -112,66 +111,115 @@ def evaluate_probability(x, oracle_site_state):
     if(np.abs(probability)**2 > 1):
         print('Error: probability out of bounds: ', np.abs(probability)**2)
 
+    else:
+        return -np.abs(probability)**2
 
-    return -np.abs(probability)**2
+#define callback functions. This allows to set precision to probability evaluation,
+#e.g. stop process at 0.99 instead of 0.99875
+def optimization_precision(x, probability, context):
+
+    if(probability <= -0.99):
+        return True
+    else:
+        return False
 
 
+#routine to maximize probability
+def optimization(par_bnds,optimization_method):
 
+    #define oracle_site_state
+    oracle_site_state = np.empty([dimension, 1])
+    oracle_site_state.fill(0)
+    oracle_site_state[int((dimension-1)/2)][0] = 1
 
-#parameters
-par_bnds = [(0, 4), (1, 40)]
-BH_iter = 50
-dimension = 7
-optimization_method = 'BH'
-step_function = 1
-
-#define oracle_site_state
-oracle_site_state = np.empty([dimension, 1])
-oracle_site_state.fill(0)
-oracle_site_state[int((dimension-1)/2)][0] = 1
-
-#Optimization methods. This prevents commenting of unused code snippets
-if(optimization_method == 'SHGO'):
-
-    #count time
-    tic = time.perf_counter()
-
-    #maximize probability
-    maximized = shgo(evaluate_probability, par_bnds,n=100, iters=1, args=(oracle_site_state,),sampling_method='sobol')
-
-    #computation time in minutes (rounded)
-    comp_time = int((time.perf_counter() - tic)/60)
-
-    #store results
-    comp_results = [dimension, -maximized.fun, maximized.x[0], maximized.x[1], comp_time]
-
-    #print computational comp_results
-    print(comp_results)
-
-elif(optimization_method == 'BH'):
-
-        #initial values for minimization
-        x0 = np.array([1.,10])
-
-        #BH arguments for minimization
-        #"L-BFGS-B" is the chosen minimization methods
-        minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=oracle_site_state)
+    if(optimization_method == 'SHGO'):
 
         #count time
         tic = time.perf_counter()
 
         #maximize probability
-        maximized = basinhopping(evaluate_probability, x0,  minimizer_kwargs=minimizer_kwargs,niter=BH_iter)
+        #sampling_method must be chosen between 'simplicial' and 'sobol'
+        maximized = shgo(evaluate_probability, par_bnds,n=100, iters=5, args=(oracle_site_state,),sampling_method='simplicial')
 
         #computation time in minutes (rounded)
-        comp_time = int(time.perf_counter() - tic)/60
+        comp_time = int(int(time.perf_counter() - tic)/60)
 
         #store results
         comp_results = [dimension, -maximized.fun, maximized.x[0], maximized.x[1], comp_time]
 
-        #print computational comp_results
-        print(comp_results)
-else:
-        print("Error: minimization methods wrongly specified")
+        #return computational comp_results
+        return comp_results
+
+    elif(optimization_method == 'BH'):
+
+            #set basinhopping niter
+            if(dimension > 15):
+                BH_iter = 25
+            else:
+                BH_iter = 50
+
+            #test basinhopping iter set to 1
+            BH_iter = 1
+            #initial values for minimization
+            x0 = np.array([1.,10])
+
+            #BH arguments for minimization
+            #"L-BFGS-B" is the chosen minimization methods
+            minimizer_kwargs = dict(method="L-BFGS-B", bounds=par_bnds, args=oracle_site_state)
+
+            #count time
+            tic = time.perf_counter()
+
+            #maximize probability
+            maximized = basinhopping(evaluate_probability, x0,  minimizer_kwargs=minimizer_kwargs,niter=BH_iter)
+
+            #computation time in minutes (rounded)
+            comp_time = int(int(time.perf_counter() - tic)/60)
+
+            #store results
+            comp_results = [dimension, float(-maximized.fun), maximized.x[0], maximized.x[1], comp_time]
+
+            #print computational comp_results
+            return comp_results
+    elif(optimization_method == 'DUAL'):
+        #count time
+        tic = time.perf_counter()
+
+        #maximize probability
+        #sampling_method must be chosen between 'simplicial' and 'sobol'
+        maximized = dual_annealing(evaluate_probability, par_bnds, args=(oracle_site_state,), maxiter=2)
+
+        #computation time in minutes (rounded)
+        comp_time = int(int(time.perf_counter() - tic)/60)
+
+        #store results
+        comp_results = [dimension, float(-maximized.fun), maximized.x[0], maximized.x[1], comp_time]
+
+        #return computational comp_results
+        return comp_results
+
+    else:
+        print('Error: invalid optimization method')
+
+# # # # # # #
+#   MAIN    #
+# # # # # # #
+
+
+#parameters
+par_bnds = [(0, 4), (30,120)]
+dimension = 17
+
+step_function = 1
+results = optimization(par_bnds, 'SHGO')
+print(results)
+step_function = 2
+results = optimization(par_bnds, 'SHGO')
+print(results)
+step_function = 3
+results = optimization(par_bnds, 'SHGO')
+print(results)
+
+
 
 #np.savetxt('Adiabatic_Optimization_5.txt', computation_results, fmt='%.3e')
