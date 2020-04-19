@@ -123,9 +123,157 @@ def optimization_precision(x, probability, context):
     else:
         return False
 
+#manipolation of other local maxima found
+def arrange_local_maxima(results):
+
+    local_maxima = np.empty([len(results.funl), 3])
+
+    for i in range(len(results.funl)):
+        local_maxima[i][0] = -results.funl[i]
+        local_maxima[i][1] = results.xl[i][0]
+        local_maxima[i][2] = results.xl[i][1]
+
+    return local_maxima
+
+#routine to generate loop hamiltonian + oracle state
+def generate_hamiltonian_derivative(s, beta, derivative):
+
+    #generate diagonal matrix
+    diag_matrix = np.empty([dimension, dimension])
+    diag_matrix.fill(0)
+    for i in range(dimension):
+        for j in range(dimension):
+            if i == j:
+                diag_matrix[i,j] = 2
+
+    #generate loop adjacency matrix
+    adj_matrix = np.empty([dimension, dimension])
+    adj_matrix.fill(0)
+    for i in range(dimension):
+        for j in range(dimension):
+            if i == j:
+                if i == 0 & j == 0:
+                    adj_matrix[i,dimension-1] = 1
+                    adj_matrix[i,j+1] = 1
+                elif i == dimension-1 & j == dimension-1:
+                    adj_matrix[i,j-1] = 1
+                    adj_matrix[i,0] = 1
+                else:
+                    adj_matrix[i,j-1] = 1
+                    adj_matrix[i,j+1] = 1
+
+    #generate laplacian of loop
+    laplacian = diag_matrix - adj_matrix
+
+    #generate time-stepping function g_T(t): let's consider three cases, ^1, ^1/2, 1^1/3
+    #Note: if t=0 the function is automatically set to 'almost zero' (0.000001). This prevents warning within the ODE solver
+    if(derivative==0):
+        if(step_function == 1):
+            hamiltonian = (1-s)*laplacian
+            hamiltonian[int((dimension-1)/2),int((dimension-1)/2)] += -s*beta
+
+        elif(step_function == 2):
+            hamiltonian = (1-np.sqrt(s))*laplacian
+            hamiltonian[int((dimension-1)/2),int((dimension-1)/2)] += -np.sqrt(s)*beta
+
+        elif(step_function == 3):
+            hamiltonian = (1-np.cbrt(s))*laplacian
+            hamiltonian[int((dimension-1)/2),int((dimension-1)/2)] += -np.cbrt(s)*beta
+        else:
+            print('NameError: step_function not defined')
+
+    elif(derivative==1):
+        if(step_function == 1):
+            hamiltonian = -laplacian
+            hamiltonian[int((dimension-1)/2),int((dimension-1)/2)] += -beta
+
+        elif(step_function == 2):
+            hamiltonian = -(1/(2*np.sqrt(s)))*laplacian
+            hamiltonian[int((dimension-1)/2),int((dimension-1)/2)] += -(1/(2*np.sqrt(s)))*beta
+
+        elif(step_function == 3):
+            hamiltonian = -(1/(3*np.cbrt(s)))*laplacian
+            hamiltonian[int((dimension-1)/2),int((dimension-1)/2)] += -(1/(3*np.cbrt(s)))*beta
+        else:
+            print('NameError: step_function not defined')
+    else:
+        print('NameError: derivative flag unknown')
+
+    return hamiltonian
+
+def compute_eigenvalues_eigenvectors(s, beta, eigen_flag):
+
+    t_hamiltonian = generate_hamiltonian_derivative(s,beta,0)
+    eigenvalues, eigenstates = linalg.eig(t_hamiltonian)
+    idx = eigenvalues.argsort()[::1]
+    eigenvalues = eigenvalues[idx]
+    eigenstates = eigenstates[:,idx]
+
+    if(eigen_flag == 1):
+        return eigenstates
+    elif(eigen_flag == 0):
+        return eigenvalues.real
+    else:
+        print('NameError: compute_eigen flag unknown!')
+        return 0
+
+def compute_gamma(s,beta):
+
+    #find eigenstates
+    #compute hamiltonian_derivative
+    #return  | < phi1 | dH | phi0 > |
+
+    eigenstates_array = compute_eigenvalues_eigenvectors(s, beta, 1)
+    hamiltonian_derivative = generate_hamiltonian_derivative(s, beta, 1)
+
+    phi0 = np.empty([dimension,1])
+    phi1 = np.empty([dimension,1])
+
+    for i in range(dimension):
+        phi0[i] = eigenstates_array[i,0]
+        phi1[i] = eigenstates_array[i,1]
+
+    gamma = np.dot(np.transpose((np.conj(phi1))), np.dot(hamiltonian_derivative, phi0))
+    return -np.abs(gamma)
+
+def compute_energy_diff(s,beta):
+
+    energy = compute_eigenvalues_eigenvectors(s, beta,0)
+
+    return (energy[1]-energy[0])
+
+#check if adiabatic theorem with current parameters is applicable
+#returns adiabatic_results which contains Adiabatic_Time, Max_Energy_Diff,
+#Min_Energy_Diff, Crossing_Flag
+def adiabatic_theorem_check(current_par):
+
+
+    #Performance counter
+    tic = time.perf_counter()
+    #GAMMA MAXIMIZATION
+    par_bnds = ([0, 1],)
+
+    minimization = shgo(compute_gamma, par_bnds,n=25, iters=1, args=(current_par[2],),sampling_method='sobol')
+    gamma_max = -minimization.fun
+
+    #ENERGY MINIMUM
+
+    minimization = shgo(compute_energy_diff, par_bnds,n=25, iters=1, args=(current_par[2],),sampling_method='sobol')
+    energy_min = minimization.fun
+
+    #TIME BOUNDS FOR ADIABATIC THEOREM
+    adiabatic_time = gamma_max/(energy_min**2)
+    if(energy_min>0):
+        adiabatic_flag = 'True'
+    else:
+        adiabatic_flag = 'False'
+
+    adiabatic_results = [adiabatic_time, gamma_max, energy_min, adiabatic_flag, (tic - time.perf_counter())/60]
+
+    return adiabatic_results
 
 #routine to maximize probability
-def optimization(par_bnds,optimization_method):
+def optimization(par_bnds,optimization_method, its):
 
     #define oracle_site_state
     oracle_site_state = np.empty([dimension, 1])
@@ -137,29 +285,33 @@ def optimization(par_bnds,optimization_method):
         #count time
         tic = time.perf_counter()
 
+        #minimizer options
+
+        opt1 = {'f_min': -1, 'f_tol': 0.1}
+        opt2 = {'f_min': -1}
         #maximize probability
         #sampling_method must be chosen between 'simplicial' and 'sobol'
-        maximized = shgo(evaluate_probability, par_bnds,n=100, iters=5, args=(oracle_site_state,),sampling_method='simplicial')
+        maximized = shgo(evaluate_probability, par_bnds,n=60, iters=1, args=(oracle_site_state,),sampling_method='sobol')
 
         #computation time in minutes (rounded)
-        comp_time = int(int(time.perf_counter() - tic)/60)
+        comp_time = int(time.perf_counter() - tic)/60
+
+        #print other local maxima found
+        #set 0 for probability sorting, 1 for time sorting
+        local_results = arrange_local_maxima(maximized)
 
         #store results
         comp_results = [dimension, -maximized.fun, maximized.x[0], maximized.x[1], comp_time]
 
+        #check adiabatic theorem for current results
+        adiabatic_results = adiabatic_theorem_check(comp_results)
+
         #return computational comp_results
-        return comp_results
+        return comp_results, local_results, adiabatic_results
 
     elif(optimization_method == 'BH'):
 
-            #set basinhopping niter
-            if(dimension > 15):
-                BH_iter = 25
-            else:
-                BH_iter = 50
 
-            #test basinhopping iter set to 1
-            BH_iter = 1
             #initial values for minimization
             x0 = np.array([1.,10])
 
@@ -171,10 +323,10 @@ def optimization(par_bnds,optimization_method):
             tic = time.perf_counter()
 
             #maximize probability
-            maximized = basinhopping(evaluate_probability, x0,  minimizer_kwargs=minimizer_kwargs,niter=BH_iter)
+            maximized = basinhopping(evaluate_probability, x0,  minimizer_kwargs=minimizer_kwargs,niter=its)
 
             #computation time in minutes (rounded)
-            comp_time = int(int(time.perf_counter() - tic)/60)
+            comp_time = int(time.perf_counter() - tic)/60
 
             #store results
             comp_results = [dimension, float(-maximized.fun), maximized.x[0], maximized.x[1], comp_time]
@@ -187,38 +339,65 @@ def optimization(par_bnds,optimization_method):
 
         #maximize probability
         #sampling_method must be chosen between 'simplicial' and 'sobol'
-        maximized = dual_annealing(evaluate_probability, par_bnds, args=(oracle_site_state,), maxiter=2)
+        maximized = dual_annealing(evaluate_probability, par_bnds, args=(oracle_site_state,), maxiter=its)
 
         #computation time in minutes (rounded)
-        comp_time = int(int(time.perf_counter() - tic)/60)
+        comp_time = int(time.perf_counter() - tic)/60
 
         #store results
         comp_results = [dimension, float(-maximized.fun), maximized.x[0], maximized.x[1], comp_time]
 
         #return computational comp_results
         return comp_results
-
     else:
         print('Error: invalid optimization method')
+
+#routine for results exporting - formatting - etc
+def export_results_routine(dimension, par_bnds, method, step_function, optimization_iterations):
+
+    results, local_results, adiabatic_results = optimization(par_bnds, method, optimization_iterations)
+    print()
+    print('#  #  #  #  # COMPUTATIONAL RESULTS DIM ',dimension, ' #  #  #  #  #')
+    print()
+    print('Optimization algorithm: ', method)
+    print('Par. bounds: ', par_bnds)
+    print('Comp. time (min) ~', int(results[4]))
+    print()
+    print('Dimension: ', dimension)
+    print('g_T = (t/T)^(1/', step_function,')')
+    print('Probability: ', round(results[1], 4))
+    print('T: ', round(results[3], 2))
+    print('Beta: ', round(results[2], 3))
+    print()
+    print('Adiabatic theorem applies: ', adiabatic_results[3])
+    print('Adiabatic time: ', round(adiabatic_results[0], 2))
+    print('Gamma max: ', round(adiabatic_results[1],3))
+    print('Energy min: ', round(adiabatic_results[2],3))
+    print('Computation time (min) ~', int(adiabatic_results[4]))
+    print()
+    print('Additional local maxima')
+    print('Prob - Beta - T')
+    for i in range(len(local_results)):
+        print(round(local_results[i][0], 4), round(local_results[i][1], 3), round(local_results[i][2],2))
+    print()
+    return ('Simulation success!')
+
 
 # # # # # # #
 #   MAIN    #
 # # # # # # #
 
 
-#parameters
-par_bnds = [(0, 4), (30,120)]
-dimension = 17
 
+dimension = 5
 step_function = 1
-results = optimization(par_bnds, 'SHGO')
-print(results)
-step_function = 2
-results = optimization(par_bnds, 'SHGO')
-print(results)
-step_function = 3
-results = optimization(par_bnds, 'SHGO')
-print(results)
+export_results_routine(dimension, [(0, 3), (10, 80)],'SHGO', step_function, 20)
+
+
+
+
+
+
 
 
 
