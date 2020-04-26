@@ -397,12 +397,13 @@ def export_results_routine(dimension, par_bnds, method, step_function, optimizat
 def heatmap2d(arr: np.ndarray, time_array, beta_array, non_prob, non_time):
 
     for i in range(len(time_array)):
-        time_array[i] = int(time_array[i])
+        time_array[i] = round((time_array[i]),1)
     for i in range(len(beta_array)):
         beta_array[i] = round(beta_array[i],2)
 
     plt.imshow(arr, cmap='inferno_r', aspect= 1., origin= {'lower'})
     #plt.xticks(np.linspace(0, 40, 30, dtype=int), rotation='vertical')
+    plt.tick_params(axis='both', which='major', labelsize=7)
     plt.xticks(range(len(time_array)), time_array, rotation='vertical')
     plt.yticks(range(len(beta_array)), beta_array)
     plt.xlabel('Time', fontweight="bold")
@@ -413,14 +414,16 @@ def heatmap2d(arr: np.ndarray, time_array, beta_array, non_prob, non_time):
     #plt.suptitle(title, fontweight="bold", ha='center')
     plt.colorbar()
     levels = [0.9, 0.95, 0.99]
-    adiabatic_level = [0.92]
+    non_adiabatic_levels = [non_prob]
     ct = plt.contour(arr,levels, colors='white')
-    cta = plt.contour(arr, adiabatic_level, colors ='white', linestyles = 'dashed')
+    cta = plt.contour(arr,non_adiabatic_levels, colors ='white', linestyles = 'dashed')
     plt.clabel(ct)
     #plt.clabel(cta)
     #plt.tight_layout()
     file_name = str(dimension) + '_probability_heatmap.pdf'
     plt.savefig(file_name)
+    plt.clf()
+    plt.close()
     #plt.show()
 
 def grid_probability_evaluation(dimension, time_lb, time_up, time_sampling_points, beta_lb, beta_up, beta_sampling_points, non_time, non_prob):
@@ -463,8 +466,63 @@ def single_evaluation_benchmark(x):
 step_function = 1
 rtolerance = 1e-6
 atolerance = 1e-6
+
+
 dimension = 5
-grid_probability_evaluation(dimension, 1,20,20, 0.1, 5, 50, 0.92, 7)
+beta = [0, 4.5]
+time = [1, 20]
+non_prob = 0.92
+non_time = 7
+time_sampling = 40
+beta_sampling = 30
+grid_probability_evaluation(dimension, time[0],time[1], time_sampling, beta[0], beta[1], beta_sampling, non_prob, non_time)
+
+dimension = 7
+beta = [0, 4]
+time = [1, 40]
+non_prob = 0.79
+non_time = 4
+time_sampling = 40
+beta_sampling = 30
+grid_probability_evaluation(dimension, time[0],time[1], time_sampling, beta[0], beta[1], beta_sampling, non_prob, non_time)
+
+dimension = 9
+beta = [0, 4]
+time = [1, 60]
+non_prob = 0.70
+non_time = 5
+time_sampling = 40
+beta_sampling = 30
+grid_probability_evaluation(dimension, time[0],time[1], time_sampling, beta[0], beta[1], beta_sampling, non_prob, non_time)
+
+dimension = 11
+beta = [0, 3]
+time = [1, 80]
+non_prob = 0.6
+non_time = 7
+time_sampling = 40
+beta_sampling = 30
+grid_probability_evaluation(dimension, time[0],time[1], time_sampling, beta[0], beta[1], beta_sampling, non_prob, non_time)
+
+dimension = 13
+beta = [0, 3]
+time = [1, 120]
+non_prob = 0.5
+non_time = 10
+time_sampling = 40
+beta_sampling = 30
+grid_probability_evaluation(dimension, time[0],time[1], time_sampling, beta[0], beta[1], beta_sampling, non_prob, non_time)
+
+dimension = 15
+beta = [0, 3]
+time = [1, 150]
+non_prob = 0.44
+non_time = 11
+time_sampling = 40
+beta_sampling = 30
+grid_probability_evaluation(dimension, time[0],time[1], time_sampling, beta[0], beta[1], beta_sampling, non_prob, non_time)
+
+
 
 
 """

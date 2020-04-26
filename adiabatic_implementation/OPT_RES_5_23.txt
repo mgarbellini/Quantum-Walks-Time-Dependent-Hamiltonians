@@ -1,0 +1,360 @@
+
+#  #  #  #  # COMPUTATIONAL RESULTS DIM  5  #  #  #  #  #
+
+Optimization algorithm:  SHGO
+Par. bounds:  [(0, 5), (2, 30)]
+Comp. time (min) ~ 0
+
+Dimension:  5
+g_T = (t/T)^(1/ 2 )
+Probability:  0.9996
+T:  17.83
+Beta:  1.479
+
+Adiabatic theorem applies:  True
+Adiabatic time:  91906.66
+Gamma max:  42758.195
+Energy min:  0.682
+Computation time (min) ~ 0
+
+Additional local maxima
+Prob - Beta - T
+0.9996 1.479 17.83
+0.9995 0.916 29.4
+0.9995 0.916 29.4
+0.9975 1.755 22.58
+0.9966 1.635 30.0
+
+
+#  #  #  #  # COMPUTATIONAL RESULTS DIM  7  #  #  #  #  #
+
+Optimization algorithm:  SHGO
+Par. bounds:  [(0, 4.5), (25, 45)]
+Comp. time (min) ~ 0
+
+Dimension:  7
+g_T = (t/T)^(1/ 2 )
+Probability:  0.9993
+T:  36.23
+Beta:  1.211
+
+Adiabatic theorem applies:  True
+Adiabatic time:  280837.95
+Gamma max:  45047.729
+Energy min:  0.401
+Computation time (min) ~ 0
+
+Additional local maxima
+Prob - Beta - T
+0.9993 1.211 36.23
+0.9993 1.211 36.23
+0.9991 0.968 28.1
+0.9991 0.968 28.1
+0.9981 1.284 39.07
+0.9981 1.284 39.07
+0.9966 1.483 45.0
+
+
+#  #  #  #  # COMPUTATIONAL RESULTS DIM  9  #  #  #  #  #
+
+Optimization algorithm:  SHGO
+Par. bounds:  [(0, 3), (10, 70)]
+Comp. time (min) ~ 1
+
+Dimension:  9
+g_T = (t/T)^(1/ 2 )
+Probability:  0.9996
+T:  54.66
+Beta:  0.894
+
+Adiabatic theorem applies:  True
+Adiabatic time:  6418683.11
+Gamma max:  378990.108
+Energy min:  0.243
+Computation time (min) ~ 0
+
+Additional local maxima
+Prob - Beta - T
+0.9996 0.894 54.66
+0.9994 0.869 51.89
+0.9993 0.832 48.58
+0.9993 0.832 48.58
+0.9993 0.832 48.58
+0.9987 1.007 61.01
+0.9987 1.007 61.01
+0.9987 1.007 61.01
+0.9984 1.017 64.26
+0.9978 0.756 45.92
+0.9977 1.102 67.09
+0.9959 0.726 42.39
+0.9959 0.726 42.39
+
+
+#  #  #  #  # COMPUTATIONAL RESULTS DIM  11  #  #  #  #  #
+
+Optimization algorithm:  SHGO
+Par. bounds:  [(0, 3), (25, 80)]
+Comp. time (min) ~ 2
+
+Dimension:  11
+g_T = (t/T)^(1/ 2 )
+Probability:  0.9993
+T:  74.8
+Beta:  0.693
+
+Adiabatic theorem applies:  True
+Adiabatic time:  335273.05
+Gamma max:  8644.659
+Energy min:  0.161
+Computation time (min) ~ 0
+
+Additional local maxima
+Prob - Beta - T
+0.9993 0.693 74.8
+0.9993 0.725 77.9
+0.9989 0.68 71.47
+0.998 0.658 67.63
+0.998 0.658 67.63
+0.9956 0.605 64.53
+0.9933 0.582 60.81
+0.9933 0.582 60.81
+0.9933 0.582 60.81
+0.9933 0.582 60.81
+
+
+#  #  #  #  # COMPUTATIONAL RESULTS DIM  13  #  #  #  #  #
+
+Optimization algorithm:  SHGO
+Par. bounds:  [(0, 3), (70, 130)]
+Comp. time (min) ~ 4
+
+Dimension:  13
+g_T = (t/T)^(1/ 2 )
+Probability:  0.9991
+T:  109.27
+Beta:  0.625
+
+Adiabatic theorem applies:  0
+Adiabatic time:  0
+Gamma max:  0
+Energy min:  0
+Computation time (min) ~ 0
+
+Additional local maxima
+Prob - Beta - T
+0.9991 0.625 109.27
+0.9989 0.619 105.62
+0.9989 0.663 116.26
+0.9988 0.581 102.44
+0.9988 0.581 102.44
+0.9986 0.671 120.18
+0.9982 0.711 127.09
+0.9979 0.558 95.04
+0.9967 0.549 91.0
+0.9884 0.484 79.92
+
+
+#  #  #  #  # COMPUTATIONAL RESULTS DIM  15  #  #  #  #  #
+
+Optimization algorithm:  SHGO
+Par. bounds:  [(0, 3), (70, 130)]
+Comp. time (min) ~ 4
+
+Dimension:  15
+g_T = (t/T)^(1/ 2 )
+Probability:  0.9977
+T:  130.0
+Beta:  0.507
+
+Adiabatic theorem applies:  0
+Adiabatic time:  0
+Gamma max:  0
+Energy min:  0
+Computation time (min) ~ 0
+
+Additional local maxima
+Prob - Beta - T
+0.9977 0.507 130.0
+0.9977 0.507 130.0
+0.9977 0.507 130.0
+0.9968 0.475 123.03
+0.9968 0.475 123.03
+0.9958 0.47 118.81
+0.9912 0.458 110.65
+
+
+#  #  #  #  # COMPUTATIONAL RESULTS DIM  17  #  #  #  #  #
+
+Optimization algorithm:  SHGO
+Par. bounds:  [(0, 3), (120, 190)]
+Comp. time (min) ~ 8
+
+Dimension:  17
+g_T = (t/T)^(1/ 2 )
+Probability:  0.9978
+T:  190.0
+Beta:  0.497
+
+Adiabatic theorem applies:  0
+Adiabatic time:  0
+Gamma max:  0
+Energy min:  0
+Computation time (min) ~ 0
+
+Additional local maxima
+Prob - Beta - T
+0.9978 0.497 190.0
+0.9977 0.477 182.55
+0.9977 0.46 175.07
+0.9967 0.433 163.58
+0.9948 0.41 151.4
+0.9916 0.406 142.67
+0.9828 0.365 130.73
+
+
+#  #  #  #  # COMPUTATIONAL RESULTS DIM  19  #  #  #  #  #
+
+Optimization algorithm:  SHGO
+Par. bounds:  [(0, 2), (150, 250)]
+Comp. time (min) ~ 23
+
+Dimension:  19
+g_T = (t/T)^(1/ 2 )
+Probability:  0.9969
+T:  232.31
+Beta:  0.435
+
+Adiabatic theorem applies:  0
+Adiabatic time:  0
+Gamma max:  0
+Energy min:  0
+Computation time (min) ~ 0
+
+Additional local maxima
+Prob - Beta - T
+0.9969 0.435 232.31
+0.9968 0.43 224.01
+0.9966 0.409 216.74
+0.9966 0.405 212.73
+0.9966 0.46 248.39
+0.9964 0.403 208.58
+0.9955 0.393 200.62
+0.9945 0.372 192.87
+0.9916 0.36 179.79
+0.9877 0.359 170.97
+
+
+#  #  #  #  # COMPUTATIONAL RESULTS DIM  21  #  #  #  #  #
+
+Optimization algorithm:  SHGO
+Par. bounds:  [(0, 2), (150, 250)]
+Comp. time (min) ~ 27
+
+Dimension:  21
+g_T = (t/T)^(1/ 2 )
+Probability:  0.995
+T:  250.0
+Beta:  0.366
+
+Adiabatic theorem applies:  0
+Adiabatic time:  0
+Gamma max:  0
+Energy min:  0
+Computation time (min) ~ 0
+
+Additional local maxima
+Prob - Beta - T
+0.995 0.366 250.0
+0.9938 0.35 238.42
+0.9927 0.334 230.32
+0.9886 0.322 212.69
+0.9847 0.322 203.71
+0.9793 0.317 194.97
+0.9793 0.317 194.97
+0.9692 0.295 182.4
+
+
+#  #  #  #  # COMPUTATIONAL RESULTS DIM  23  #  #  #  #  #
+
+Optimization algorithm:  SHGO
+Par. bounds:  [(0, 2), (180, 260)]
+Comp. time (min) ~ 30
+
+Dimension:  23
+g_T = (t/T)^(1/ 2 )
+Probability:  0.9886
+T:  259.42
+Beta:  0.293
+
+Adiabatic theorem applies:  0
+Adiabatic time:  0
+Gamma max:  0
+Energy min:  0
+Computation time (min) ~ 0
+
+Additional local maxima
+Prob - Beta - T
+0.9886 0.293 259.42
+0.9886 0.293 259.41
+0.9886 0.293 259.41
+0.986 0.292 250.31
+0.9824 0.292 241.27
+0.9778 0.292 232.26
+0.9653 0.27 215.09
+
+
+#  #  #  #  # COMPUTATIONAL RESULTS DIM  25  #  #  #  #  #
+
+Optimization algorithm:  SHGO
+Par. bounds:  [(0, 2), (150, 290)]
+Comp. time (min) ~ 49
+
+Dimension:  25
+g_T = (t/T)^(1/ 2 )
+Probability:  0.9823
+T:  287.9
+Beta:  0.268
+
+Adiabatic theorem applies:  0
+Adiabatic time:  0
+Gamma max:  0
+Energy min:  0
+Computation time (min) ~ 0
+
+Additional local maxima
+Prob - Beta - T
+0.9823 0.268 287.9
+0.9823 0.266 287.97
+0.9768 0.267 274.35
+0.972 0.266 265.19
+0.9184 0.26 209.07
+0.8513 0.291 171.88
+
+
+#  #  #  #  # COMPUTATIONAL RESULTS DIM  27  #  #  #  #  #
+
+Optimization algorithm:  SHGO
+Par. bounds:  [(0, 2), (150, 300)]
+Comp. time (min) ~ 54
+
+Dimension:  27
+g_T = (t/T)^(1/ 2 )
+Probability:  0.9647
+T:  298.16
+Beta:  0.245
+
+Adiabatic theorem applies:  0
+Adiabatic time:  0
+Gamma max:  0
+Energy min:  0
+Computation time (min) ~ 0
+
+Additional local maxima
+Prob - Beta - T
+0.9647 0.245 298.16
+0.9646 0.262 300.0
+0.9646 0.262 300.0
+0.9646 0.262 300.0
+0.9557 0.234 285.01
+0.8456 0.268 196.89
+
