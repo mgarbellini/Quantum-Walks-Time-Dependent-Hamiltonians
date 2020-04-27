@@ -468,58 +468,49 @@ rtolerance = 1e-6
 atolerance = 1e-6
 
 
-dimension = 5
-beta = [0, 4.5]
-time = [1, 20]
-non_prob = 0.92
-non_time = 7
-time_sampling = 40
-beta_sampling = 30
-grid_probability_evaluation(dimension, time[0],time[1], time_sampling, beta[0], beta[1], beta_sampling, non_prob, non_time)
-
-dimension = 7
-beta = [0, 4]
-time = [1, 40]
-non_prob = 0.79
-non_time = 4
-time_sampling = 40
-beta_sampling = 30
-grid_probability_evaluation(dimension, time[0],time[1], time_sampling, beta[0], beta[1], beta_sampling, non_prob, non_time)
-
-dimension = 9
-beta = [0, 4]
-time = [1, 60]
-non_prob = 0.70
-non_time = 5
-time_sampling = 40
-beta_sampling = 30
-grid_probability_evaluation(dimension, time[0],time[1], time_sampling, beta[0], beta[1], beta_sampling, non_prob, non_time)
-
-dimension = 11
+dimension = 17
 beta = [0, 3]
-time = [1, 80]
-non_prob = 0.6
-non_time = 7
-time_sampling = 40
+time = [1, 180]
+non_prob = 0.39
+non_time = 15
+time_sampling = 30
 beta_sampling = 30
 grid_probability_evaluation(dimension, time[0],time[1], time_sampling, beta[0], beta[1], beta_sampling, non_prob, non_time)
 
-dimension = 13
+dimension = 19
 beta = [0, 3]
-time = [1, 120]
-non_prob = 0.5
-non_time = 10
-time_sampling = 40
+time = [1, 220]
+non_prob = 0.36
+non_time = 19
+time_sampling = 30
 beta_sampling = 30
 grid_probability_evaluation(dimension, time[0],time[1], time_sampling, beta[0], beta[1], beta_sampling, non_prob, non_time)
 
-dimension = 15
-beta = [0, 3]
-time = [1, 150]
-non_prob = 0.44
+dimension = 21
+beta = [0, 2]
+time = [1, 240]
+non_prob = 0.28
 non_time = 11
-time_sampling = 40
-beta_sampling = 30
+time_sampling = 30
+beta_sampling = 20
+grid_probability_evaluation(dimension, time[0],time[1], time_sampling, beta[0], beta[1], beta_sampling, non_prob, non_time)
+
+dimension = 23
+beta = [0, 2]
+time = [1, 280]
+non_prob = 0.26
+non_time = 13
+time_sampling = 30
+beta_sampling = 20
+grid_probability_evaluation(dimension, time[0],time[1], time_sampling, beta[0], beta[1], beta_sampling, non_prob, non_time)
+
+dimension = 25
+beta = [0, 2]
+time = [1, 300]
+non_prob = 0.24
+non_time = 14
+time_sampling = 30
+beta_sampling = 20
 grid_probability_evaluation(dimension, time[0],time[1], time_sampling, beta[0], beta[1], beta_sampling, non_prob, non_time)
 
 
