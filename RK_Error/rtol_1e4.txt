@@ -1,0 +1,40 @@
+
+N:  51
+T: 1000
+Beta: 0.5
+
+Relative accuracy: 0.0001
+Absolute accuracy: 1e-05
+Normalization:  0.998837150737537
+RK45 Error:  0.0011628492624630171
+Comp time:  90.662334217
+
+N:  51
+T: 300
+Beta: 0.5
+
+Relative accuracy: 0.0001
+Absolute accuracy: 1e-06
+Normalization:  0.999601439059778
+RK45 Error:  0.0003985609402219481
+Comp time:  21.746032549999995
+
+N:  51
+T: 300
+Beta: 0.5
+
+Relative accuracy: 0.0001
+Absolute accuracy: 1e-07
+Normalization:  0.9995872897689818
+RK45 Error:  0.0004127102310181874
+Comp time:  21.355048583
+
+N:  51
+T: 300
+Beta: 0.5
+
+Relative accuracy: 0.0001
+Absolute accuracy: 1e-08
+Normalization:  0.9995964777777278
+RK45 Error:  0.00040352222227224566
+Comp time:  21.51559309199999
