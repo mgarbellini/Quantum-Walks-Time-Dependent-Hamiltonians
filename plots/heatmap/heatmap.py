@@ -11,6 +11,7 @@ from scipy.optimize import minimize, basinhopping, shgo, dual_annealing
 from scipy.integrate import odeint, solve_ivp
 import seaborn as sns
 import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
 
 #useful global variables, shouldn't be too inefficient
 global dimension
@@ -252,32 +253,35 @@ def compute_energy_diff(s,beta):
 #check if adiabatic theorem with current parameters is applicable
 #returns adiabatic_results which contains Adiabatic_Time, Max_Energy_Diff,
 #Min_Energy_Diff, Crossing_Flag
-def adiabatic_theorem_check(current_par):
+def adiabatic_theorem_check(beta, time):
 
 
     #Performance counter
-    tic = time.perf_counter()
     #GAMMA MAXIMIZATION
     par_bnds = ([0, 1],)
+    energy_min = 1
 
-    minimization = shgo(compute_gamma, par_bnds,n=25, iters=1, args=(current_par[2],),sampling_method='sobol')
+    minimization = shgo(compute_gamma, par_bnds,n=25, iters=1, args=(beta,),sampling_method='sobol')
     gamma_max = -minimization.fun
 
     #ENERGY MINIMUM
 
-    minimization = shgo(compute_energy_diff, par_bnds,n=25, iters=1, args=(current_par[2],),sampling_method='sobol')
+    minimization = shgo(compute_energy_diff, par_bnds,n=25, iters=1, args=(beta,),sampling_method='sobol')
     energy_min = minimization.fun
 
     #TIME BOUNDS FOR ADIABATIC THEOREM
     adiabatic_time = gamma_max/(energy_min**2)
-    if(energy_min>0):
-        adiabatic_flag = 'True'
+
+    if(time < adiabatic_time):
+        adiabatic_flag = 0
     else:
-        adiabatic_flag = 'False'
+        adiabatic_flag = 1
 
-    adiabatic_results = [adiabatic_time, gamma_max, energy_min, adiabatic_flag, (tic - time.perf_counter())/60]
+    #adiabatic_results = [adiabatic_time, gamma_max, energy_min, adiabatic_flag, (tic - time.perf_counter())/60]
 
-    return adiabatic_results
+
+    #return adiabatic_results
+    return adiabatic_flag
 
 #routine to maximize probability
 def optimization(par_bnds,optimization_method, its):
@@ -394,7 +398,7 @@ def export_results_routine(dimension, par_bnds, method, step_function, optimizat
     print()
     return ('Simulation success!')
 
-def heatmap2d(arr: np.ndarray, time_array, beta_array, non_prob, non_time):
+def heatmap2d(arr: np.ndarray, time_array, beta_array, non_prob, non_time, adiabatic_check):
 
     for i in range(len(time_array)):
         time_array[i] = round((time_array[i]),1)
@@ -418,13 +422,17 @@ def heatmap2d(arr: np.ndarray, time_array, beta_array, non_prob, non_time):
     ct = plt.contour(arr,levels, colors='white')
     cta = plt.contour(arr,non_adiabatic_levels, colors ='white', linestyles = 'dashed')
     plt.clabel(ct)
-    #plt.clabel(cta)
-    #plt.tight_layout()
-    file_name = str(dimension) + '_probability_heatmap.pdf'
+
+    #non physical results
+    for i in range(len(time_array)):
+        for j in range(len(beta_array)):
+            if(adiabatic_check[j][i] == 0):
+                plt.gca().add_patch(Rectangle((-0.5+i, -0.5+j), 1, 1, fill=False, color = 'white', linewidth=0, hatch = '///////'))
+
+    file_name = str(dimension) + '_probability_heatmap_2nd_version.pdf'
     plt.savefig(file_name)
     plt.clf()
     plt.close()
-    #plt.show()
 
 def grid_probability_evaluation(dimension, time_lb, time_up, time_sampling_points, beta_lb, beta_up, beta_sampling_points, non_time, non_prob):
 
@@ -433,17 +441,18 @@ def grid_probability_evaluation(dimension, time_lb, time_up, time_sampling_point
     oracle_site_state.fill(0)
     oracle_site_state[int((dimension-1)/2)][0] = 1
 
-    #Define time, beta and probability array
+    #Define time, beta and probability and adiabatic_check array
     time_array = np.linspace(time_lb, time_up, time_sampling_points)
     beta_array = np.linspace(beta_lb, beta_up, beta_sampling_points)
     probability = np.empty([beta_sampling_points, time_sampling_points])
+    adiabatic_check  = np.empty([beta_sampling_points, time_sampling_points])
 
     for i in range(time_sampling_points):
         for j in range(beta_sampling_points):
             #evaluate probability
             probability[j][i] = -evaluate_probability([beta_array[j], time_array[i]], oracle_site_state)
-
-    heatmap2d(probability, time_array, beta_array, non_time, non_prob)
+            adiabatic_check[j][i] = adiabatic_theorem_check(beta_array[j], time_array[i] )
+    heatmap2d(probability, time_array, beta_array, non_time, non_prob, adiabatic_check)
     return probability
 
 def single_evaluation_benchmark(x):
@@ -467,22 +476,11 @@ step_function = 1
 rtolerance = 1e-6
 atolerance = 1e-6
 
-
-
-dimension = 27
-beta = [0, 2]
-time = [1, 320]
-non_prob = 0.22
-non_time = 17
-time_sampling = 40
-beta_sampling = 30
-grid_probability_evaluation(dimension, time[0],time[1], time_sampling, beta[0], beta[1], beta_sampling, non_prob, non_time)
-
-dimension = 29
-beta = [0, 2]
-time = [1, 350]
-non_prob = 0.19
-non_time = 14
+dimension = 11
+beta = [0, 6]
+time = [1, 80]
+non_prob = 0.6
+non_time = 7
 time_sampling = 40
 beta_sampling = 30
 grid_probability_evaluation(dimension, time[0],time[1], time_sampling, beta[0], beta[1], beta_sampling, non_prob, non_time)
