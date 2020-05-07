@@ -18,7 +18,7 @@ global dimension
 global step_function
 global rtolerance, atolerance #error tolerance (relative and absolute) for RK45 intergrator
 
-def heatmap2d(arr: np.ndarray, time_array, beta_array, non_prob,non_prob_2, non_time, adiabatic_check):
+def heatmap2d(arr: np.ndarray, time_array, beta_array, non_prob, non_time, adiabatic_check):
 
     for i in range(len(time_array)):
         time_array[i] = round((time_array[i]),1)
@@ -33,21 +33,22 @@ def heatmap2d(arr: np.ndarray, time_array, beta_array, non_prob,non_prob_2, non_
     plt.xlabel('Time', fontweight="bold")
     plt.ylabel('Beta', fontweight="bold")
 
-    title = 'Adiabatic Probability N=' + str(dimension) + '\nNon-Adiabatic (dashed): p = ' + str(non_prob) + ', T = ' + str(non_time)
+    title = 'Adiabatic Probability N=' + str(dimension) + '\nNon-Adiabatic (dashed): p = ' + str(non_prob[0]) + ', T = ' + str(non_time)
     plt.title(title,  y=1.04,fontweight="bold",  ha = 'center')
     #plt.suptitle(title, fontweight="bold", ha='center')
     plt.colorbar()
     levels = [0.9, 0.95, 0.99]
-    non_adiabatic_levels = [non_prob,non_prob_2]
+    non_adiabatic_levels = non_prob
     ct = plt.contour(arr,levels, colors='white')
     cta = plt.contour(arr,non_adiabatic_levels, colors ='black', linestyles = 'dashed')
     plt.clabel(ct)
+    plt.clabel(cta)
 
     #non physical results
     for i in range(len(time_array)):
         for j in range(len(beta_array)):
             if(adiabatic_check[j][i] == 0):
-                plt.gca().add_patch(Rectangle((-0.5+i, -0.5+j), 1, 1, fill=False, color = 'white', linewidth=0, hatch = '///////'))
+                plt.gca().add_patch(Rectangle((-0.5+i, -0.5+j), 1, 1, fill=True, fc= (0.843, 0.819, 0.819, 0.7),  ec= (0.843, 0.819, 0.819, 0.25), linewidth=0.1, hatch = '/////'))
 
     file_name = str(dimension) + '_probability_heatmap_2nd_version.pdf'
     plt.savefig(file_name)
@@ -56,11 +57,24 @@ def heatmap2d(arr: np.ndarray, time_array, beta_array, non_prob,non_prob_2, non_
 
 
 #MAIN
-dimension = 71
+dimension = int(sys.argv[1])
+non_time = int(sys.argv[2])
+if(float(sys.argv[4]) == 0):
+    non_prob = [float(sys.argv[3])]
+    non_prob[0] = round(non_prob[0], 2)
+else:
+    non_prob = [float(sys.argv[3]), float(sys.argv[4])]
+    non_prob[0] = round(non_prob[0], 2)
+    non_prob[1] = round(non_prob[1], 2)
 
-probability = np.load('71_probability.npy')
-beta_array = np.load('71_beta_array.npy')
-time_array = np.load('71_time_array.npy')
-adiabatic_check = np.load('71_adiabatic_check.npy')
 
-heatmap2d(probability, time_array, beta_array,0.19,0.38,14 , adiabatic_check)
+prob = str(dimension) + '_probability.npy'
+beta = str(dimension) + '_beta_array.npy'
+time = str(dimension) + '_time_array.npy'
+adiab = str(dimension) + '_adiabatic_check.npy'
+probability = np.load(prob)
+beta_array = np.load(beta)
+time_array = np.load(time)
+adiabatic_check = np.load(adiab)
+
+heatmap2d(probability, time_array, beta_array, non_prob, non_time, adiabatic_check)
