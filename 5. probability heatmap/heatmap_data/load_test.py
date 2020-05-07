@@ -18,7 +18,7 @@ global dimension
 global step_function
 global rtolerance, atolerance #error tolerance (relative and absolute) for RK45 intergrator
 
-def heatmap2d(arr: np.ndarray, time_array, beta_array, non_prob, non_time, adiabatic_check):
+def heatmap2d(arr: np.ndarray, time_array, beta_array, non_prob,non_prob_2, non_time, adiabatic_check):
 
     for i in range(len(time_array)):
         time_array[i] = round((time_array[i]),1)
@@ -38,9 +38,9 @@ def heatmap2d(arr: np.ndarray, time_array, beta_array, non_prob, non_time, adiab
     #plt.suptitle(title, fontweight="bold", ha='center')
     plt.colorbar()
     levels = [0.9, 0.95, 0.99]
-    non_adiabatic_levels = [non_prob]
+    non_adiabatic_levels = [non_prob,non_prob_2]
     ct = plt.contour(arr,levels, colors='white')
-    cta = plt.contour(arr,non_adiabatic_levels, colors ='white', linestyles = 'dashed')
+    cta = plt.contour(arr,non_adiabatic_levels, colors ='black', linestyles = 'dashed')
     plt.clabel(ct)
 
     #non physical results
@@ -56,11 +56,11 @@ def heatmap2d(arr: np.ndarray, time_array, beta_array, non_prob, non_time, adiab
 
 
 #MAIN
-dimension = 3
+dimension = 29
 
-probability = np.load('3_probability.npy')
-beta_array = np.load('3_beta_array.npy')
-time_array = np.load('3_time_array.npy')
-adiabatic_check = np.load('3_adiabatic_check.npy')
+probability = np.load('29_probability.npy')
+beta_array = np.load('29_beta_array.npy')
+time_array = np.load('29_time_array.npy')
+adiabatic_check = np.load('29_adiabatic_check.npy')
 
-heatmap2d(probability, time_array, beta_array, 0.9, 5, adiabatic_check)
+heatmap2d(probability, time_array, beta_array,0.19,0.38,14 , adiabatic_check)

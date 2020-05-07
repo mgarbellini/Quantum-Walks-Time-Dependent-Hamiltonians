@@ -346,18 +346,18 @@ if __name__ == '__main__':
     rtolerance = 1e-6
     atolerance = 1e-6
 
-    dimension = 13
+    dimension = 17
     tic = time.perf_counter()
     #initialize multiprocessing Pool(). Will split computation on different ranges of beta.
     #being beta_max = 6 will split over 6 processes
     pool = mp.Pool(6)
 
-    process_1 = pool.apply_async(grid_probability_evaluation, args=(1, 115, 0))
-    process_2 = pool.apply_async(grid_probability_evaluation, args=(1, 115, 1))
-    process_3 = pool.apply_async(grid_probability_evaluation, args=(1, 115, 2))
-    process_4 = pool.apply_async(grid_probability_evaluation, args=(1, 115, 3))
-    process_5 = pool.apply_async(grid_probability_evaluation, args=(1, 115, 4))
-    process_6 = pool.apply_async(grid_probability_evaluation, args=(1, 115, 5))
+    process_1 = pool.apply_async(grid_probability_evaluation, args=(1, 180, 0))
+    process_2 = pool.apply_async(grid_probability_evaluation, args=(1, 180, 1))
+    process_3 = pool.apply_async(grid_probability_evaluation, args=(1, 180, 2))
+    process_4 = pool.apply_async(grid_probability_evaluation, args=(1, 180, 3))
+    process_5 = pool.apply_async(grid_probability_evaluation, args=(1, 180, 4))
+    process_6 = pool.apply_async(grid_probability_evaluation, args=(1, 180, 5))
     pool.close()
     pool.join()
 
@@ -375,4 +375,4 @@ if __name__ == '__main__':
     adiabatic_check = np.concatenate([adiabatic_check_1, adiabatic_check_2, adiabatic_check_3, adiabatic_check_4, adiabatic_check_5, adiabatic_check_6], axis=0)
     beta_array = np.concatenate([beta_array_1, beta_array_2, beta_array_3, beta_array_4, beta_array_5, beta_array_6])
     time_array = time_array_1
-    heatmap2d(probability, time_array, beta_array, 0.5, 0.7, 9, adiabatic_check)
+    heatmap2d(probability, time_array, beta_array, 0.39, 0.8, 14, adiabatic_check)
