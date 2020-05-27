@@ -38,11 +38,11 @@ def generate_hamiltonian(dimension, beta, time, T):
     adj_matrix.fill(0)
     for i in range(dimension):
         for j in range(dimension):
-            if i == j:
-                if i == 0 & j == 0:
+            if (i == j):
+                if (i == 0 & j == 0):
                     adj_matrix[i,dimension-1] = 1
                     adj_matrix[i,j+1] = 1
-                elif i == dimension-1 & j == dimension-1:
+                elif (i == (dimension-1) & j == (dimension-1)):
                     adj_matrix[i,j-1] = 1
                     adj_matrix[i,0] = 1
                 else:
@@ -280,6 +280,7 @@ def adiabatic_theorem_check(beta, time):
         return 0
     else:
         return 1
+
 def heatmap2d(arr: np.ndarray, time, beta, non_prob, non_prob_2, non_time, adiabatic_check):
 
     time_array = time
@@ -321,7 +322,7 @@ def heatmap2d(arr: np.ndarray, time, beta, non_prob, non_prob_2, non_time, adiab
 @ray.remote
 def grid_eval(time_lb, time_up, beta_array):
 
-    time_sampling_points = 40
+    time_sampling_points = 30
     #Define oracle site state
     oracle_site_state = np.empty([dimension, 1])
     oracle_site_state.fill(0)
@@ -336,7 +337,7 @@ def grid_eval(time_lb, time_up, beta_array):
         for j in range(len(beta_array)):
             #evaluate probability
             probability[j][i] = -evaluate_probability([beta_array[j], time_array[i]], oracle_site_state)
-            adiabatic_check[j][i] = adiabatic_theorem_check(beta_array[j], time_array[i])
+            #adiabatic_check[j][i] = adiabatic_theorem_check(beta_array[j], time_array[i])
 
     return probability, time_array, beta_array, adiabatic_check
 
@@ -399,11 +400,6 @@ if __name__ == '__main__':
     rtolerance = 1e-6
     atolerance = 1e-6
 
-    dimension = 71
-    parallel_routine(100, 900)
 
-    dimension = 81
-    parallel_routine(200, 1200)
-
-    dimension = 91
-    parallel_routine(300, 1500)
+    dimension = 33
+    parallel_routine(1,80)

@@ -69,7 +69,7 @@ def adiabatic_no_constrains(dim):
 
     for i in range(len(time)):
         for j in range(len(beta)):
-            if(time[i]>10):
+            if(time[i]>5):
                 probability[j][i] = float(time[i]/probability[j][i])
             else:
                 probability[j,i] = 10e4
@@ -77,9 +77,9 @@ def adiabatic_no_constrains(dim):
     min_index = np.unravel_index(probability.argmin(), probability.shape)
     min = probability[min_index[0],min_index[1]]
     a_flag = adiabatic_flag[min_index[0],min_index[1]]
-    if(a_flag==0):
-        print('Unphysical result!')
-    print(min, (1/min)*time[min_index[1]], time[min_index[1]], beta[min_index[0]])
+    iters_to_unity = float(1/((1/min)*time[min_index[1]]))
+
+    print(dim, round((1/min)*time[min_index[1]],2), round(time[min_index[1]],1), round(beta[min_index[0]],1), round(min,2), round(iters_to_unity, 1))
 
 def non_adiabatic_delta(dim):
 
@@ -101,7 +101,10 @@ def non_adiabatic_delta(dim):
 
 if __name__ == '__main__':
 
-    dimensions = [31]
+    dimension = []
+    for i in range(3, 36):
+        if i % 2 != 0:
+            dimension.append(i)
 
-    for dim in dimensions:
-        non_adiabatic_delta(dim)
+    for dim in dimension:
+        adiabatic_no_constrains(dim)
