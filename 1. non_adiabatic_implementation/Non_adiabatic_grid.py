@@ -159,7 +159,7 @@ def parallel_routine(lb_time, ub_time):
     np.save(file_time_array, time_array)
     np.save(file_beta_array, beta_array)
 
-    return print('Success: N=',dimension,' in ',int(toc/60),'min')
+    return print('Success: N=',dimension,' in ',int(toc/10),'min')
 
 if __name__ == '__main__':
 
@@ -167,14 +167,5 @@ if __name__ == '__main__':
     rtolerance = 1e-6
     atolerance = 1e-6
 
-    dimension = 31
-    parallel_routine(1,400)
-
-    dimension = 41
-    parallel_routine(1, 500)
-
-    dimension = 51
-    parallel_routine(50, 700)
-
-    dimension = 61
-    parallel_routine(100, 900)
+    dimension = int(sys.argv[1])
+    parallel_routine(1,80)

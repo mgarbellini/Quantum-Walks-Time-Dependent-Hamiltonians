@@ -335,18 +335,13 @@ def parallel_routine(lb_time, ub_time, lb_beta, ub_beta):
 
 if __name__ == '__main__':
 
-    step_function = 3
+    step_function = 2
     rtolerance = 1e-6
     atolerance = 1e-6
 
 
 
     #dimension = int(sys.argv[1])
-    dimension = 3
-    parallel_routine(0, dimension*2, 0, 10)
 
-    dimension = 5
-    parallel_routine(0, dimension*2, 0, 10)
-
-    dimension = 7
-    parallel_routine(0, dimension*2, 0, 10)
+    dimension = 15
+    parallel_routine(0, dimension*2, 0, 15)
