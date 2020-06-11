@@ -250,7 +250,7 @@ def compute_gamma(s,beta):
 
 def compute_energy_diff(s,beta):
 
-    energy = compute_eigenvalues_eigenvectors(s, beta,0)
+    energy = compute_eigenvalues_eigenvectors(s, beta, 0)
 
     return (energy[1]-energy[0])
 
@@ -322,7 +322,7 @@ def heatmap2d(arr: np.ndarray, time, beta, non_prob, non_prob_2, non_time, adiab
 @ray.remote
 def grid_eval(time_lb, time_up, beta_array):
 
-    time_sampling_points = 30
+    time_sampling_points = 40
     #Define oracle site state
     oracle_site_state = np.empty([dimension, 1])
     oracle_site_state.fill(0)
@@ -341,27 +341,27 @@ def grid_eval(time_lb, time_up, beta_array):
 
     return probability, time_array, beta_array, adiabatic_check
 
-def parallel_routine(lb_time, ub_time):
+def parallel_routine(lb_time, ub_time, beta_array):
 
     tic = time.perf_counter()
 
     #beta arrays
-    beta_1 = [0.1, 0.2, 0.3,]
+
+    beta_1 = [0.1, 0.2, 0.3]
     beta_2 = [0.4, 0.5, 0.6]
     beta_3 = [0.7, 0.8, 0.9]
     beta_4 = [1.0, 1.1, 1.2]
     beta_5 = [1.3, 1.4, 1.5]
     beta_6 = [1.6, 1.7, 1.8]
-    beta_7 = [1.9, 2.0, 2.1]
+
 
     #parallel processes
-    process_1 = grid_eval.remote(lb_time, ub_time, beta_1)
-    process_2 = grid_eval.remote(lb_time, ub_time, beta_2)
-    process_3 = grid_eval.remote(lb_time, ub_time, beta_3)
-    process_4 = grid_eval.remote(lb_time, ub_time, beta_4)
-    process_5 = grid_eval.remote(lb_time, ub_time, beta_5)
-    process_6 = grid_eval.remote(lb_time, ub_time, beta_6)
-    process_7 = grid_eval.remote(lb_time, ub_time, beta_7)
+    process_1 = grid_eval.remote(lb_time, ub_time, beta_array[0:5])
+    process_2 = grid_eval.remote(lb_time, ub_time, beta_array[5:10])
+    process_3 = grid_eval.remote(lb_time, ub_time, beta_array[10:15])
+    process_4 = grid_eval.remote(lb_time, ub_time, beta_array[15:20])
+    process_5 = grid_eval.remote(lb_time, ub_time, beta_array[20:25])
+    process_6 = grid_eval.remote(lb_time, ub_time, beta_array[25:30])
 
     #reassigning values to arrays
     probability_1, time_array_1, beta_array_1, adiabatic_check_1 = ray.get(process_1)
@@ -370,36 +370,34 @@ def parallel_routine(lb_time, ub_time):
     probability_4, time_array_4, beta_array_4, adiabatic_check_4 = ray.get(process_4)
     probability_5, time_array_5, beta_array_5, adiabatic_check_5 = ray.get(process_5)
     probability_6, time_array_6, beta_array_6, adiabatic_check_6 = ray.get(process_6)
-    probability_7, time_array_7, beta_array_7, adiabatic_check_7 = ray.get(process_7)
 
     #concatenate arrays to output array
     toc = time.perf_counter() - tic
-    print(toc)
 
-    probability = np.concatenate([probability_1, probability_2, probability_3, probability_4, probability_5, probability_6, probability_7], axis=0)
-    adiabatic_check = np.concatenate([adiabatic_check_1, adiabatic_check_2, adiabatic_check_3, adiabatic_check_4, adiabatic_check_5, adiabatic_check_6, adiabatic_check_7], axis=0)
-    beta_array = np.concatenate([beta_array_1, beta_array_2, beta_array_3, beta_array_4, beta_array_5, beta_array_6, beta_array_7])
-    time_array = time_array_1
+    probability = np.concatenate([probability_1, probability_2, probability_3, probability_4, probability_5, probability_6], axis=0)
 
     #preparing for export
-    file_probability = str(dimension) + '_probability.npy'
-    file_adiabatic_check = str(dimension) + '_adiabatic_check.npy'
-    file_time_array = str(dimension) + '_time_array.npy'
-    file_beta_array = str(dimension) + '_beta_array.npy'
+    file_probability = str(dimension) + '_probability_pow2.npy'
+
+
 
     np.save(file_probability, probability)
-    np.save(file_adiabatic_check, adiabatic_check)
-    np.save(file_time_array, time_array)
-    np.save(file_beta_array, beta_array)
 
     return print('Success: N=',dimension,' in ',int(toc/60),'min')
 
 if __name__ == '__main__':
 
-    step_function = 1
+    step_function = 3
     rtolerance = 1e-6
     atolerance = 1e-6
 
 
-    dimension = 33
-    parallel_routine(1,80)
+
+    dimension = int(sys.argv[1])
+    beta_array = np.load(str(dimension)+ "_beta_array.npy")
+    time_array = np.load(str(dimension) + "_time_array.npy")
+
+    lb_time = time_array[0]
+    ub_time = time_array[len(time_array)-1]
+
+    parallel_routine(lb_time, ub_time, beta_array)

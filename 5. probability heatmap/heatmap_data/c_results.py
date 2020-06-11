@@ -98,13 +98,37 @@ def non_adiabatic_delta(dim):
 
     print(dim, round((1/min)*time[min_index[1]],2), round(time[min_index[1]],1), round(beta[min_index[0]],1), round(min,2), round(iters_to_unity, 1))
 
+def adiabatic_normalized(dim):
+
+    probability, time, beta, adiabatic_flag = load_data_file(dim,1)
+
+    for i in range(len(time)):
+        for j in range(len(beta)):
+            if(time[i]>5):
+                iters_to_unity = float(1/((probability[j][i])*time[i]))
+                probability[j][i] = float(time[i]/probability[j][i]) * iters_to_unity
+            else:
+                probability[j,i] = 10e4
+
+    min_index = np.unravel_index(probability.argmin(), probability.shape)
+    min = probability[min_index[0],min_index[1]]
+
+    print(dim, min, )
 
 if __name__ == '__main__':
 
     dimension = []
-    for i in range(3, 36):
+    for i in range(3,36):
         if i % 2 != 0:
             dimension.append(i)
+    dimension.append(37)
+    dimension.append(41)
+    dimension.append(47)
+    dimension.append(51)
+    dimension.append(57)
+    dimension.append(61)
+    dimension.append(67)
+    dimension.append(71)
 
     for dim in dimension:
-        adiabatic_no_constrains(dim)
+        adiabatic_normalized(dim)

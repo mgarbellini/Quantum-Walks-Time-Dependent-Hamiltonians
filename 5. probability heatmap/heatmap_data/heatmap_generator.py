@@ -40,11 +40,12 @@ def heatmap2d(prob, time_array, beta_array, non_prob, non_time, adiabatic_check)
     plt.clabel(ct)
     plt.clabel(cta)
 
+    #
     #non physical results
-    for i in range(len(time_array)):
-        for j in range(len(beta_array)):
-            if(adiabatic_check[j][i] == 0):
-                plt.gca().add_patch(Rectangle((-0.5+i, -0.5+j), 1, 1, fill=True, fc= (0.662, 0.662, 0.662, 0.9),  ec= (0.662, 0.662, 0.662, 0.4), linewidth=0.1, hatch = '/////'))
+    #for i in range(len(time_array)):
+    #    for j in range(len(beta_array)):
+    #        if(adiabatic_check[j][i] == 0):
+    #            plt.gca().add_patch(Rectangle((-0.5+i, -0.5+j), 1, 1, fill=True, fc= (0.662, 0.662, 0.662, 0.9),  ec= (0.662, 0.662, 0.662, 0.4), linewidth=0.1, hatch = '/////'))
 
     file_name = str(dimension) + '_probability_heatmap.pdf'
     plt.savefig(file_name)
