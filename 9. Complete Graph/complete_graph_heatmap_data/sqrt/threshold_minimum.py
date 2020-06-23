@@ -42,20 +42,9 @@ def max_routine(dim, type):
     probability, time, beta = load_data_file(dim, type)
     print(dim, max_probability_by_threshold(0.9, time, beta, probability), max_probability_by_threshold(0.95, time, beta, probability), max_probability_by_threshold(0.99, time, beta, probability))
 
-def prob_time(dim, type):
-
-    probability, time, beta = load_data_file(dim, type)
-    for i in range(len(time)):
-        print(time[i], probability[25,i])
-
-
-
-
 if __name__ == '__main__':
 
-    dimensions = [3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33]
+    dimensions = [3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,35,41,45, 51, 61]
 
-    #for dim in dimensions:
-    #    max_routine(dim, 2)
-
-    prob_time(23, 2)
+    for dim in dimensions:
+        max_routine(dim, 2)

@@ -58,4 +58,4 @@ if __name__ == '__main__':
     #for dim in dimensions:
     #    max_routine(dim, 2)
 
-    prob_time(23, 2)
+    prob_time(27, 2)

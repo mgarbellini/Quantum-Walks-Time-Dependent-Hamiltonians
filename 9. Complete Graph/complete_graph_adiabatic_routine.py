@@ -1,13 +1,16 @@
+#!/usr/bin/env python
 # M. Garbellini
 # Dept. of Physics
 # Universita degli Studi di Milano
 # matteo.garbellini@studenti.unimi.it
 
+
+
+
 import sys
 import time
 import numpy as np
 from scipy import linalg
-from scipy.optimize import minimize, basinhopping, shgo, dual_annealing
 from scipy.integrate import odeint, solve_ivp
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -15,7 +18,7 @@ from matplotlib.patches import Rectangle
 import multiprocessing as mp
 import ray
 
-ray.init()
+
 
 #useful global variables, shouldn't be too inefficient
 global dimension
@@ -44,6 +47,9 @@ def generate_hamiltonian(dimension, beta, time, T):
             g_T = np.sqrt(float(time)/T)
         elif(step_function==3):
             g_T = np.cbrt(float(time)/T)
+        elif(step_function==0):
+            nn = np.sqrt(-1+dimension)
+            g_T = (nn*nn + nn*np.tan(2*nn*time*(1/dimension) - np.arctan(nn))*(1/(2*nn*nn)))
         else:
             print("Error: step_function value not defined")
 
@@ -107,142 +113,7 @@ def evaluate_probability(x, oracle_site_state):
     else:
         return -np.abs(probability)**2
 
-
-#routine to generate loop hamiltonian + oracle state
-def generate_hamiltonian_derivative(s, beta, derivative):
-
-    #generate diagonal matrix
-    diag_matrix = np.empty([dimension, dimension])
-    diag_matrix.fill(0)
-    for i in range(dimension):
-        for j in range(dimension):
-            if i == j:
-                diag_matrix[i,j] = 2
-
-    #generate loop adjacency matrix
-    adj_matrix = np.empty([dimension, dimension])
-    adj_matrix.fill(0)
-    for i in range(dimension):
-        for j in range(dimension):
-            if i == j:
-                if i == 0 & j == 0:
-                    adj_matrix[i,dimension-1] = 1
-                    adj_matrix[i,j+1] = 1
-                elif i == dimension-1 & j == dimension-1:
-                    adj_matrix[i,j-1] = 1
-                    adj_matrix[i,0] = 1
-                else:
-                    adj_matrix[i,j-1] = 1
-                    adj_matrix[i,j+1] = 1
-
-    #generate laplacian of loop
-    laplacian = diag_matrix - adj_matrix
-
-    #generate time-stepping function g_T(t): let's consider three cases, ^1, ^1/2, 1^1/3
-    #Note: if t=0 the function is automatically set to 'almost zero' (0.000001). This prevents warning within the ODE solver
-    if(derivative==0):
-        if(step_function == 1):
-            hamiltonian = (1-s)*laplacian
-            hamiltonian[int((dimension-1)/2),int((dimension-1)/2)] += -s*beta
-
-        elif(step_function == 2):
-            hamiltonian = (1-np.sqrt(s))*laplacian
-            hamiltonian[int((dimension-1)/2),int((dimension-1)/2)] += -np.sqrt(s)*beta
-
-        elif(step_function == 3):
-            hamiltonian = (1-np.cbrt(s))*laplacian
-            hamiltonian[int((dimension-1)/2),int((dimension-1)/2)] += -np.cbrt(s)*beta
-        else:
-            print('NameError: step_function not defined')
-
-    elif(derivative==1):
-        if(step_function == 1):
-            hamiltonian = -laplacian
-            hamiltonian[int((dimension-1)/2),int((dimension-1)/2)] += -beta
-
-        elif(step_function == 2):
-            hamiltonian = -(1/(2*np.sqrt(s)))*laplacian
-            hamiltonian[int((dimension-1)/2),int((dimension-1)/2)] += -(1/(2*np.sqrt(s)))*beta
-
-        elif(step_function == 3):
-            hamiltonian = -(1/(3*np.cbrt(s)))*laplacian
-            hamiltonian[int((dimension-1)/2),int((dimension-1)/2)] += -(1/(3*np.cbrt(s)))*beta
-        else:
-            print('NameError: step_function not defined')
-    else:
-        print('NameError: derivative flag unknown')
-
-    return hamiltonian
-
-def compute_eigenvalues_eigenvectors(s, beta, eigen_flag):
-
-    t_hamiltonian = generate_hamiltonian_derivative(s,beta,0)
-    eigenvalues, eigenstates = linalg.eig(t_hamiltonian)
-    idx = eigenvalues.argsort()[::1]
-    eigenvalues = eigenvalues[idx]
-    eigenstates = eigenstates[:,idx]
-
-    if(eigen_flag == 1):
-        return eigenstates
-    elif(eigen_flag == 0):
-        return eigenvalues.real
-    else:
-        print('NameError: compute_eigen flag unknown!')
-        return 0
-
-def compute_gamma(s,beta):
-
-    #find eigenstates
-    #compute hamiltonian_derivative
-    #return  | < phi1 | dH | phi0 > |
-
-    eigenstates_array = compute_eigenvalues_eigenvectors(s, beta, 1)
-    hamiltonian_derivative = generate_hamiltonian_derivative(s, beta, 1)
-
-    phi0 = np.empty([dimension,1])
-    phi1 = np.empty([dimension,1])
-
-    for i in range(dimension):
-        phi0[i] = eigenstates_array[i,0]
-        phi1[i] = eigenstates_array[i,1]
-
-    gamma = np.dot(np.transpose((np.conj(phi1))), np.dot(hamiltonian_derivative, phi0))
-    return -np.abs(gamma)
-
-def compute_energy_diff(s,beta):
-
-    energy = compute_eigenvalues_eigenvectors(s, beta, 0)
-
-    return (energy[1]-energy[0])
-
-#check if adiabatic theorem with current parameters is applicable
-#returns adiabatic_results which contains Adiabatic_Time, Max_Energy_Diff,
-#Min_Energy_Diff, Crossing_Flag
-def adiabatic_theorem_check(beta, time):
-
-
-    #Performance counter
-    #GAMMA MAXIMIZATION
-    par_bnds = ([0, 1],)
-    energy_min = 1
-
-    minimization = shgo(compute_gamma, par_bnds,n=25, iters=1, args=(beta,),sampling_method='sobol')
-    gamma_max = -minimization.fun
-
-    #ENERGY MINIMUM
-
-    minimization = shgo(compute_energy_diff, par_bnds,n=25, iters=1, args=(beta,),sampling_method='sobol')
-    energy_min = minimization.fun
-
-    #TIME BOUNDS FOR ADIABATIC THEOREM
-    adiabatic_time = gamma_max/(energy_min**2)
-
-    if(time < adiabatic_time):
-        return 0
-    else:
-        return 1
-
-def heatmap2d(arr: np.ndarray, time, beta):
+def heatmap2d(probability, time, beta, step_function_text):
 
     time_array = time
     beta_array = beta
@@ -251,24 +122,23 @@ def heatmap2d(arr: np.ndarray, time, beta):
     for i in range(len(beta_array)):
         beta_array[i] = round(beta_array[i],2)
 
-    plt.imshow(arr, cmap='inferno_r', aspect= 1., origin= {'lower'})
-    #plt.xticks(np.linspace(0, 40, 30, dtype=int), rotation='vertical')
+    plt.imshow(probability, cmap='inferno_r', aspect= 1., origin= {'lower'})
     plt.tick_params(axis='both', which='major', labelsize=7)
     plt.xticks(range(len(time_array)), time_array, rotation='vertical')
     plt.yticks(range(len(beta_array)), beta_array)
     plt.xlabel('Time', fontweight="bold")
     plt.ylabel('Beta', fontweight="bold")
 
-    title = 'Dynamic Probability Complete Graph N=' + str(dimension)
+    title = 'Dynamic Prob Complete Graph N=' + str(dimension) + ' (' + step_function_text[step_function - 1] + ')'
     plt.title(title,  y=1.04,fontweight="bold",  ha = 'center')
     plt.colorbar()
 
     levels = [0.9, 0.95, 0.99]
-    ct = plt.contour(arr,levels, colors='white')
+    ct = plt.contour(probability,levels, colors='white')
     plt.clabel(ct)
 
-
-    file_name = str(dimension) + '_cg_heatmap.pdf'
+    pdf = '.pdf'
+    file_name = str(dimension) + '_cg_heatmap_' + step_function_text[step_function-1] + pdf
     plt.savefig(file_name)
     plt.clf()
     plt.close()
@@ -291,13 +161,18 @@ def grid_eval(time_array, beta_array):
 
     return probability
 
-def parallel_routine(lb_time, ub_time, lb_beta, ub_beta):
+def parallel_routine(lb_time, ub_time,lb_beta, ub_beta):
 
+    #initialize ray multiprocessing
+    ray.init()
     tic = time.perf_counter()
 
-    cpu_count = 5
-    time_sampling_points = 40
-    beta_sampling_points = cpu_count * 6
+
+    #useful definitions for multicore computation
+    cpu_count = 4
+    time_sampling_points = 30
+    sampling_per_cpu_count = 6
+    beta_sampling_points = cpu_count*sampling_per_cpu_count
     beta = np.linspace(lb_beta, ub_beta, beta_sampling_points)
     time_array = np.linspace(lb_time, ub_time, time_sampling_points)
     process = []
@@ -305,7 +180,7 @@ def parallel_routine(lb_time, ub_time, lb_beta, ub_beta):
 
     #parallel processes
     for i in range(cpu_count):
-        process.append(grid_eval.remote(time_array, beta[int(6*i):int(6*(i+1))]))
+        process.append(grid_eval.remote(time_array, beta[int(sampling_per_cpu_count*i):int(sampling_per_cpu_count*(i+1))]))
 
     #reassigning values to arrays
     for i in range(cpu_count):
@@ -316,32 +191,37 @@ def parallel_routine(lb_time, ub_time, lb_beta, ub_beta):
     for i in range(cpu_count - 2):
         probability_array = np.concatenate([probability_array, probability[i+2]])
 
+    #shutting down ray
+    ray.shutdown()
 
     #preparing for export and export and miscellanea
-    file_probability = str(dimension) + '_cg_probability.npy'
-    file_time = str(dimension) + '_cg_time_array.npy'
-    file_beta = str(dimension) + '_cg_beta_array.npy'
+    step_function_text = ["lin", "sqrt", "cbrt"]
+    npy = ".npy"
+
+    file_probability = str(dimension) + '_cg_probability_' + step_function_text[step_function-1]
+    file_time = str(dimension) + '_cg_time_array_.npy'
+    file_beta = str(dimension) + '_cg_beta_array_.npy'
 
     #export heatmap plot
-    heatmap2d(probability_array, time_array, beta)
+    heatmap2d(probability_array, time_array, beta, step_function_text)
 
     np.save(file_probability, probability_array)
     np.save(file_time, time_array)
     np.save(file_beta, beta)
     toc = time.perf_counter() - tic
 
-    return print('Success: N ',dimension,' in ',int(toc/60),' min')
+
+    print('Success: N ',dimension,' in ',int(toc/60),' min')
+    return 0
 
 
 if __name__ == '__main__':
 
-    step_function = 2
+    step_function = 0
     rtolerance = 1e-6
     atolerance = 1e-6
 
-
-
-    #dimension = int(sys.argv[1])
-
-    dimension = 15
-    parallel_routine(0, dimension*2, 0, 15)
+    dims = [15, 21]
+    for dim in dims:
+        dimension = dim
+        parallel_routine(0, dimension*(1.2), 0, 15)
