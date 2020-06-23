@@ -1,1 +1,8 @@
-plot "results_step_function.txt" using 1:2 w lp dt 2 pt 20 ps 2 title "static", "" using 1:3 w lp dt 2 pt 35 ps 2 title "linear", "" using 1:4 w lp dt 2 pt 35 ps 2 title "sqrt", "" using 1:5 w lp dt 2 pt 35 ps 2 title "cbrt"
+plot "lin.txt" using 1:4 w lp dt 2 pt 11 ps 2 title "linear", "sqrt.txt" using 1:4 w lp dt 2 pt 11 ps 2 title "linear", "cbrt.txt" using 1:4 w lp dt 2 pt 11 ps 2 title "cbrt"
+
+plot "cbrt.txt" using 1:2 w lp dt 2 pt 11 ps 2 title "p>0.90", "" using 1:3 w lp dt 2 pt 11 ps 2 title "p>0.95", "" using 1:4 w lp dt 2 pt 11 ps 2 title "p>0.99"
+
+
+plot "lin.txt" using 1:4 pt 11 ps 2 title "linear", "sqrt.txt" using 1:4 pt 30 ps 2 title "sqrt", "cbrt.txt" using 1:4 pt 5 ps 2 title "cbrt"
+
+fit
