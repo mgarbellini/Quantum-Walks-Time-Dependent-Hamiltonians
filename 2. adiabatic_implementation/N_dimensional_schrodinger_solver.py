@@ -298,7 +298,7 @@ def optimization(par_bnds,optimization_method, its):
         opt2 = {'f_min': -1}
         #maximize probability
         #sampling_method must be chosen between 'simplicial' and 'sobol'
-        maximized = shgo(evaluate_probability, par_bnds,n=40, iters=1, args=(oracle_site_state,),sampling_method='sobol')
+        maximized = shgo(evaluate_probability, par_bnds, n=40, iters=1, args=(oracle_site_state,),sampling_method='sobol')
 
         #computation time in minutes (rounded)
         comp_time = int(time.perf_counter() - tic)/60
