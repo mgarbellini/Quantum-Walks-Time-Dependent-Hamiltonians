@@ -5,7 +5,7 @@ The repository is structured in the following way
   0. **report**. Contains a latex and pdf report of the work done so far. Constantly updated and not yet up to current date. 
   Quick link to pdf (https://github.com/matteogarbellini/Adiabatic-Quantum-Walk/blob/AdiabaticQuantumWalk/0.%20report/report.pdf)
   1. **non-adiabatic-implementation**. Search with the usual Grover's QW algorithm. Provides benchmark for the adiabatic-QW implementation
-  2. **adiabatic-implementation**. Serch with the adiabatic-QW implementation. Contains an N-dimensional schroedinger solver, and a routine to check if the adiabati c theorem is satisfied. 
+  2. **adiabatic-implementation**. Search with the adiabatic-QW implementation. Contains an N-dimensional schroedinger solver, and a routine to check if the adiabati c theorem is satisfied. 
   3. **eigenvalues-crossing**. Contains a simply routine to check the no-crossing needed for the adiabati theorem
   4. **RK-error**. Standalone study on the normalization error due to the Runge-Kutta integrator. Contains a python routine and pdf report of the results
   5. **probability-heatmap**. Routine for the probability heatmap needed in order to save computational time. Lots of results (.npy and .pdf), including heatmap plots. 
