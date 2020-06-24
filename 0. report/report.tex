@@ -106,10 +106,18 @@ We introduce a novel algorithm for quantum search based on an dynamical implemen
 
 % body of paper here - Use proper section commands
 % References should be done using the \cite, \ref, and \label commands
+
+% % % % % % % % % 
+% INTRODUCTION  % 
+% % % % % % % % %
 \section{Introduction}
 
 In Section II a review of the topic is presented, i.e. \textit{Continous-Quantum Walk} and \textit{Adiabatic Computation}. Follows a breif overview of Grover Algorithm in its usual Quantum-Walk formulation in Section III, which provides benchmark for the \textit{ring-graph} configuration. Section IV is dedicated to the introduction of the \textit{Adiabatic-Quantum-Walk Algorithm}. Results for two graph configurations (complete and ring) are presented in Section V. The computational methods used in the numerical simulations are discussed in Section VII (or appendix). Section VIII presents a summary of the work done so far, and the further developments to be made. 
 
+
+% % % % % % % %
+% BACKGROUND
+% % % % % % % %
 \section{Background}
 \subsection{Countinous - Time Quantum Walk}
 \subsection{Adiabatic Theorem}
@@ -148,17 +156,49 @@ Let's now discuss how to take advantage of the adiabatic theorem introducting th
 In this way we can prepare for $s=0$ the system in $H_B$ and let it evolve so that for $s=1$ it reaches $H_P$. Thanks to the adiabatic theorem, if it's made to evolve sufficiently slowly we will find ourself in the ground state of the problem hamiltonian, which is exactly the solution. 
 
 
-
+% % % % % % % % % % % % % % % % % % % % % %
+% SEARCH PROBLEM AND GROVER'S ALGORITHM 
+% % % % % % % % % % % % % % % % % % % % % %
 \section{Search problem and Grover's algorithm}
+
+
+% % % % % % % % % % % % % % % % % % % % % %
+% ADIABATIC-QUANTUM-WALK ALGORITHM
+% % % % % % % % % % % % % % % % % % % % % %
 \section{Adiabatic-Quantum-Walk algorithm}
 
+We introduce an adiabatic-quantum-walk hamiltonian of the form
+\begin{equation}
+    H(t) = \big( 1-g_T(t)\big)L + g_T(t)\beta|w\rangle\langle w|
+\end{equation}
+where $L$ is the laplacian described in Section II and $|w\rangle$ is the oracle state, i.e. the target. 
+The idea behind this particular formulation is that we intend to adiabatically \textit{turn on} the oracle, and combined with the adiabatic theorem we should find the solution with high probability.
+\subsection{Localization vs Optimized Search}
+We shall describe the possible outcomes of the previously introduced hamiltonian and characterize them as \textbf{localization} and \textbf{optimized search}. The first describes the finding with high probability of the solution without particular interest in the time needed to reach that particular solution. For example, as we shall see later in Section V, the ring-graph is known for not working with traditional quantum-walk algorithm (i.e. found with low probability), but thanks to the adiabatic nature for $T \to \infty$ the solution is found with probability 1. \\
+
+On the other hand we know that for our algorithm to be somewhat interesting from the perspective of the quantum search itxs
+
+
+% % % % % % % % % % % % % % % % % % % % % %
+% RESULTS FOR SELECTED TOPOLOGIES
+% % % % % % % % % % % % % % % % % % % % % %
 \section{Results for selected topologies}
 \subsection{Ring}
 \subsection{Complete graph} 
+
+
+% % % % % % % %
+% DISCUSSION
+% % % % % % % %
 \section{Discussion}
 \subsection{So far}
 \subsection{Future}
-\section{Appendix: Methods}
+
+
+% % % % % % % % % % % % % % %
+% APPENDIX: METHODS
+% % % % % % % % % % % % % % %
+\section{Methods}
 In this section an overview of the computational methods is presented, focusing the attention on specific matters: \textit{Optimization Algorithm} used for determining the optimal $\gamma$-configuration for maximum probability, \textit{Schroedinger Solver} for the time dependent hamiltonian evolution and some additional parameters for the optimal \textit{Runge-Kutta Normalization Error}. Lastly computational reasoning for the \textit{2D - Probability Heatmap} are presented. \\
 
 Most all numerical simulations were performed using \textbf{Python} being easy and flexible to sudden changes. Numerical methods such as optimization and ODE Solver come directly from python's native \textbf{Scipy}. In addition, a CPU-multiprocessing library, \textbf{Ray}, has been used to speed up the grid probability evaluation quite noticeably. 2D - Heatmap plots were created using python matplotlib, while additional plots were created with gnuplot. 
