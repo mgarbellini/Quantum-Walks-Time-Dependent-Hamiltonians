@@ -14,4 +14,4 @@ The repository is structured in the following way
   8. **step-function**. Some test with different (time) step functions. Will be later deleted, as it's already implemented in the other routines and results are redundant
   9. **complete-graph**. Probability heatmap routine for the complete graph. Includes plots and numerical results (for different step functions) and some initial test following the step function s(t) proposed by Roland and Cerf (*Quantum Search by Local Adiabatic Evolution*, quant-ph/0107015)
   10. **plots**. Some 'somewhat' organized plots and useful gnuplot snippets
-  11. **results**. Some 'somewhat' organized results for the weekly meetings
+  11. **meeting-results**. Some 'somewhat' organized results for the weekly meetings
