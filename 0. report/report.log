@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  24 JUN 2020 16:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  25 JUN 2020 09:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -721,7 +721,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 125--126
 []\OT1/cmr/m/n/10 A quan-tum sys-tem evolves ac-cord-ing to the
  []
 
-[1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+
 Underfull \hbox (badness 1466) in paragraph at lines 179--180
 \OT1/cmr/m/n/10 adi-a-batic evo-lu-tion since it reg-u-lates how fast the
  []
@@ -731,7 +731,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 179--180
 
  []
 
-
+[1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 Underfull \hbox (badness 2181) in paragraph at lines 190--191
 []\OT1/cmr/m/n/10 We shall de-scribe the pos-si-ble out-comes of the
  []
@@ -778,13 +778,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 233--234
 
 (./report.bbl) [3] (./report.aux) ) 
 Here is how much of TeX's memory you used:
- 16159 strings out of 493014
- 305102 string characters out of 6133351
- 480081 words of memory out of 5000000
- 19553 multiletter control sequences out of 15000+600000
+ 16158 strings out of 493014
+ 305091 string characters out of 6133351
+ 455081 words of memory out of 5000000
+ 19552 multiletter control sequences out of 15000+600000
  11098 words of font info for 42 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,6n,42p,10379b,993s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,5n,42p,10379b,993s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/typ
 e1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type
@@ -803,7 +803,7 @@ msy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
 i10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti
 9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.
 pfb>
-Output written on report.pdf (3 pages, 208894 bytes).
+Output written on report.pdf (3 pages, 203407 bytes).
 PDF statistics:
  82 PDF objects out of 1000 (max. 8388607)
  59 compressed objects within 1 object stream
