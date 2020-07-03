@@ -7,8 +7,8 @@
 % Choose pra, prb, prc, prd, pre, prl, prstab, prstper, or rmp for journal
 %  Add 'draft' option to mark overfull boxes with black boxes
 %  Add 'showkeys' option to make keywords appear
-%\documentclass[aps,pra,reprint, onecolumn]{revtex4-2}
-\documentclass[aps,pra,reprint]{revtex4-2}
+\documentclass[aps,pra,reprint, onecolumn]{revtex4-2}
+%\documentclass[aps,pra,reprint]{revtex4-2}
 \usepackage{lipsum}
 \usepackage{listings}
 
@@ -166,7 +166,7 @@ In this way we can prepare for $s=0$ the system in $H_B$ and let it evolve so th
 % % % % % % % % % % % % % % % % % % % % % %
 % ADIABATIC-QUANTUM-WALK ALGORITHM
 % % % % % % % % % % % % % % % % % % % % % %
-\section{Adiabatic-Quantum-Walk algorithm}
+\section{Time-dependent hamiltonian algorithm}
 
 We introduce an adiabatic-quantum-walk hamiltonian of the form
 \begin{equation}
@@ -196,7 +196,14 @@ On the other hand we know that for our algorithm to be somewhat interesting from
 % RESULTS FOR SELECTED TOPOLOGIES
 % % % % % % % % % % % % % % % % % % % % % %
 \section{Results for selected topologies}
+
 \subsection{Ring}
+
+\begin{figure}[ht]
+\includegraphics{./figures/23_probability_heatmap.pdf}%
+\caption{Probability N=23 Time Dependent Approach}
+\end{figure}
+
 \subsection{Complete graph}
 
 
@@ -217,7 +224,7 @@ In this section an overview of the computational methods is presented, focusing 
 Most all numerical simulations were performed using \textbf{Python} being easy and flexible to sudden changes. Numerical methods such as optimization and ODE Solver come directly from python's native \textbf{Scipy}. In addition, a CPU-multiprocessing library, \textbf{Ray}, has been used to speed up the grid probability evaluation quite noticeably. 2D - Heatmap plots were created using python matplotlib, while additional plots were created with gnuplot.
 
 \subsection{Optimization Algorithm}
-In Section II a series of benchmark were performed to compare the standard Quantum-Walk algorithm to the Adiabatic-Quantum-Walk implementation (later simply named 'dynamic'). In order to determine which optimization algorithm fitted the best for the task, a number of possible algorithm were tested, such as \textit{shgo, dualannealing, minimize, LHSBH} and \textit{Basin-Hopping}. \\
+In Section II a series of benchmark were performed to compare the standard Quantum-Walk algorithm to the Adiabatic-Quantum-Walk implementation (later simply named \textit{dynamic}). In order to determine which optimization algorithm fitted the best for the task, a number of possible algorithm were tested, such as \textit{shgo, dualannealing, minimize, LHSBH} and \textit{Basin-Hopping}. \\
 
 Due to the oscillating nature of the probability (cfr figure) the scipy native \textbf{Basinhopping algorithm} was used. As the name suggests the algorithm performs a series of randomized hops, i.e. jumps, of the coordinates in order to find the true maximum (actually, the true \textit{minimum}). This fits particularly well with the series of maxima and minima of the probability function (for fixed $\gamma$) in the static algorithm (std QWAlgorithm). Snippets of the parameters used follow.
 

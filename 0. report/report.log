@@ -1,6 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  28 JUN 2020 11:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  3 JUL 2020 09:52
 entering extended mode
  restricted \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
 **report.tex
 (./report.tex
@@ -716,28 +717,9 @@ e
 \c__siunitx_mathsf_int=\count177
 \c__siunitx_mathtt_int=\count178
 
-Underfull \hbox (badness 10000) in paragraph at lines 125--126
-[]\OT1/cmr/m/n/10 A quan-tum sys-tem evolves ac-cord-ing to the
- []
-
-
-Underfull \hbox (badness 1466) in paragraph at lines 179--180
-\OT1/cmr/m/n/10 adi-a-batic evo-lu-tion since it reg-u-lates how fast the
- []
-
-
+[1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 Underfull \hbox (badness 10000) in paragraph at lines 179--180
 
- []
-
-[1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 2181) in paragraph at lines 190--191
-[]\OT1/cmr/m/n/10 We shall de-scribe the pos-si-ble out-comes of the
- []
-
-
-Underfull \hbox (badness 3168) in paragraph at lines 190--191
-\OT1/cmr/m/n/10 pre-vi-ously in-tro-duced hamil-to-nian and char-ac-ter-ize
  []
 
 
@@ -745,67 +727,64 @@ Underfull \hbox (badness 10000) in paragraph at lines 190--191
 
  []
 
+<./figures/23_probability_heatmap.pdf, id=18, 462.52798pt x 346.89601pt>
+File: ./figures/23_probability_heatmap.pdf Graphic file (type pdf)
 
-Underfull \hbox (badness 2689) in paragraph at lines 215--216
-\OT1/cmr/m/n/10 evo-lu-tion and some ad-di-tional pa-ram-e-ters for the
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 215--216
-
- []
-
-
-Underfull \hbox (badness 3977) in paragraph at lines 220--221
-\OT1/cmr/m/n/10 the Adiabatic-Quantum-Walk im-ple-men-ta-tion (later
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 220--221
+<use ./figures/23_probability_heatmap.pdf>
+Package pdftex.def Info: ./figures/23_probability_heatmap.pdf used on input lin
+e 203.
+(pdftex.def)             Requested size: 462.52684pt x 346.89516pt.
+ [2]
+Underfull \hbox (badness 10000) in paragraph at lines 222--223
 
  []
 
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 231--232
+[3 <./figures/23_probability_heatmap.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 227--228
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 233--234
+Underfull \hbox (badness 10000) in paragraph at lines 238--239
 
  []
 
-(./report.bbl) [3] (./report.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 240--241
+
+ []
+
+(./report.bbl) [4] [5] (./report.aux) ) 
 Here is how much of TeX's memory you used:
- 16158 strings out of 493014
- 305091 string characters out of 6133351
- 455081 words of memory out of 5000000
- 19552 multiletter control sequences out of 15000+600000
+ 16164 strings out of 493014
+ 305286 string characters out of 6133351
+ 458125 words of memory out of 5000000
+ 19556 multiletter control sequences out of 15000+600000
  11098 words of font info for 42 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,5n,42p,10379b,993s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/c
-msy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
-i10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti
-9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.
-pfb>
-Output written on report.pdf (3 pages, 203288 bytes).
+ 38i,6n,42p,10379b,993s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2016/texmf-dist/font
+s/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2016/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmti9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+tt8.pfb>
+Output written on report.pdf (5 pages, 227483 bytes).
 PDF statistics:
- 82 PDF objects out of 1000 (max. 8388607)
- 59 compressed objects within 1 object stream
+ 148 PDF objects out of 1000 (max. 8388607)
+ 75 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
