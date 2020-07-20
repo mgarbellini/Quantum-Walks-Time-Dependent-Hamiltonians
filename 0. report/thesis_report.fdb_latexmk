@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex thesis_report"] 1595238598 "thesis_report.aux" "thesis_report.bbl" "thesis_report" 1595239372
+["bibtex thesis_report"] 1595238598 "thesis_report.aux" "thesis_report.bbl" "thesis_report" 1595239778
   "./apsrev4-2.bst" 1595064284 69611 b535f07e11c1fea03841ef5fe125643f ""
-  "thesis_report.aux" 1595239372 3460 7df116791b48c233e5868685d2b71fcd ""
+  "thesis_report.aux" 1595239778 3460 7df116791b48c233e5868685d2b71fcd ""
   "thesis_report.bcf" 0 -1 0 ""
-  "thesis_reportNotes.bib" 1595239372 104 4d8bb863c86f3d7b03a471e9d4707f34 ""
+  "thesis_reportNotes.bib" 1595239778 104 4d8bb863c86f3d7b03a471e9d4707f34 ""
   (generated)
-  "thesis_report.bbl"
   "thesis_report.blg"
-["pdflatex"] 1595239371 "thesis_report.tex" "thesis_report.pdf" "thesis_report" 1595239372
+  "thesis_report.bbl"
+["pdflatex"] 1595239777 "thesis_report.tex" "thesis_report.pdf" "thesis_report" 1595239778
   "/usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex9.tfm" 1246382020 996 a18840b13b499c08ac2de96a99eda4bc ""
@@ -125,11 +125,11 @@
   "figures/example.pdf" 1590760175 19735 5c591fff9e094b5f51367d3bddcd7258 ""
   "revsymb4-2.sty" 1547816100 5433 fd7fccdc1ca7819d49e5bb1deb9d741b ""
   "revtex4-2.cls" 1547816224 200719 c96794d0e4d320fe9ff0c7147d98a76b ""
-  "thesis_report.aux" 1595239372 3460 7df116791b48c233e5868685d2b71fcd ""
+  "thesis_report.aux" 1595239778 3460 7df116791b48c233e5868685d2b71fcd ""
   "thesis_report.bbl" 1595238598 1982 35453d3875d823f0ec9445e740a573d9 "bibtex thesis_report"
-  "thesis_report.tex" 1595239371 28575 cfc99dd3c32395b7146072aaf8791371 ""
+  "thesis_report.tex" 1595239777 28575 4db13e82d787ddab09f1c27e681b56f1 ""
   (generated)
-  "thesis_report.aux"
-  "thesis_report.pdf"
-  "thesis_report.log"
   "thesis_reportNotes.bib"
+  "thesis_report.log"
+  "thesis_report.pdf"
+  "thesis_report.aux"

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  20 JUL 2020 12:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  20 JUL 2020 12:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -749,11 +749,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 239--240
 
  []
 
-[4] <./figures/benchmarks.pdf, id=31, 642.4pt x 481.8pt>
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 242--244
+
+ []
+
+<./figures/benchmarks.pdf, id=31, 642.4pt x 481.8pt>
 File: ./figures/benchmarks.pdf Graphic file (type pdf)
 
 <use ./figures/benchmarks.pdf>
-Package pdftex.def Info: ./figures/benchmarks.pdf used on input line 242.
+Package pdftex.def Info: ./figures/benchmarks.pdf used on input line 246.
 (pdftex.def)             Requested size: 284.52756pt x 213.39682pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 253--254
@@ -914,7 +919,7 @@ c/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
 msfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmti9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmtt8.pfb>
-Output written on thesis_report.pdf (10 pages, 393222 bytes).
+Output written on thesis_report.pdf (10 pages, 393225 bytes).
 PDF statistics:
  538 PDF objects out of 1000 (max. 8388607)
  175 compressed objects within 2 object streams

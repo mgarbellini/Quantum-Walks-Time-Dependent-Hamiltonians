@@ -238,15 +238,15 @@ On the other hand we know that for our algorithm to be somewhat interesting from
 \subsubsection{Time-Independent Benchmarks}
 The first step in our analysis is to compute some benchmark for the time-independent hamiltonian, in order to later compare the time-dependent approach. This is particularly interesting since we know that th quantum search time-independent algorithm does not work with the circular graph, namely the found probability is periodical and for large N converges to p = 0.1.\\ \blue{Converging probability to 0.1 for large N}\\
 
+
+Using the time-independent hamiltonian introduced before we optimized the probability on T and $\beta$ for circular graphs up to N=31. It is worth noting that we considered only odd graphs, since it made an easier center-placement of the oracle site state. The following are the results:\\
+\blue{time-independent benchmarks up to N=31}\\
+
 \begin{figure}[ht]
 \includegraphics[width=10cm]{./figures/benchmarks.pdf}%
 \caption{Time Independent Benchmarks up to N=31}
 \end{figure}
 
-
-
-Using the time-independent hamiltonian introduced before we optimized the probability on T and $\beta$ for circular graphs up to N=31. It is worth noting that we considered only odd graphs, since it made an easier center-placement of the oracle site state. The following are the results:\\
-\blue{time-independent benchmarks up to N=31}\\
 It is clear that the time-independent algorithm does indeed not work, as we expected. The probability decreases as the number of sites N increases, \red{converging for large N to $p=0.1$}.
 
 \subsubsection{Time-Dependent Algorithm}
