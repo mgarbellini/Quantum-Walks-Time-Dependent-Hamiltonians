@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex thesis_report"] 1595258863 "thesis_report.aux" "thesis_report.bbl" "thesis_report" 1595258884
+["bibtex thesis_report"] 1595276250 "thesis_report.aux" "thesis_report.bbl" "thesis_report" 1595276252
   "./apsrev4-2.bst" 1595064284 69611 b535f07e11c1fea03841ef5fe125643f ""
-  "thesis_report.aux" 1595258884 3488 cc5874f87346eb09170ff559e541c55d ""
+  "thesis_report.aux" 1595276251 3373 f24361f667760ee6b7bfedd57bde6169 ""
   "thesis_report.bcf" 0 -1 0 ""
-  "thesis_reportNotes.bib" 1595258884 104 4d8bb863c86f3d7b03a471e9d4707f34 ""
+  "thesis_reportNotes.bib" 1595276251 104 4d8bb863c86f3d7b03a471e9d4707f34 ""
   (generated)
-  "thesis_report.blg"
   "thesis_report.bbl"
-["pdflatex"] 1595258883 "thesis_report.tex" "thesis_report.pdf" "thesis_report" 1595258884
+  "thesis_report.blg"
+["pdflatex"] 1595276250 "thesis_report.tex" "thesis_report.pdf" "thesis_report" 1595276252
   "/usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex9.tfm" 1246382020 996 a18840b13b499c08ac2de96a99eda4bc ""
@@ -125,13 +125,14 @@
   "figures/benchmarks.pdf" 1595173968 8389 168305318cbc72e3a48f0a68487cb647 ""
   "figures/delta.pdf" 1591015397 8638 69f829a8dcb4742c16273df9150a3c9e ""
   "figures/example.pdf" 1590760175 19735 5c591fff9e094b5f51367d3bddcd7258 ""
+  "figures/graph.png" 1595260321 182559 b7a22f34250d9057c429834ec837c8de ""
   "revsymb4-2.sty" 1547816100 5433 fd7fccdc1ca7819d49e5bb1deb9d741b ""
   "revtex4-2.cls" 1547816224 200719 c96794d0e4d320fe9ff0c7147d98a76b ""
-  "thesis_report.aux" 1595258884 3488 cc5874f87346eb09170ff559e541c55d ""
-  "thesis_report.bbl" 1595258864 1982 35453d3875d823f0ec9445e740a573d9 "bibtex thesis_report"
-  "thesis_report.tex" 1595258882 30620 6a9c158733bce34675e2eee07aa98391 ""
+  "thesis_report.aux" 1595276251 3373 f24361f667760ee6b7bfedd57bde6169 ""
+  "thesis_report.bbl" 1595276250 1982 35453d3875d823f0ec9445e740a573d9 "bibtex thesis_report"
+  "thesis_report.tex" 1595276248 31808 49d6c1e65eb11ae1bf9c4f0ded745d8d ""
   (generated)
+  "thesis_report.pdf"
+  "thesis_reportNotes.bib"
   "thesis_report.aux"
   "thesis_report.log"
-  "thesis_reportNotes.bib"
-  "thesis_report.pdf"

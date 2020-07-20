@@ -152,7 +152,10 @@ INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmbx9.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
+INPUT ./figures/graph.png
+INPUT ./figures/graph.png
 OUTPUT thesis_report.pdf
+INPUT ./figures/graph.png
 INPUT /usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmbxti10.tfm
 INPUT ./figures/benchmarks.pdf
