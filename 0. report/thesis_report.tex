@@ -127,15 +127,52 @@ This report can be summarized as follows.
 
 
 \subsection{Quantum Walks}
-\red{What is a quantum walk starting (maybe) from the notion of the classical random walk. Some words on discrete-time and continuous-time quantum walks and the fact that we consider the latter. Define the dynamics of the walker in terms of the laplacian matrix.}
+The continous time quantum walk is the direct analougue of the classical random walk. Given a graph G, a random walk is a Markov process with a fixed probability for unit time $\gamma$ of jumping to an adjacent vertex $j$. This particular walk can be described by a linear differential equation in terms of probability, namely
+
+\begin{equation}
+  \frac{d}{dt}p_j(t) = \gamma\sum_{k}L_{jk}p_k(t)
+\end{equation}
+
+where $p_j(t)$ is the probability of being on the vertex $j$ at time $t$.\\
+The quantum analogue takes place in an N-dimentional Hilbert space spanned by the states (vertex) $|j\rangle$ of the graph G. Instead of considering the classical probability as we previosuly did, we consider the probability time-dependent amplitudes $q_j(t) = \langle j|\psi(t)\rangle$, where $|\psi\rangle$ is a general time-dependent state. The differential equation takes thus the form of
+
+\begin{equation}
+  i\frac{d}{dt}q_j(t) = \sum_{k}H_{jk}q_k(t)
+\end{equation}
+The continous-time quantum walk is defined by letting $H=-\gamma L$, where $L$ is the previosuly defined Laplacian matrix.
 
 
-\subsection{Quantum Search with QWs}
-\red{Introduction to quantum search with the classical Grover algorithm and how it is possible to formulate the problem with continuous-time quantum walks. This section should contain the main core of quantum search and all the theoretical principles used throughout the thesis. It should be clear what finding the oracle is and what is the probability we're looking for. Description of the system evolution (matrix element for probability) will be discussed in later sections.}
+\subsection{Quantum Search with Continous-Time Quantum Walk}
+\purple{Spatial Search by Quantum Walk, \textit{A. Childs, J. Goldstone}, quant-ph/0306054v2}\\
+We now address the quantum search problem firstly formulated as Grover's algorithm and then extending it to the search on a graph using quantum walks. \\
+
+\red{Grover problem without quantum walks} \\
+
+To approach the Grover problem with quantum walk it's necessary to modify the hamiltonian such that the vertex $|w\rangle$, i.e. the target, is somewhat special. Following Grover's oracle an oracle hamiltonian $H_w$ is introduced
+
+\begin{equation}
+  H_w = -|w\rangle\langle w|
+\end{equation}
+
+which in particular has energy zero for all but the vertex $|w\rangle$ for which it has enenergy $-1$. Therefore the Grover problem, i.e. quantum search, becomes finding the ground state of such hamiltonian. To do so we consider the time-independent hamiltonian of the form
+\begin{equation}
+  H = -\gamma L + H_w = -\gamma L -|w\rangle\langle w|
+\end{equation}
+where L is the laplacian of the graph, which contains the information of the dynamics over that particular graph topology.\\
+
+We then begin considering the superposition of all possible state, namely
+\begin{equation}
+  |s\rangle = \frac{1}{\sqrt{N}}\sum_j|j\rangle
+\end{equation}
+and run the quantum walk for time T. The evolved state is then measured in the vertex basis. Our objective is to find the optimal value of $\gamma$ so that the success probability is as close as possible to 1 for the smallest T
+
+\begin{equation}
+ p = |\langle w|\psi(T)\rangle|^2 = |\langle w|\psi(T)\rangle|
+\end{equation}
 
 
 \subsection{Adiabatic Theorem}
-
+\purple{Quantum Computation by Adiabatic Evolution \textit{E. Farhi, J. Goldstone, S. Gutmann, M. Sipser}, quant-ph/0001106 }\\
 \red{Key aspect of the adiabatic theorem is the fact that we can get very close to probability p=1 for large T. Also the beginning-problem hamiltonian feature is quite important to explain with clarity.}\\
 
 
