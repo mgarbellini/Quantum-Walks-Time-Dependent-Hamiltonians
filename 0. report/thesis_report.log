@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  18 JUL 2020 19:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  20 JUL 2020 12:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -716,68 +716,208 @@ e
 
 \c__siunitx_mathsf_int=\count177
 \c__siunitx_mathtt_int=\count178
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 112.
 
-Underfull \hbox (badness 10000) in paragraph at lines 138--139
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 112.
+ [1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 139--140
 
  []
 
-[1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 217--218
+Underfull \hbox (badness 10000) in paragraph at lines 207--208
 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 233--234
+Underfull \hbox (badness 10000) in paragraph at lines 230--231
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 238--239
+Underfull \hbox (badness 10000) in paragraph at lines 236--237
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 249--250
+Underfull \hbox (badness 10000) in paragraph at lines 239--240
 
  []
 
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 251--252
+[4] <./figures/benchmarks.pdf, id=31, 642.4pt x 481.8pt>
+File: ./figures/benchmarks.pdf Graphic file (type pdf)
+
+<use ./figures/benchmarks.pdf>
+Package pdftex.def Info: ./figures/benchmarks.pdf used on input line 242.
+(pdftex.def)             Requested size: 284.52756pt x 213.39682pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 253--254
 
  []
 
-(./thesis_report.bbl) [5] (./thesis_report.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 255--256
+
+ []
+
+<./figures/example.pdf, id=32, 462.52798pt x 346.89601pt>
+File: ./figures/example.pdf Graphic file (type pdf)
+
+<use ./figures/example.pdf>
+Package pdftex.def Info: ./figures/example.pdf used on input line 258.
+(pdftex.def)             Requested size: 284.52756pt x 213.40594pt.
+ [5 <./figures/benchmarks.pdf>]
+<./figures/7_probability_heatmap.pdf, id=46, 462.52798pt x 346.89601pt>
+File: ./figures/7_probability_heatmap.pdf Graphic file (type pdf)
+
+<use ./figures/7_probability_heatmap.pdf>
+Package pdftex.def Info: ./figures/7_probability_heatmap.pdf used on input line
+ 277.
+(pdftex.def)             Requested size: 256.0748pt x 192.06375pt.
+
+<./figures/11_probability_heatmap.pdf, id=47, 462.52798pt x 346.89601pt>
+File: ./figures/11_probability_heatmap.pdf Graphic file (type pdf)
+
+<use ./figures/11_probability_heatmap.pdf>
+Package pdftex.def Info: ./figures/11_probability_heatmap.pdf used on input lin
+e 277.
+(pdftex.def)             Requested size: 256.0748pt x 192.06375pt.
+
+<./figures/17_probability_heatmap.pdf, id=48, 462.52798pt x 346.89601pt>
+File: ./figures/17_probability_heatmap.pdf Graphic file (type pdf)
+
+<use ./figures/17_probability_heatmap.pdf>
+Package pdftex.def Info: ./figures/17_probability_heatmap.pdf used on input lin
+e 279.
+(pdftex.def)             Requested size: 256.0748pt x 192.06375pt.
+
+<./figures/21_probability_heatmap.pdf, id=49, 462.52798pt x 346.89601pt>
+File: ./figures/21_probability_heatmap.pdf Graphic file (type pdf)
+
+<use ./figures/21_probability_heatmap.pdf>
+Package pdftex.def Info: ./figures/21_probability_heatmap.pdf used on input lin
+e 279.
+(pdftex.def)             Requested size: 256.0748pt x 192.06375pt.
+
+<./figures/27_probability_heatmap.pdf, id=50, 462.52798pt x 346.89601pt>
+File: ./figures/27_probability_heatmap.pdf Graphic file (type pdf)
+
+<use ./figures/27_probability_heatmap.pdf>
+Package pdftex.def Info: ./figures/27_probability_heatmap.pdf used on input lin
+e 281.
+(pdftex.def)             Requested size: 256.0748pt x 192.06375pt.
+
+<./figures/29_probability_heatmap.pdf, id=51, 462.52798pt x 346.89601pt>
+File: ./figures/29_probability_heatmap.pdf Graphic file (type pdf)
+
+<use ./figures/29_probability_heatmap.pdf>
+Package pdftex.def Info: ./figures/29_probability_heatmap.pdf used on input lin
+e 281.
+(pdftex.def)             Requested size: 256.0748pt x 192.06375pt.
+
+Overfull \hbox (10.1496pt too wide) in paragraph at lines 276--284
+ []$[]$ 
+ []
+
+[6 <./figures/example.pdf>] [7 <./figures/7_probability_heatmap.pdf> <./figures
+/11_probability_heatmap.pdf
+
+pdfTeX warning: pdflatex (file ./figures/11_probability_heatmap.pdf): PDF inclu
+sion: multiple pdfs with page group included in a single page
+> <./figures/17_probability_heatmap.pdf
+
+pdfTeX warning: pdflatex (file ./figures/17_probability_heatmap.pdf): PDF inclu
+sion: multiple pdfs with page group included in a single page
+> <./figures/21_probability_heatmap.pdf
+
+pdfTeX warning: pdflatex (file ./figures/21_probability_heatmap.pdf): PDF inclu
+sion: multiple pdfs with page group included in a single page
+> <./figures/27_probability_heatmap.pdf
+
+pdfTeX warning: pdflatex (file ./figures/27_probability_heatmap.pdf): PDF inclu
+sion: multiple pdfs with page group included in a single page
+> <./figures/29_probability_heatmap.pdf
+
+pdfTeX warning: pdflatex (file ./figures/29_probability_heatmap.pdf): PDF inclu
+sion: multiple pdfs with page group included in a single page
+>]
+Underfull \hbox (badness 10000) in paragraph at lines 292--294
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 295--296
+
+ []
+
+<./figures/delta.pdf, id=451, 642.4pt x 481.8pt>
+File: ./figures/delta.pdf Graphic file (type pdf)
+ <use ./figures/delta.pdf>
+Package pdftex.def Info: ./figures/delta.pdf used on input line 301.
+(pdftex.def)             Requested size: 284.52756pt x 213.39682pt.
+
+<./figures/9_Giugno.pdf, id=452, 642.4pt x 481.8pt>
+File: ./figures/9_Giugno.pdf Graphic file (type pdf)
+
+<use ./figures/9_Giugno.pdf>
+Package pdftex.def Info: ./figures/9_Giugno.pdf used on input line 310.
+(pdftex.def)             Requested size: 284.52756pt x 213.39682pt.
+ [8 <./figures/delta.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 326--327
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 331--332
+
+ []
+
+[9 <./figures/9_Giugno.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 342--343
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 344--345
+
+ []
+
+(./thesis_report.bbl) [10] (./thesis_report.aux) ) 
 Here is how much of TeX's memory you used:
- 16145 strings out of 493014
- 304990 string characters out of 6133351
- 454220 words of memory out of 5000000
- 19547 multiletter control sequences out of 15000+600000
- 8181 words of font info for 31 fonts, out of 8000000 for 9000
+ 16236 strings out of 493014
+ 307157 string characters out of 6133351
+ 457250 words of memory out of 5000000
+ 19617 multiletter control sequences out of 15000+600000
+ 11098 words of font info for 42 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,6n,42p,10386b,993s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf
--dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2016/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/font
-s/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmti9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmtt8.pfb>
-Output written on thesis_report.pdf (5 pages, 213405 bytes).
+ 38i,11n,42p,10386b,993s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2016/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2016/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmti9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmtt8.pfb>
+Output written on thesis_report.pdf (10 pages, 393222 bytes).
 PDF statistics:
- 88 PDF objects out of 1000 (max. 8388607)
- 63 compressed objects within 1 object stream
+ 538 PDF objects out of 1000 (max. 8388607)
+ 175 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 51 words of extra memory for PDF output out of 10000 (max. 10000000)
 

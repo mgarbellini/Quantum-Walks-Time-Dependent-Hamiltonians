@@ -64,6 +64,8 @@ def generate_hamiltonian(dimension, beta, time, T):
             g_T = np.sqrt(float(time)/T)
         elif(step_function==3):
             g_T = np.cbrt(float(time)/T)
+        elif(step_function==4):
+            g_T = 0.5*(1+(2*time -1)**3)
         else:
             print("Error: step_function value not defined")
 
@@ -202,12 +204,12 @@ def single_evaluation(beta):
 
 if __name__ == '__main__':
 
-    step_function = 1
+    step_function = 4
     rtolerance = 1e-6
     atolerance = 1e-6
 
     dim = []
-    for i in range(72):
+    for i in range(11):
         if (i%2 != 0):
             if(i != 1):
                 dim.append(i)
