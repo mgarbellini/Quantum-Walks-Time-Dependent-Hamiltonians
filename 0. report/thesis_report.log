@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  23 JUL 2020 13:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  23 JUL 2020 14:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -620,42 +620,153 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 635.
 LaTeX Info: Redefining \[ on input line 2739.
 LaTeX Info: Redefining \] on input line 2740.
 )
-Class revtex4-2 Info: Patching array package. on input line 59.
-Class revtex4-2 Info: Robustifying \LaTeX's \boldmath command on input line 59.
+(/usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2016/05/05 v6.83n Hypertext links for LaTeX
 
-Class revtex4-2 Info: cite was not loaded (OK!) on input line 59.
-Class revtex4-2 Info: mcite was not loaded (OK!) on input line 59.
-Class revtex4-2 Info: multicol was not loaded (OK!) on input line 59.
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+Package: hobsub-hyperref 2016/05/16 v1.14 Bundle oberdiek, subset hyperref (HO)
+
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+Package: hobsub-generic 2016/05/16 v1.14 Bundle oberdiek, subset generic (HO)
+Package: hobsub 2016/05/16 v1.14 Construct package bundles (HO)
+Package hobsub Info: Skipping package `infwarerr' (already loaded).
+Package hobsub Info: Skipping package `ltxcmds' (already loaded).
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+Package: intcalc 2016/05/16 v1.2 Expandable calculations with integers (HO)
+Package: ifpdf 2016/05/14 v3.1 Provides the ifpdf switch
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+Package: pdftexcmds 2016/05/10 v0.21 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+Package: pdfescape 2016/05/16 v1.14 Implements pdfTeX's escape features (HO)
+Package: bigintcalc 2016/05/16 v1.4 Expandable calculations on big integers (HO
+)
+Package: bitset 2016/05/16 v1.2 Handle bit-vector datatype (HO)
+Package: uniquecounter 2016/05/16 v1.3 Provide unlimited unique counter (HO)
+)
+Package hobsub Info: Skipping package `hobsub' (already loaded).
+Package: letltxmacro 2016/05/16 v1.5 Let assignment for LaTeX macros (HO)
+Package: hopatch 2016/05/16 v1.3 Wrapper for package hooks (HO)
+Package: xcolor-patch 2016/05/16 xcolor patch
+Package: atveryend 2016/05/16 v1.9 Hooks at the very end of document (HO)
+Package: atbegshi 2016/05/16 v1.17 At begin shipout hook (HO)
+Package: refcount 2016/05/16 v3.5 Data extraction from label references (HO)
+Package: hycolor 2016/05/16 v1.8 Color options for hyperref/bookmark (HO)
+)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/auxhook.sty
+Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+)
+\@linkdim=\dimen190
+\Hy@linkcounter=\count170
+\Hy@pagecounter=\count171
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2016/05/05 v6.83n Hyperref: PDFDocEncoding definition (HO)
+)
+\Hy@SavedSpaceFactor=\count172
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+Package hyperref Info: Hyper figures OFF on input line 4446.
+Package hyperref Info: Link nesting OFF on input line 4451.
+Package hyperref Info: Hyper index ON on input line 4454.
+Package hyperref Info: Plain pages OFF on input line 4461.
+Package hyperref Info: Backreferencing OFF on input line 4466.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4691.
+LaTeX Info: Redefining \href on input line 4955.
+\c@Hy@tempcnt=\count173
+LaTeX Info: Redefining \url on input line 5044.
+\XeTeXLinkMargin=\dimen191
+\Fld@menulength=\count174
+\Field@Width=\dimen192
+\Fld@charsize=\dimen193
+Package hyperref Info: Hyper figures OFF on input line 6298.
+Package hyperref Info: Link nesting OFF on input line 6303.
+Package hyperref Info: Hyper index ON on input line 6306.
+Package hyperref Info: backreferencing OFF on input line 6313.
+Package hyperref Info: Link coloring OFF on input line 6318.
+Package hyperref Info: Link coloring with OCG OFF on input line 6323.
+Package hyperref Info: PDF/A mode OFF on input line 6328.
+LaTeX Info: Redefining \ref on input line 6368.
+LaTeX Info: Redefining \pageref on input line 6372.
+\Hy@abspage=\count175
+\c@Item=\count176
+\c@Hfootnote=\count177
+)
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2016/05/05 v6.83n Hyperref driver for pdfTeX
+\Fld@listcount=\count178
+\c@bookmark@seq@number=\count179
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
+)
+\Hy@SectionHShift=\skip61
+)
+Class revtex4-2 Info: Patching array package. on input line 60.
+Class revtex4-2 Info: Robustifying \LaTeX's \boldmath command on input line 60.
+
+Class revtex4-2 Info: cite was not loaded (OK!) on input line 60.
+Class revtex4-2 Info: mcite was not loaded (OK!) on input line 60.
+Class revtex4-2 Info: multicol was not loaded (OK!) on input line 60.
 
 (./thesis_report.aux)
 \openout1 = `thesis_report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-\c@lstlisting=\count170
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+\c@lstlisting=\count180
 
 (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count171
-\scratchdimen=\dimen190
+\scratchcounter=\count181
+\scratchdimen=\dimen194
 \scratchbox=\box70
-\nofMPsegments=\count172
-\nofMParguments=\count173
+\nofMPsegments=\count182
+\nofMParguments=\count183
 \everyMPshowfont=\toks27
-\MPscratchCnt=\count174
-\MPscratchDim=\dimen191
-\MPnumerator=\count175
-\makeMPintoPDFobject=\count176
+\MPscratchCnt=\count184
+\MPscratchDim=\dimen195
+\MPnumerator=\count185
+\makeMPintoPDFobject=\count186
 \everyMPtoPDFconversion=\toks28
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/beamer/translator/dicts/translato
@@ -664,44 +775,12 @@ Dictionary: translator-basic-dictionary, Language: English
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/siunitx/siunitx-abbreviations.cfg
 File: siunitx-abbreviations.cfg 2016/03/01 v2.6q siunitx: Abbreviated units
-) (/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2016/05/10 v0.21 Utility functions of pdfTeX for LuaTeX (HO
-)
-
-(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ifluatex.sty
-Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
-Package ifluatex Info: LuaTeX not detected.
-)
-(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2016/05/14 v3.1 Provides the ifpdf switch
-)
-Package pdftexcmds Info: LuaTeX not detected.
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
-)
-(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+) (/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/grfext.sty
 Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
-
-(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
-Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
-))
-(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/kvoptions.sty
-Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
-
-(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
-Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
-
-(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/etexcmds.sty
-Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
-Package etexcmds Info: Could not find \expanded.
-(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
-(etexcmds)             that some package has redefined \expanded.
-(etexcmds)             In the latter case, load this package earlier.
-)))
+)
 Package grfext Info: Graphics extension search list:
 (grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
 G,.JBIG2,.JB2,.eps]
@@ -711,36 +790,52 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+\AtBeginShipoutBox=\box71
+Package hyperref Info: Link coloring OFF on input line 60.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
+)
+\c@section@level=\count187
+)
+LaTeX Info: Redefining \ref on input line 60.
+LaTeX Info: Redefining \pageref on input line 60.
+LaTeX Info: Redefining \nameref on input line 60.
+
+(./thesis_report.out) (./thesis_report.out)
+\@outlinefile=\write4
+\openout4 = `thesis_report.out'.
+
+Class revtex4-2 Info: Taking \maketitle back from hyperref on input line 60.
 \openout3 = `thesis_reportNotes.bib'.
 
-\c__siunitx_mathsf_int=\count177
-\c__siunitx_mathtt_int=\count178
+\c__siunitx_mathsf_int=\count188
+\c__siunitx_mathtt_int=\count189
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 113.
 
-Underfull \hbox (badness 10000) in paragraph at lines 104--105
-
- []
-
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 112.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 112.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 113.
  [1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<./figures/graph.png, id=16, 696.6025pt x 383.4325pt>
+<./figures/graph.png, id=136, 696.6025pt x 383.4325pt>
 File: ./figures/graph.png Graphic file (type png)
 
 <use ./figures/graph.png>
-Package pdftex.def Info: ./figures/graph.png used on input line 144.
+Package pdftex.def Info: ./figures/graph.png used on input line 145.
 (pdftex.def)             Requested size: 270.30118pt x 148.78333pt.
  [2 <./figures/graph.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 178--180
+Underfull \hbox (badness 10000) in paragraph at lines 179--181
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 208--209
+Underfull \hbox (badness 10000) in paragraph at lines 209--210
 
  []
 
@@ -749,142 +844,89 @@ Underfull \hbox (badness 10000) in paragraph at lines 275--277
 
  []
 
-[5] [6]
-Underfull \hbox (badness 10000) in paragraph at lines 329--332
-
- []
-
-<./figures/benchmarks.pdf, id=40, 642.4pt x 481.8pt>
+[5] <./figures/benchmarks.pdf, id=183, 642.4pt x 481.8pt>
 File: ./figures/benchmarks.pdf Graphic file (type pdf)
 
 <use ./figures/benchmarks.pdf>
-Package pdftex.def Info: ./figures/benchmarks.pdf used on input line 334.
+Package pdftex.def Info: ./figures/benchmarks.pdf used on input line 331.
 (pdftex.def)             Requested size: 284.52756pt x 213.39682pt.
- [7 <./figures/benchmarks.pdf>]
-<./figures/example.pdf, id=55, 462.52798pt x 346.89601pt>
+
+<./figures/example.pdf, id=184, 462.52798pt x 346.89601pt>
 File: ./figures/example.pdf Graphic file (type pdf)
 
 <use ./figures/example.pdf>
-Package pdftex.def Info: ./figures/example.pdf used on input line 344.
+Package pdftex.def Info: ./figures/example.pdf used on input line 341.
 (pdftex.def)             Requested size: 284.52756pt x 213.40594pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 341--347
+Underfull \hbox (badness 10000) in paragraph at lines 338--344
 
  []
 
-[8 <./figures/example.pdf>]
-<./figures/7_probability_heatmap.pdf, id=105, 462.52798pt x 346.89601pt>
-File: ./figures/7_probability_heatmap.pdf Graphic file (type pdf)
+[6] [7 <./figures/benchmarks.pdf> <./figures/example.pdf>]
+<./figures/11.pdf, id=252, 542.025pt x 413.545pt>
+File: ./figures/11.pdf Graphic file (type pdf)
+ <use ./figures/11.pdf>
+Package pdftex.def Info: ./figures/11.pdf used on input line 363.
+(pdftex.def)             Requested size: 256.0748pt x 195.38211pt.
 
-<use ./figures/7_probability_heatmap.pdf>
-Package pdftex.def Info: ./figures/7_probability_heatmap.pdf used on input line
- 366.
-(pdftex.def)             Requested size: 256.0748pt x 192.06375pt.
+<./figures/21.pdf, id=253, 552.0625pt x 401.5pt>
+File: ./figures/21.pdf Graphic file (type pdf)
+ <use ./figures/21.pdf>
+Package pdftex.def Info: ./figures/21.pdf used on input line 363.
+(pdftex.def)             Requested size: 256.0748pt x 186.2422pt.
 
-<./figures/11_probability_heatmap.pdf, id=106, 462.52798pt x 346.89601pt>
-File: ./figures/11_probability_heatmap.pdf Graphic file (type pdf)
+<./figures/27.pdf, id=254, 551.05875pt x 431.6125pt>
+File: ./figures/27.pdf Graphic file (type pdf)
+ <use ./figures/27.pdf>
+Package pdftex.def Info: ./figures/27.pdf used on input line 365.
+(pdftex.def)             Requested size: 256.0748pt x 200.5726pt.
 
-<use ./figures/11_probability_heatmap.pdf>
-Package pdftex.def Info: ./figures/11_probability_heatmap.pdf used on input lin
-e 366.
-(pdftex.def)             Requested size: 256.0748pt x 192.06375pt.
+<./figures/29.pdf, id=255, 531.9875pt x 420.57124pt>
+File: ./figures/29.pdf Graphic file (type pdf)
+ <use ./figures/29.pdf>
+Package pdftex.def Info: ./figures/29.pdf used on input line 365.
+(pdftex.def)             Requested size: 256.0748pt x 202.44946pt.
 
-<./figures/17_probability_heatmap.pdf, id=107, 462.52798pt x 346.89601pt>
-File: ./figures/17_probability_heatmap.pdf Graphic file (type pdf)
-
-<use ./figures/17_probability_heatmap.pdf>
-Package pdftex.def Info: ./figures/17_probability_heatmap.pdf used on input lin
-e 368.
-(pdftex.def)             Requested size: 256.0748pt x 192.06375pt.
-
-<./figures/21_probability_heatmap.pdf, id=108, 462.52798pt x 346.89601pt>
-File: ./figures/21_probability_heatmap.pdf Graphic file (type pdf)
-
-<use ./figures/21_probability_heatmap.pdf>
-Package pdftex.def Info: ./figures/21_probability_heatmap.pdf used on input lin
-e 368.
-(pdftex.def)             Requested size: 256.0748pt x 192.06375pt.
-
-<./figures/27_probability_heatmap.pdf, id=109, 462.52798pt x 346.89601pt>
-File: ./figures/27_probability_heatmap.pdf Graphic file (type pdf)
-
-<use ./figures/27_probability_heatmap.pdf>
-Package pdftex.def Info: ./figures/27_probability_heatmap.pdf used on input lin
-e 370.
-(pdftex.def)             Requested size: 256.0748pt x 192.06375pt.
-
-<./figures/29_probability_heatmap.pdf, id=110, 462.52798pt x 346.89601pt>
-File: ./figures/29_probability_heatmap.pdf Graphic file (type pdf)
-
-<use ./figures/29_probability_heatmap.pdf>
-Package pdftex.def Info: ./figures/29_probability_heatmap.pdf used on input lin
-e 370.
-(pdftex.def)             Requested size: 256.0748pt x 192.06375pt.
-
-Overfull \hbox (10.1496pt too wide) in paragraph at lines 365--373
+Overfull \hbox (10.1496pt too wide) in paragraph at lines 362--368
  []$[]$ 
  []
 
+[8 <./figures/11.pdf> <./figures/21.pdf> <./figures/27.pdf> <./figures/29.pdf>]
 
-Underfull \hbox (badness 10000) in paragraph at lines 381--385
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 381--385
+Underfull \hbox (badness 10000) in paragraph at lines 376--380
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 381--385
+Underfull \hbox (badness 10000) in paragraph at lines 376--380
 
  []
 
-<./figures/delta.pdf, id=111, 642.4pt x 481.8pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 376--380
+
+ []
+
+<./figures/delta.pdf, id=340, 642.4pt x 481.8pt>
 File: ./figures/delta.pdf Graphic file (type pdf)
  <use ./figures/delta.pdf>
-Package pdftex.def Info: ./figures/delta.pdf used on input line 387.
-(pdftex.def)             Requested size: 284.52756pt x 213.39682pt.
+Package pdftex.def Info: ./figures/delta.pdf used on input line 382.
+(pdftex.def)             Requested size: 256.0748pt x 192.06227pt.
 
-<./figures/9_Giugno.pdf, id=112, 642.4pt x 481.8pt>
-File: ./figures/9_Giugno.pdf Graphic file (type pdf)
+<./figures/s(t).pdf, id=341, 794.97pt x 614.295pt>
+File: ./figures/s(t).pdf Graphic file (type pdf)
+ <use ./figures/s(t).pdf>
+Package pdftex.def Info: ./figures/s(t).pdf used on input line 391.
+(pdftex.def)             Requested size: 227.62204pt x 175.89137pt.
 
-<use ./figures/9_Giugno.pdf>
-Package pdftex.def Info: ./figures/9_Giugno.pdf used on input line 397.
-(pdftex.def)             Requested size: 284.52756pt x 213.39682pt.
- [9] [10 <./figures/7_probability_heatmap.pdf> <./figures/11_probability_heatma
-p.pdf
-
-pdfTeX warning: pdflatex (file ./figures/11_probability_heatmap.pdf): PDF inclu
-sion: multiple pdfs with page group included in a single page
-> <./figures/17_probability_heatmap.pdf
-
-pdfTeX warning: pdflatex (file ./figures/17_probability_heatmap.pdf): PDF inclu
-sion: multiple pdfs with page group included in a single page
-> <./figures/21_probability_heatmap.pdf
-
-pdfTeX warning: pdflatex (file ./figures/21_probability_heatmap.pdf): PDF inclu
-sion: multiple pdfs with page group included in a single page
-> <./figures/27_probability_heatmap.pdf
-
-pdfTeX warning: pdflatex (file ./figures/27_probability_heatmap.pdf): PDF inclu
-sion: multiple pdfs with page group included in a single page
-> <./figures/29_probability_heatmap.pdf
-
-pdfTeX warning: pdflatex (file ./figures/29_probability_heatmap.pdf): PDF inclu
-sion: multiple pdfs with page group included in a single page
->] [11 <./figures/delta.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 424--425
-
- []
-
-[12 <./figures/9_Giugno.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 429--431
+[9 <./figures/delta.pdf>] [10 <./figures/s(t).pdf, page is rotated 270 degrees>
+]
+Underfull \hbox (badness 10000) in paragraph at lines 427--428
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 434--435
+Underfull \hbox (badness 10000) in paragraph at lines 432--434
 
  []
 
@@ -893,36 +935,57 @@ Underfull \hbox (badness 10000) in paragraph at lines 436--437
 
  []
 
-(./thesis_report.bbl) [13] [14] (./thesis_report.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 438--439
+
+ []
+
+<./figures/runge.png, id=402, 291.0875pt x 342.27875pt>
+File: ./figures/runge.png Graphic file (type png)
+
+<use ./figures/runge.png>
+Package pdftex.def Info: ./figures/runge.png used on input line 441.
+(pdftex.def)             Requested size: 142.26378pt x 167.28455pt.
+ [11 <./figures/runge.png>] (./thesis_report.bbl)
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 473.
+
+(./thesis_report.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 473.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 473.
+Package rerunfilecheck Info: File `thesis_report.out' has not changed.
+(rerunfilecheck)             Checksum: 160606E24DCB36F87C6F62D140B48465;1961.
+ ) 
 Here is how much of TeX's memory you used:
- 16243 strings out of 493014
- 307288 string characters out of 6133351
- 446224 words of memory out of 5000000
- 19622 multiletter control sequences out of 15000+600000
- 11349 words of font info for 42 fonts, out of 8000000 for 9000
+ 19720 strings out of 493014
+ 359633 string characters out of 6133351
+ 521447 words of memory out of 5000000
+ 23007 multiletter control sequences out of 15000+600000
+ 12952 words of font info for 48 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,17n,42p,10386b,533s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2016/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/local/texlive/2016/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2016/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmti9.pfb>
-Output written on thesis_report.pdf (14 pages, 509533 bytes).
+ 38i,17n,42p,10386b,801s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></
+usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><
+/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></
+usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></u
+sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr
+/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/l
+ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/loc
+al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local
+/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/te
+xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texli
+ve/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/
+2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2
+016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/201
+6/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2016/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2016/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
+Output written on thesis_report.pdf (11 pages, 1010443 bytes).
 PDF statistics:
- 550 PDF objects out of 1000 (max. 8388607)
- 182 compressed objects within 2 object streams
- 0 named destinations out of 1000 (max. 500000)
- 56 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 486 PDF objects out of 1000 (max. 8388607)
+ 371 compressed objects within 4 object streams
+ 69 named destinations out of 1000 (max. 500000)
+ 275 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -54,6 +54,7 @@
 %\renewcommand{\subsubsection}[1]{\subsubsection{\textbf{#1}}}
 
 \usepackage{amsmath}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
 
 
 \begin{document}
@@ -101,7 +102,7 @@
 % body of paper here - Use proper section commands
 % References should be done using the \cite, \ref, and \label commands
 
-\red{I testi in rosso sono commenti su argomenti mancanti, informazioni da aggiungere e analisi necessarie per completare il lavoro. Una lista piu o meno completa si trova nella Sezione V} \\
+\red{I testi in rosso sono commenti su argomenti mancanti, informazioni da aggiungere e analisi necessarie per completare il lavoro. Una lista piu o meno completa si trova nella Sezione V. Una versione di questo report aggiornata volta per volta si puo trovare qui}\\ {\footnotesize \url{https://github.com/matteogarbellini/Adiabatic-Quantum-Walk/blob/AdiabaticQuantumWalk/0.%20report/thesis_report.pdf}}
 
 % % % % % % % % %
 % INTRODUCTION  %
@@ -248,7 +249,7 @@ In this way we can prepare for $s=0$ the system in $H_B$ and let it evolve so th
 \section{Dynamics and Methods}
 In this section we look more in depth at the time-independent and time-dependent hamiltonian used for the search algorithm, putting particular focus on the time function that regulates the evolution of the hamiltonian. A definition of the computational routines used is given.
 \subsection{Time Independent Hamiltonian}
-As we've seen in Section ?, the quantum search with quantum walk consists in finding the probability $p = |\langle w|\psi(T)\rangle|^2$, thus we're interested in the evolution of the beginnig state $|s\rangle$ using the hamiltonian:
+As we've seen in Section II, the quantum search with quantum walk consists in finding the probability $p = |\langle w|\psi(T)\rangle|^2$, thus we're interested in the evolution of the beginnig state $|s\rangle$ using the hamiltonian:
 \begin{equation}
 H = -L -\gamma|w\rangle\langle w|
 \end{equation}
@@ -267,7 +268,7 @@ Therefore the probability is given by the following
 From a computational point of view this evolution is a simple matrix multiplication, and doesn not require any particular tool.
 
 \subsection{Time Dependent Hamiltonian}
-We introduce a time dependent hamiltonian that follows from the adiabatic implementation discussed in Section ? and the time-independent approach previously discussed. The intuition behind this implementation comes from the idea of \textit{adiabatically} turn on the oracle hamiltonian. Theoretically this should give us the advantage discussed in (Section II - Adiabatic Theorem), namely the high probability of finding the solution with the possible expense of longer time scaling. \\
+We introduce a time dependent hamiltonian that follows from the adiabatic implementation discussed in Section II and the time-independent approach previously discussed. The intuition behind this implementation comes from the idea of \textit{adiabatically} turn on the oracle hamiltonian. Theoretically this should give us the advantage discussed in (Section II - Adiabatic Theorem), namely the high probability of finding the solution with the possible expense of longer time scaling. \\
 The hamiltonian is thus in the form of
 \begin{equation}
 H(t) = (1-s(t))L + \gamma s(t)|w\rangle\langle w|
@@ -294,7 +295,7 @@ Once the N solutions are found, the probability is easily found with $p=|\langle
 
 
 \subsection{Comments on the form of s(t)}
-\red{Discussion on the time-stepping function $s(t)$ (or better  $g_T(t)$). Why did we choose this particular shape for the function? Are we expecting any improvements? \\ In particular if we follow what has been said by Cerf et al. the function should be steeper (evolving faster) when the separation $E_1(t)-E_0(t)$ is larger, and slower for small separation. Looking at the separation distribution the functions used (sqrt, cbrt, linear) do not fit to this model. \\ It's interesting to show, probably in the Results section rathen than here, how significant is the shape of s(t) in the final probability}
+\red{Discussion on the time-stepping function $s(t)$ (or better  $g_T(t)$). Why did we choose this particular shape for the function? Are we expecting any improvements? In particular if we follow what has been said by Cerf et al. the function should be steeper (evolving faster) when the separation $E_1(t)-E_0(t)$ is larger, and slower for small separation. Looking at the separation distribution the functions used (sqrt, cbrt, linear) do not fit to this model. It's interesting to show how significant is the shape of s(t) in the final probability}
 
 
 \subsection{Computational Routines}
@@ -306,7 +307,6 @@ Throughout the analysis the goal was to find the maximum probability for the spe
 \end{itemize}
 Additional information on the optimization algorithms used can be found in the Appendix.
 
-\clearpage
 %%%%%%%
 %RESULTS FOR SELECTED
 %TOPOLOGIES
@@ -327,8 +327,6 @@ We shall describe the possible outcomes of the quantum search and characterize t
 \subsubsection{\textbf{Time-Independent Benchmarks}}
 The first step in our analysis is to compute some benchmark for the time-independent hamiltonian, in order to later compare the time-dependent approach. This is particularly interesting since we know that th quantum search time-independent algorithm does not work with the circular graph, namely the found probability decreases with N increasing. \\
 Using the time-independent hamiltonian introduced before we optimized the probability on T and $\beta$ for circular graphs up to N=31. It is worth noting that we considered only odd graphs, since it made an easier center-placement of the oracle site state. The following are the results:\\
-\blue{time-independent benchmarks up to N=31}\\
-
 \begin{figure}[ht]
 \includegraphics[width=10cm]{./figures/benchmarks.pdf}
 \caption{Time Independent Benchmarks up to N=31}
@@ -360,14 +358,12 @@ These, with the corrisponding time T at which the time-independent probability i
 \end{itemize}
 
 
-\begin{figure}
+\begin{figure}[ht]
 \begin{tabular}{cc}
-  \includegraphics[width=90mm]{./figures/7_probability_heatmap.pdf} &   \includegraphics[width=90mm]{./figures/11_probability_heatmap.pdf} \\
-(a) N = 7 & (b) N = 11\\[6pt]
-\includegraphics[width=90mm]{./figures/17_probability_heatmap.pdf} &   \includegraphics[width=90mm]{./figures/21_probability_heatmap.pdf} \\
-(a) N = 17 & (b) N = 21\\[6pt]
-\includegraphics[width=90mm]{./figures/27_probability_heatmap.pdf} &   \includegraphics[width=90mm]{./figures/29_probability_heatmap.pdf} \\
-(a) N = 27 & (b) N = 29\\[6pt]
+  \includegraphics[width=90mm]{./figures/11.pdf} &   \includegraphics[width=90mm]{./figures/21.pdf} \\
+(a) N = 11 & (b) N = 21\\[6pt]
+\includegraphics[width=90mm]{./figures/27.pdf} &   \includegraphics[width=90mm]{./figures/29.pdf} \\
+(c) N = 27 & (d) N = 29\\[6pt]
 \end{tabular}
 \end{figure}
 
@@ -383,17 +379,16 @@ What we do is thus for each vertical column of the grid, i.e. constant T and var
 The following plot compares the time-independent approach to the time-dependent one, using for the first the quantity T/p evaluated with the \textit{$\beta$-T optimized} probability while the latter uses the quantity $\delta$. \\
 
 \begin{figure}[ht]
-\includegraphics[width=10cm]{./figures/delta.pdf}%
-\caption{delta values comparing methods}
+\includegraphics[width=9cm]{./figures/delta.pdf}%
+\caption{\textbf{$\delta$ values comparing methods:} the figure shows the distribution of the delta-quantity for the time-dependent hamiltonian (light blue), the time-independent hamiltonian with $\gamma-T$ optimization (purple) and the time-independent hamiltonian with the grid evaluation (green)}
 \end{figure}
-
+\red{It's necessary to decide whether to use the grid evaluation approach or the $\gamma-T$ optimization. It is indeed clear that the two produce two drastically different results. In additions comments on the fact that a lower bound on T might be needed in order to get interesting results on delta.}
 
 \subsubsection{\textbf{Different s(t) shapes}}
-As we introduced in Section ? we're interested in determining how influencial is the shape of s(t) in the probability distribution. We then proceed as in Section ? using the step function s(t) previously discussed. \\ To compare we consider the quantity $\delta$. Since we're interested in the trend for large N we ignore small N and only consider a few sampled N between 35-70.
+As we introduced in Section III we're interested in determining how influencial is the shape of s(t) in the probability distribution. We then proceed as in Section ? using the step function s(t) previously discussed. \\ To compare we consider the quantity $\delta$. Since we're interested in the trend for large N we ignore small N and only consider a few sampled N between 35-70.
 
-\clearpage
 \begin{figure}[ht]
-\includegraphics[width=10cm]{./figures/9_Giugno.pdf}
+\includegraphics[width=8cm]{./figures/s(t).pdf}
 \caption{Delta distrubution for different s(t). Computed for N = 35,47,57,67}
 \end{figure}
 
@@ -403,22 +398,31 @@ As the plot shows however we do not see any speedup for functions that are not l
 We can clearly see from the heatmap plots that for large T the probabability gets bigger, and it will eventually get to one. This is, as we already mentioned, a direct consequence of the adiabatic theorem. \\ A further analysis is due, focusing on studying the probability distribution with a more quantitative approach. That being said the localization is a key feature of the time-dependent approach to quantum search. 
 
 \subsection{Complete graph}
-\red{This section should include a comparison between time dependent and time independent approach to quantum search for the complete graph. Since this topology is solvable analitically I wonder what kind of results should I put in this section.\\ It might be interesting looking into the order of the probability for p=0.9. Analytically the solution is looked for p=1, possibily (for localization in particular) we could get some speed up over $\sqrt{N}$ for probabilities less than 1. This might work particularly well if the probability is not linear in the vicinity of $\sqrt{N}$ }\\ \blue{Probability distribution for fixed $\gamma$ with increasing time}
-
-
+\red{This section should include a comparison between time dependent and time independent approach to quantum search for the complete graph. We're interested in benchmarks to compare to the circular graph. For now the results we have are partial and yet not enough to show what we want\\ It might also be interesting looking into the order of the probability for p=0.9.}
 %%%%%%%
 %FUTURE DEVELOPMENTS
 %%%%%%%
 \section{Future Developments}
 Follows a list of things to be done
 \begin{itemize}
-	\item grafo completo
+	\item Benchmarks for the complete graph
+	\item Comments on s(t), more in-depth description (and Adiabatic Theorem consideration)
+	\item Additional results for s(t), also using the one introduced by Cerf
+	\item Comments on heatmap and computational time
+	\item Grover's quantum search
+	\item Search on complete graph (analitical solution)
+	\item Additional parameters for the discussion on the optimization algorithm and the ode solver
+	\item Better figures!
+	\item Decide which method to use for the time-independent delta values
+	\item In the qualitative comparison the vertical T-line is not very effective in showing what I wanted
 
 \end{itemize}
-
+\clearpage
 %%%%%%%
 %APPENDIX
 %%%%%%%
+
+
 \section{Appendix}
 In this section an overview of the computational methods is presented, focusing the attention on the \textbf{optimization algorithm} and the \textbf{differential equation solver}. Additionally the normalization error is discussed. Lastly computational reasoning for the \textbf{probability grid evaluation} are presented. \\
 
@@ -428,44 +432,42 @@ Most all numerical simulations were performed using \textbf{Python}. Numerical m
 In Section III a series of benchmark were performed to compare the time-dependent and time independent hamiltonian approach to the search problem. In order to determine which optimization algorithm fitted the best for the task, a number of possible algorithm were tested, such as \textit{shgo, dualannealing, minimize, LHSBH} and \textit{Basin-Hopping}.\\ \\
 Due to the oscillating nature of the probability (\red{a figure is needed}) the scipy native \textbf{Basinhopping algorithm} was used. As the name suggests the algorithm performs a series of randomized hops, i.e. jumps, of the coordinates in order to find the true maximum This fits particularly well with the series of maxima and minima of the probability function (for fixed $\gamma$) in the time-independent hamiltonian. \\\red{Additional information on the parameter used are needed (e.g. step size, number of iterations)} 
 
-
 \subsection{Schroedinger Solver and Normalization Error}
 In Section II we presented an evolution which is governed by a time-dependent hamiltonian, used to find the evolved state $|\psi(t)\rangle$. This is accomplished by solving the usual Schroedinger equation using Scipy's \textbf{integrate.solve\_ivp}, that provides a wide varieties of integrations methods. \\
 
 As it's routine we used Runge-Kutta RK45, which as stated in the documentation it's a explicit Runge Kutta method of order 4(5). The error is controlled assuming fourth order accuracy, but steps are taken using the fifth-order accurate formula. In addition, the integrator is adaptive, meaning that the time step is chosen for optimal error control. Regarding the error, the algorithm provides two distinct parameters to set a targeted limit, namely the \textbf{relative (rtol)} and \textbf{absolute tolerances (atol)}. The first provides a relative accuracy, i.e. the number of digits, while the latter is used to keep the local error estimate below the threshold \textit{atol + rtol*abs(y)}. Determining the correct combinations of the two parameters is key for achieving the desired error. A few of those are presented in the following table, where a worst case scenario (N=101, T=1000) is used and the error is evaluated on the expected normalized state. The combination of rtol and atol bolded is the one we used in the solver, which gives us a small enough error on the normalization without greater computational expense.\\
 
-\begin{center}
-\begin{adjustbox}{width=6cm}
-\begin{tabular}{>{\rowmac}c>{\rowmac}c>{\rowmac}c>{\rowmac}c>{\rowmac}c<{\clearrow}} \toprule
-    {rtol} & {atol} & {norm} &{error} & {comp time (s)}\\ \midrule
-    e-3  & e-5 & 1.0851 & -0.0851 & 83.8\\
-    e-3  & e-6 & 1.0198 & -0.0198 & 19.5\\
-    e-3  & e-7 & 1.0188 & -0.0188 & 19.4\\
-    e-3  & e-8 & 1.0187 & -0.0187 & 19.5\\ \midrule
+\begin{figure}[ht]
+\includegraphics[width=5cm]{./figures/runge.png}%
+\end{figure}
 
-    e-4  & e-5 & 0.9988 & 1.16e-3 & 90.6\\
-    e-4  & e-6 & 0.9996 & 3.98e-4 & 21.7\\
-    e-4  & e-7 & 0.9996 & 4.13e-4 & 21.4 \\
-    e-4  & e-8 & 0.9996 & 4.04e-4 & 21.5 \\ \midrule
+\clearpage
+%\begin{center}
+%\begin{adjustbox}{width=6cm}
+%\begin{tabular}{>{\rowmac}c>{\rowmac}c>{\rowmac}c>{\rowmac}c>{\rowmac}c<{\clearrow}} \toprule
+%    {rtol} & {atol} & {norm} &{error} & {comp time (s)}\\ \midrule
+%    e-3  & e-5 & 1.0851 & -0.0851 & 83.8\\
+%    e-3  & e-6 & 1.0198 & -0.0198 & 19.5\\
+%    e-3  & e-7 & 1.0188 & -0.0188 & 19.4\\
+%    e-3  & e-8 & 1.0187 & -0.0187 & 19.5\\ \midrule
 
-    e-5  & e-5 & 0.9989 & 1.09e-3 & 82.8\\
-    e-5  & e-6 & 0.9998 & 1.81e-4 & 20.5\\
-    e-5  & e-7 & 0.9999 & 1.33e-4 & 20.6\\
-    e-5  & e-8 & 0.9999 & 1.21e-4 & 20.8\\ \midrule
+%    e-4  & e-5 & 0.9988 & 1.16e-3 & 90.6\\
+%    e-4  & e-6 & 0.9996 & 3.98e-4 & 21.7\\
+%    e-4  & e-7 & 0.9996 & 4.13e-4 & 21.4 \\
+%    e-4  & e-8 & 0.9996 & 4.04e-4 & 21.5 \\ \midrule
 
-    e-6  & e-5 & 0.9998 & 2.48e-4 & 92  \\
-    \setrow{\bfseries} e-6  & e-6 & 0.9999 & 5.78e-5 & 22.6\\
-    e-6  & e-7 & 0.9999 & 2.47e-5 & 23.2\\
-    e-6  & e-8 & 0.9999 & 1.68e-5 & 23.2\\ \bottomrule
+%    e-5  & e-5 & 0.9989 & 1.09e-3 & 82.8\\
+%    e-5  & e-6 & 0.9998 & 1.81e-4 & 20.5\\
+%    e-5  & e-7 & 0.9999 & 1.33e-4 & 20.6\\
+%    e-5  & e-8 & 0.9999 & 1.21e-4 & 20.8\\ \midrule
 
-\end{tabular}
-\end{adjustbox}
-\end{center}
+%  e-6  & e-5 & 0.9998 & 2.48e-4 & 92  \\
+%    \setrow{\bfseries} e-6  & e-6 & 0.9999 & 5.78e-5 & 22.6\\
+%    e-6  & e-7 & 0.9999 & 2.47e-5 & 23.2\\
+%    e-6  & e-8 & 0.9999 & 1.68e-5 & 23.2\\ \bottomrule
 
-
-\subsection{Comments on heatmap and computational time}
-
-
-
+%\end{tabular}
+%\end{adjustbox}
+%\end{center}
 
 \end{document}
