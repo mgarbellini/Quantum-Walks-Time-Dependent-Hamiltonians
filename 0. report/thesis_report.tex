@@ -7,7 +7,8 @@
 % Choose pra, prb, prc, prd, pre, prl, prstab, prstper, or rmp for journal
 %  Add 'draft' option to mark overfull boxes with black boxes
 %  Add 'showkeys' option to make keywords appear
-\documentclass[aps,pra,reprint, onecolumn, showkeys]{revtex4-2}
+\documentclass[aps,pra,reprint, onecolumn]{revtex4-2}
+% showkey for keywords
 %\documentclass[aps,pra,reprint]{revtex4-2}
 \usepackage{lipsum}
 \usepackage{listings}
@@ -48,7 +49,9 @@
 \newcommand{\red}[1]{\textcolor{red}{#1}}
 \newcommand{\blue}[1]{\textcolor{blue}{\textbf{figure: #1}}}
 \newcommand{\teal}[1]{\textcolor{teal}{\textbf{equation: #1}}}
-\newcommand{\purple}[1]{\textcolor{purple}{\textbf{reference: #1}}}
+\newcommand{\purple}[3]{\textcolor{purple}{\textbf{\textit{#1}, #2, #3}}}
+
+%\renewcommand{\subsubsection}[1]{\subsubsection{\textbf{#1}}}
 
 \usepackage{amsmath}
 
@@ -56,7 +59,8 @@
 \begin{document}
 
 % Title of paper
-\title{Systematic comparison between time-independent and time-dependent \\ hamiltonian approach to quantum search}
+\title{Quantum Walks with Time-Dependent Hamiltonian}
+%\\ \small{Systematic comparison between time-independent and time-dependent \\ hamiltonian approach to quantum search}
 
 % repeat the \author .. \affiliation  etc. as needed
 % \email, \thanks, \homepage, \altaffiliation all apply to the current
@@ -89,7 +93,7 @@
 %\end{abstract}
 
 % insert suggested keywords - APS authors don't need to do this
-\keywords{Quantum Search, Quantum Walk, Adiabatic Theorem}
+%\keywords{Quantum Search, Quantum Walk, Adiabatic Theorem}
 
 %\maketitle must follow title, authors, abstract, and keywords
 \maketitle
@@ -97,11 +101,7 @@
 % body of paper here - Use proper section commands
 % References should be done using the \cite, \ref, and \label commands
 
-Legend: \\
-\red{\textbf{Red text is comment text with general guidelines on what to write in that particular section.}}\\
-\blue{Blue text is for figures and tables needed.} \\
-\teal{Green text is additional equation needed.} \\
-\purple{Purple text is for references.}
+\red{I testi in rosso sono commenti su argomenti mancanti, informazioni da aggiungere e analisi necessarie per completare il lavoro. Una lista piu o meno completa si trova nella Sezione V} \\
 
 % % % % % % % % %
 % INTRODUCTION  %
@@ -110,9 +110,10 @@ Legend: \\
 This report can be summarized as follows.
 \begin{itemize}
 \item In Section II a review of the background topics is presented, with particular enphasis on Quantum Walks, Quantum Search and the Adiabatic Theorem. A brief introduction on Graph Theory is presented as well, in order to define the working context.
-\item In Section III we discuss the Dynamics, focusing on the time dependent and time independent hamiltonian approach to quantum search, as well as the Methods, i.e. the numerical solving of schroedinger equation and more broadly the numerical evolution of the system. A brief but not less important introduction to the computational methods (e.g. optimization algorithms and solver) is presented.
+\item In Section III we discuss the Dynamics, focusing on the time dependent and time independent hamiltonian approach to quantum search. A definition of the computational routines used throughout the work is also given.
 \item In Section IV we present results for selected topologies, namely the \textit{worst-case-scenario} Circular Graph and the \textit{best-case-scenario} Complete Graph. For the two selected topologies we compare the known time-independent approach and the time-dependent, in particular defining two qualitative characteristics for results: optimized search and localization.
-\item Section V presents a summary of the work done so far, and the further developments to be made.
+\item Section V is a list of things yet to be done/finished.
+\item In the Appendix a discussion on the computational methods, in particular the differential equation solver and the optimization algorithm used. 
 \end{itemize}
 
 %%%%%%%
@@ -131,6 +132,10 @@ It is also useful to introduce the \textit{laplacian matrix} defined as
   L = A-D
 \end{equation}
 which we'll later see describes the quantum walk evolution.\\
+In the quantum realm a vertex is a vector in an N dimensional Hilber space, so that a vertex $|j\rangle$ can be represented in the following way
+\begin{equation}
+  |j\rangle = \begin{pmatrix} 1 \\ 0 \\ 0 \\ .. \\0 \end{pmatrix}
+\end{equation}
 
 Throughout this work we focus our attention on two particular graph topologies: the \textbf{circular} graph and the \textbf{complete} graph (FIG. 1).
 
@@ -155,9 +160,11 @@ The quantum analogue takes place in an N-dimentional Hilbert space spanned by th
 \end{equation}
 The continous-time quantum walk is defined by letting $H=-\gamma L$, where $L$ is the previosuly defined Laplacian matrix.
 
+\subsection{Grover's Quantum Search}
+\red{This section should include the standard Grover's Quantum Search to give the contex for the quantum walk approach.}
 
 \subsection{Quantum Search with Continous-Time Quantum Walk}
-\purple{Spatial Search by Quantum Walk, \textit{A. Childs, J. Goldstone}, quant-ph/0306054v2}\\
+\purple{Spatial Search by Quantum Walk}{A. Childs, J. Goldstone}{quant-ph/0306054v2}\\
 We now address the quantum search problem firstly formulated as Grover's algorithm and then extending it to the search on a graph using quantum walks. \\
 To approach the Grover problem with quantum walk it's necessary to modify the hamiltonian such that the vertex $|w\rangle$, i.e. the target, is somewhat special. Following Grover's oracle an oracle hamiltonian $H_w$ is introduced
 
@@ -171,20 +178,34 @@ which in particular has energy zero for all but the vertex $|w\rangle$ for which
 \end{equation}
 where L is the laplacian of the graph, which contains the information of the dynamics over that particular graph topology. The evolution of the quantum walk is therefore governed by this hamiltonian.\\
 
-We then begin considering the superposition of all possible state, namely
-\begin{equation}
-  |s\rangle = \frac{1}{\sqrt{N}}\sum_j|j\rangle
-\end{equation}
-and run the quantum walk for time T. The evolved state is then measured in the vertex basis. Our objective is to find the optimal value of $\gamma$ so that the success probability is as close as possible to 1 for the smallest T
+The quantum search routine works as follow:
+\begin{itemize}
+  \item we consider the superposition of all possible states, namely
+  \begin{equation}
+    |s\rangle = \frac{1}{\sqrt{N}}\sum_j|j\rangle
+  \end{equation}
 
-\begin{equation}
- c
-\end{equation}
-where $\psi(T)$ is the evolved superposition state $|s\rangle$
+  \item we find the evolved state using the hamiltonian for a time T $H$
+  \begin{equation}
+  |\psi(T)\rangle = U(T)|s\rangle  = \mbox{exp}\Big\{-\frac{i}{\hbar}HT\big\}|s\rangle
+  \end{equation}
+  (Note that this evolution is valid only for time-independent hamiltonians.)
 
+  \item we then measure the state onto the target $|w\rangle$ and find the corrisponding probability
+  \begin{equation}
+    p = |\langle w|\psi(T)\rangle|^2
+  \end{equation}
+
+\end{itemize}
+
+The objective is to find the optimal value of $\gamma$ so that the probability of the system of finding itself in $|w\rangle$ is as close as possible to 1 for the smallest T.
+
+\subsection{Search on Complete Graph}
+We now look at the search on a complete graph. This case is particularly interesting since it can be solved analitically\\
+\red{to be continued}
 
 \subsection{Adiabatic Theorem}
-\purple{Quantum Computation by Adiabatic Evolution \textit{E. Farhi, J. Goldstone, S. Gutmann, M. Sipser}, quant-ph/0001106 }\\
+\purple{Quantum Computation by Adiabatic Evolution}{E. Farhi, J. Goldstone, S. Gutmann, M. Sipser}{quant-ph/0001106}\\
 
 
 A quantum system evolves according to the Schroedinger equation
@@ -225,21 +246,14 @@ In this way we can prepare for $s=0$ the system in $H_B$ and let it evolve so th
 %DYNAMICS AND METHODS
 %%%%%%%
 \section{Dynamics and Methods}
-In this section we look more in depth at the time-independent and time-dependent hamiltonian used for the search algorithm, putting particular focus on the time function that regulates the evolution of the hamiltonian. We then explore the possible way to numerically solve the schroedinger equation, giving reasoning of why we decided to solve it numerically using a Runge-Kutta integrator. Last but not least we look at the computational methods, namely the code written and the optimization and integrator algorithms used.
-
+In this section we look more in depth at the time-independent and time-dependent hamiltonian used for the search algorithm, putting particular focus on the time function that regulates the evolution of the hamiltonian. A definition of the computational routines used is given.
 \subsection{Time Independent Hamiltonian}
 As we've seen in Section ?, the quantum search with quantum walk consists in finding the probability $p = |\langle w|\psi(T)\rangle|^2$, thus we're interested in the evolution of the beginnig state $|s\rangle$ using the hamiltonian:
 \begin{equation}
 H = -L -\gamma|w\rangle\langle w|
 \end{equation}
-that differs from the hamiltonian introduced by Goldstone \& Childs having the $\gamma$ term in front of the oracle instead of the laplacian. The two, however, describe the same evolution (apart from a global phase). \\
-The evolution of a state for the time independent hamiltonian is given by the operator S(t)
-%\begin{equation*}
-%\begin{split}
-%  p & = |\langle w|\psi(t)\rangle|^2  \\ & =  |\langle w|S(t)|s\rangle|^2 \\ & = |\langle w|e^{-\frac{i}{\hbar}Ht}|s\rangle|^2 \\
-%  & = |\langle w|e^{-\frac{i}{\hbar}\gamma(-\frac{1}{\gamma}-|w\rangle\langle w|)t}|s\rangle|^2
-%\end{split}
-%\end{equation*}
+that differs from the hamiltonian introduced by Goldstone \& Childs having the $\gamma$ term in front of the oracle instead of the laplacian. The two, however, describe the same evolution. \\
+The evolution of a state for the time independent hamiltonian is given by the operator U(t)
 
 \begin{equation}
   U(t) = e^{-\frac{i}{\hbar}Ht}
@@ -284,11 +298,11 @@ Once the N solutions are found, the probability is easily found with $p=|\langle
 
 
 \subsection{Computational Routines}
-Throught the analysis the goal was to find the optimal probability for the specific scenario, and the procedure varied depending on the graph topology and the hamiltonian considered. That being said, we can characterize them as follows:
+Throughout the analysis the goal was to find the maximum probability for the specific scenario, and the procedure varied depending on the graph topology and the hamiltonian considered. We can therefore characterize the three main computational routines used:
 \begin{itemize}
-  \item \textbf{$\beta$ and T probability optimization:} as it might imply, we run an optimization using $\beta$ and time as parameters, trying to maximize the probability. This process is quite computationally intensive, so except for the time-independent algorithm we employ the following two technique.
-  \item \textbf{T optimization for fixed $\beta$:} this technique is quite useful when we are only qualitatively interested at the probability distribution. Thus sampling a fix number of $beta$ and optimizing on the time variable. This results in a great computational time improvement, particularly for the time-dependent approach.
-  \item \textbf{probability grid evaluation:} this technique consists in sampling both time and $\beta$ and evaluating the probability for all the time-beta combinations, namely evaluating the probability on a grid. The advantage of such approach is the much less computational time needed since a single evaluation is much faster than an optimization \blue{might be interesting having a graph comparing computational time}. Secondly true optimization tries to find the absolute maxima, to the expence of having a larger T (remember, we're trying to find the highest probability for the shortest time). As an example, we might find a probability p=0.95 for T = 10 using the grid evaluation, although the true maximum is p=0.96 for T = 35. Is indeed clear that the 0.01 in greater probability does not balances the disadvatange of more than double time.
+  \item \textbf{$\gamma$-T optimization:} as it might imply, we run an optimization on the probability using $\gamma$ and time as parameters, trying to maximize the probability. This is used for the time-independent search, since it's computationally inexpensive.
+  \item \textbf{T optimization for fixed $\gamma$:} we sample a fix number of $\gamma$ values and optimize on the time variable. This is useful to gain insight on the qualitative probability distribution for varying time. 
+  \item \textbf{probability grid evaluation:} this technique consists in sampling both time and $\gamma$ and evaluating the probability for all the $(\gamma, T)$ combinations. The advantage of such approach is the much less computational time needed since a single evaluation is much faster than an optimization over the $(\gamma, T)$ space. Secondly true optimization tries to find the absolute maximum, to the expence of having a larger T, while we're interested in a probability trend rather than a very precise maximum. \\ As an example, we might find a probability p=0.95 for T = 10 using the grid evaluation, although the true maximum is p=0.96 for T = 35. It iss indeed clear that the 0.01 in greater probability does not balances the disadvatange of more than double time. \red{this is made up data, might be interesting to show \textit{actual} data.}
 \end{itemize}
 Additional information on the optimization algorithms used can be found in the Appendix.
 
@@ -298,32 +312,33 @@ Additional information on the optimization algorithms used can be found in the A
 %TOPOLOGIES
 %%%%%%%
 \section{Results for selected topologies}
+In this section we first characterize two classes of results, namely the optimized search and the localization. We then look at search results with the time-independent hamiltonian and compare them to the time-dependent approach. In particular we look at the \textit{best-case-scenario} the \textbf{complete graph} for which we know the analitical solution and the \textit{worst-case-scenario} the \textbf{circular graph} for which no analytical solution is yet known. 
+
 
 \subsection{Search vs Localization}
-We shall describe the possible outcomes of the previously introduced hamiltonian and characterize them as \textbf{localization} and \textbf{optimized search}. The first describes the finding with high probability of the solution without particular interest in the time needed to reach that particular solution. For example, as we shall see later in Section V, the ring-graph is known for not working with traditional quantum-walk algorithm (i.e. found with low probability), but thanks to the adiabatic nature for $T \to \infty$ the solution is found with probability 1. \\
+We shall describe the possible outcomes of the quantum search and characterize them as \textbf{localization} and \textbf{optimized search}:
+\begin{itemize}
+\item The first describes the finding with high probability of the solution without particular interest in the time needed to reach that particular solution. As we will later see this is a direct consequence of the adiabatic theorem. 
 
-On the other hand we know that for our algorithm to be somewhat interesting from the perspective of the quantum search we need at least the same speedup we get from the traditional quantum-walk Grover, namely $O(\sqrt(N))$. We're thus optimizing for maximum probability and minimum time; in addition as we shall see later we'll also consider the possibility of repeating the search an $n$ amount of times, and get a less than optimal search for each iteration but better time (sum of time, actually) overall. It is indeed this what we call \textit{optimized search}.
-
+\item The latter describes the finding of the solution with high probability, optimizing for the time as well. In addition as we shall see later we'll also consider the possibility of repeating the search an $n$ amount of times, and get a less than optimal search for each iteration but better time (sum of time, actually) overall.
+\end{itemize}
 
 \subsection{Circular graph}
-\subsubsection{Time-Independent Benchmarks}
-The first step in our analysis is to compute some benchmark for the time-independent hamiltonian, in order to later compare the time-dependent approach. This is particularly interesting since we know that th quantum search time-independent algorithm does not work with the circular graph, namely the found probability is periodical and for large N converges to p = 0.1.\\ \blue{Converging probability to 0.1 for large N}\\
-
+\subsubsection{\textbf{Time-Independent Benchmarks}}
+The first step in our analysis is to compute some benchmark for the time-independent hamiltonian, in order to later compare the time-dependent approach. This is particularly interesting since we know that th quantum search time-independent algorithm does not work with the circular graph, namely the found probability decreases with N increasing. \\
 Using the time-independent hamiltonian introduced before we optimized the probability on T and $\beta$ for circular graphs up to N=31. It is worth noting that we considered only odd graphs, since it made an easier center-placement of the oracle site state. The following are the results:\\
 \blue{time-independent benchmarks up to N=31}\\
 
 \begin{figure}[ht]
-\includegraphics[width=10cm]{./figures/benchmarks.pdf}%
+\includegraphics[width=10cm]{./figures/benchmarks.pdf}
 \caption{Time Independent Benchmarks up to N=31}
 \end{figure}
 
-It is clear that the time-independent algorithm does indeed not work, as we expected. The probability decreases as the number of sites N increases, \red{converging for large N to $p=0.1$}.
+It is clear that the time-independent algorithm does indeed not work, as we expected. The probability decreases as the number of sites N increases, \red{I noticed that for large N the probability (fixing $\gamma$) converges to $p=0.1$. Further investigation is needed.}
 
-\subsubsection{Time-Dependent Algorithm}
-We then considered the time-dependent hamiltonian introduced in Section ?, and following the \textit{probability grid evaluation} procedure discussed before we computed the probability. Given the computational efficency over the regular $\beta$-T optimization we were able to compute results up to N = 71, although from 31 to 71 only the 1st and 7th (e.g. 41,47) were calculated. \\
-
-It is however clear that the grid-evaluation approach does not produce unique values of $(T,\beta)$ corrisponding to the absolute probability maximum. On the other hand is able to give a qualitative idea on the probability distribution for various $(T,\beta)$ combinations. We then present the found data with a \textbf{heatmap plot} such the one below, which makes quite easy to visualize the result.\\ \blue{heatmap plot example}\\
-
+\subsubsection{\textbf{Time-Dependent Algorithm}}
+We then considered the time-dependent hamiltonian introduced in Section ?, and following the \textit{probability grid evaluation} procedure discussed before we computed the probability. Given the computational efficency over the regular $\beta$-T optimization we were able to compute results up to N = 71, although from 31 to 71 only the 1st and 7th (e.g. 41,47) were calculated. \\ \\
+It is however clear that the grid-evaluation approach does not produce unique values of $(T,\beta)$ corrisponding to the absolute probability maximum. On the other hand is able to give a qualitative idea on the probability distribution for various $(T,\beta)$ combinations. We then present the found data with a \textbf{heatmap plot} such the one below, which makes quite easy to visualize the result.
 \begin{figure}[ht]
 \includegraphics[width=10cm]{./figures/example.pdf}%
 \caption{Time Dependent heatmap example, N=35}
@@ -331,15 +346,18 @@ It is however clear that the grid-evaluation approach does not produce unique va
 
 The task now is two develop a method to compare the time-independent and time-dependent algorithms. We first naively look at a qualitative comparison that immediately shows that the time-dependent algorithm is able to find higher probabilities but at the expense of worst time scaling; secondly we introduce a quantity to compare the two methods numerically.
 
-\subsubsection{Qualitative Comparison}
+\subsubsection{\textbf{Qualitative Comparison}}
 In order to qualitatively compare the two approaches to quantum search we will consider a heatmap plot where we superimpose probability \textbf{contour lines} corrisponding to the following probability (and with the following format):
 \begin{itemize}
   \item (solid) p = 0.99, p = 0.95, p = 0.90 for the time-dependent results
   \item (dashed) the probability found in the corrisponding time-independent results
-  \item (dashed) double the probability (as long as it doesn't exceed unity) found for the time-independent
- result
 \end{itemize}
-These, with the corrisponding time T at which the time-independent probability is found (given by a vertical line), should give a qualitative method to compare the two approaches, namely looking at the intersection between the first dashed line and the vertical time-line.\\
+These, with the corrisponding time T at which the time-independent probability is found (given by a vertical line), should give a qualitative method to compare the two approaches. How shall we do so?
+\begin{itemize}
+	\item Look for any intersection between the dashed contour line and the vertical line
+	\item If it does intersect the intersection point(s) represent a $(\gamma, T)$ combination that is equivalent as the time-independent algorithm in terms of probability
+	\item If the dashed contour line and the vertical line identify a bounded region (\red{might be necessary a figure to explain this}), that particular region represents a $(\gamma, T)$-space for which the time-dependent algorithm performs better than the time-independent one. 
+\end{itemize}
 
 
 \begin{figure}
@@ -355,15 +373,13 @@ These, with the corrisponding time T at which the time-independent probability i
 
 %\clearpage
 
-\subsubsection{Numerical Comparison}
+\subsubsection{\textbf{Numerical Comparison}}
 In order to numerically compare the two approaches we define a quantity $\delta$ in the following way:
 \begin{equation}
   \delta = \min\Big(\frac{T}{p}\Big)
 \end{equation}
-The quantity T/p represents the total time necessary to get to unitary probability. Finding the minimum of that quantity corresponds to finding the best combination of T and p that gets to unity with the minimum T. \\
-
-What we do is thus for each vertical column of the grid, i.e. constant T and variable $\beta$, computing the maximum probability and finding the quantity T/p. We than find the minimum of all the T/p calculated. In this way we \textbf{reduce a grid to a single value} to compare to the time-independent results. \\
-
+The quantity T/p represents the total time necessary to get to unitary probability. Finding the minimum of that quantity corresponds to finding the best combination of T and p that gets to unity with the minimum T. \\ \\
+What we do is thus for each vertical column of the grid, i.e. constant T and variable $\beta$, computing the maximum probability and finding the quantity T/p. We than find the minimum of all the T/p calculated. In this way we \textbf{reduce a grid to a single value} to compare to the time-independent results. \\ \\
 The following plot compares the time-independent approach to the time-dependent one, using for the first the quantity T/p evaluated with the \textit{$\beta$-T optimized} probability while the latter uses the quantity $\delta$. \\
 
 \begin{figure}[ht]
@@ -372,7 +388,7 @@ The following plot compares the time-independent approach to the time-dependent 
 \end{figure}
 
 
-\subsubsection{Different s(t) shapes}
+\subsubsection{\textbf{Different s(t) shapes}}
 As we introduced in Section ? we're interested in determining how influencial is the shape of s(t) in the probability distribution. We then proceed as in Section ? using the step function s(t) previously discussed. \\ To compare we consider the quantity $\delta$. Since we're interested in the trend for large N we ignore small N and only consider a few sampled N between 35-70.
 
 \clearpage
@@ -381,45 +397,49 @@ As we introduced in Section ? we're interested in determining how influencial is
 \caption{Delta distrubution for different s(t). Computed for N = 35,47,57,67}
 \end{figure}
 
-As the plot shows however we do not see any speedup for functions that are not linear, on the contrary we do get poorer results. The time-independent implementation remains the best performing one, followed by linear, cubic root and square root. \red{I wonder whether this approach was well-thought in the first place. As was already mentioned in Section ? we might want to consider what was mentioned by Cerf et al.}
+As the plot shows however we do not see any speedup for functions that are not linear, on the contrary we do get poorer results. The time-independent implementation remains the best performing one, followed by linear, cubic root and square root. 
 
-\subsubsection{Localization}
-We can clearly see from the heatmap plots that we showed for the qualitative comparison that for large T the probabability gets bigger, and it's quite close to one for very large T, namely $T>10N$. A further analysis is due, focusing on studying the probability distribution. \red{Although it's clear from the adiabatic theorem and from the results that we currenly have that localization is a key feature of the time-dependent hamiltonian approach, further numerical simulations are necessary. In particular we might be interested in finding a trend (in terms of N) for few sampled probabilities, e.g. p = 0.5,0.75,0.8, 0.9, 0.95, 1  }
+\subsubsection{\textbf{Localization}}
+We can clearly see from the heatmap plots that for large T the probabability gets bigger, and it will eventually get to one. This is, as we already mentioned, a direct consequence of the adiabatic theorem. \\ A further analysis is due, focusing on studying the probability distribution with a more quantitative approach. That being said the localization is a key feature of the time-dependent approach to quantum search. 
 
 \subsection{Complete graph}
 \red{This section should include a comparison between time dependent and time independent approach to quantum search for the complete graph. Since this topology is solvable analitically I wonder what kind of results should I put in this section.\\ It might be interesting looking into the order of the probability for p=0.9. Analytically the solution is looked for p=1, possibily (for localization in particular) we could get some speed up over $\sqrt{N}$ for probabilities less than 1. This might work particularly well if the probability is not linear in the vicinity of $\sqrt{N}$ }\\ \blue{Probability distribution for fixed $\gamma$ with increasing time}
 
+
+%%%%%%%
+%FUTURE DEVELOPMENTS
+%%%%%%%
+\section{Future Developments}
+Follows a list of things to be done
+\begin{itemize}
+	\item grafo completo
+
+\end{itemize}
+
 %%%%%%%
 %APPENDIX
 %%%%%%%
-\clearpage
 \section{Appendix}
-In this section an overview of the computational methods is presented, focusing the attention on specific matters: \textit{Optimization Algorithm} used for determining the optimal $\gamma$-configuration for maximum probability, \textit{Schroedinger Solver} for the time dependent hamiltonian evolution and some additional parameters for the optimal \textit{Runge-Kutta Normalization Error}. Lastly computational reasoning for the \textit{2D - Probability Heatmap} are presented. \\
+In this section an overview of the computational methods is presented, focusing the attention on the \textbf{optimization algorithm} and the \textbf{differential equation solver}. Additionally the normalization error is discussed. Lastly computational reasoning for the \textbf{probability grid evaluation} are presented. \\
 
-Most all numerical simulations were performed using \textbf{Python} being easy and flexible to sudden changes. Numerical methods such as optimization and ODE Solver come directly from python's native \textbf{Scipy}. In addition, a CPU-multiprocessing library, \textbf{Ray}, has been used to speed up the grid probability evaluation quite noticeably. 2D - Heatmap plots were created using python matplotlib, while additional plots were created with gnuplot.
+Most all numerical simulations were performed using \textbf{Python}. Numerical methods such as optimization and ODE Solver come directly from python's native \textbf{Scipy}. In addition, a CPU-multiprocessing library, \textbf{Ray}, has been used to speed up the grid probability evaluation quite noticeably. Heatmap plots were created using python matplotlib, while additional plots were created with gnuplot.
 
 \subsection{Optimization Algorithm}
-In Section II a series of benchmark were performed to compare the standard Quantum-Walk algorithm to the Adiabatic-Quantum-Walk implementation (later simply named \textit{dynamic}). In order to determine which optimization algorithm fitted the best for the task, a number of possible algorithm were tested, such as \textit{shgo, dualannealing, minimize, LHSBH} and \textit{Basin-Hopping}. \\
+In Section III a series of benchmark were performed to compare the time-dependent and time independent hamiltonian approach to the search problem. In order to determine which optimization algorithm fitted the best for the task, a number of possible algorithm were tested, such as \textit{shgo, dualannealing, minimize, LHSBH} and \textit{Basin-Hopping}.\\ \\
+Due to the oscillating nature of the probability (\red{a figure is needed}) the scipy native \textbf{Basinhopping algorithm} was used. As the name suggests the algorithm performs a series of randomized hops, i.e. jumps, of the coordinates in order to find the true maximum This fits particularly well with the series of maxima and minima of the probability function (for fixed $\gamma$) in the time-independent hamiltonian. \\\red{Additional information on the parameter used are needed (e.g. step size, number of iterations)} 
 
-Due to the oscillating nature of the probability (cfr figure) the scipy native \textbf{Basinhopping algorithm} was used. As the name suggests the algorithm performs a series of randomized hops, i.e. jumps, of the coordinates in order to find the true maximum (actually, the true \textit{minimum}). This fits particularly well with the series of maxima and minima of the probability function (for fixed $\gamma$) in the static algorithm (std QWAlgorithm). Snippets of the parameters used follow.
 
-\begin{lstlisting}[xleftmargin=0cm]
-	from scipy.optimize import basinhopping
-	optimization = optimize.basinhopping()
-	print(optimization)
-\end{lstlisting}
+\subsection{Schroedinger Solver and Normalization Error}
+In Section II we presented an evolution which is governed by a time-dependent hamiltonian, used to find the evolved state $|\psi(t)\rangle$. This is accomplished by solving the usual Schroedinger equation using Scipy's \textbf{integrate.solve\_ivp}, that provides a wide varieties of integrations methods. \\
 
-\subsection{Schroedinger Solver}
-In Section III we presented an evolution which is governed by a time-dependent hamiltonian, used to find the evolved state $|\psi(t)\rangle$. This is accomplished by solving the usual Schroedinger equation using Scipy's \textbf{integrate.solve\_ivp}, that provides a wide varieties of integrations methods. \\
-
-As it's routine we used Runge-Kutta RK45, which as stated in the documentation it's a explicit Runge Kutta method of order 4(5). The error is controlled assuming fourth order accuracy, but steps are taken using the fifth-order accurate formula. In addition, the integrator is adaptive, meaning that the time step is chosen for optimal error control. Regarding the error, the algorithm provides two distinct parameters to set a targeted limit, namely the \textbf{relative (rtol)} and \textbf{absolute tolerances (atol)}. The first provides a relative accuracy, i.e. the number of digits, while the latter is used to keep the local error estimate below the threshold \textit{atol + rtol*abs(y)}. Determining the correct combinations of the two parameters is key for achieving the desired error. A few of those are presented in the following table, where a worst case scenario is used and the error is evaluated on the expected normalized state. \\
+As it's routine we used Runge-Kutta RK45, which as stated in the documentation it's a explicit Runge Kutta method of order 4(5). The error is controlled assuming fourth order accuracy, but steps are taken using the fifth-order accurate formula. In addition, the integrator is adaptive, meaning that the time step is chosen for optimal error control. Regarding the error, the algorithm provides two distinct parameters to set a targeted limit, namely the \textbf{relative (rtol)} and \textbf{absolute tolerances (atol)}. The first provides a relative accuracy, i.e. the number of digits, while the latter is used to keep the local error estimate below the threshold \textit{atol + rtol*abs(y)}. Determining the correct combinations of the two parameters is key for achieving the desired error. A few of those are presented in the following table, where a worst case scenario (N=101, T=1000) is used and the error is evaluated on the expected normalized state. The combination of rtol and atol bolded is the one we used in the solver, which gives us a small enough error on the normalization without greater computational expense.\\
 
 \begin{center}
 \begin{adjustbox}{width=6cm}
 \begin{tabular}{>{\rowmac}c>{\rowmac}c>{\rowmac}c>{\rowmac}c>{\rowmac}c<{\clearrow}} \toprule
     {rtol} & {atol} & {norm} &{error} & {comp time (s)}\\ \midrule
     e-3  & e-5 & 1.0851 & -0.0851 & 83.8\\
-    \setrow{\bfseries} e-3  & e-6 & 1.0198 & -0.0198 & 19.5\\
+    e-3  & e-6 & 1.0198 & -0.0198 & 19.5\\
     e-3  & e-7 & 1.0188 & -0.0188 & 19.4\\
     e-3  & e-8 & 1.0187 & -0.0187 & 19.5\\ \midrule
 
@@ -434,7 +454,7 @@ As it's routine we used Runge-Kutta RK45, which as stated in the documentation i
     e-5  & e-8 & 0.9999 & 1.21e-4 & 20.8\\ \midrule
 
     e-6  & e-5 & 0.9998 & 2.48e-4 & 92  \\
-    e-6  & e-6 & 0.9999 & 5.78e-5 & 22.6\\
+    \setrow{\bfseries} e-6  & e-6 & 0.9999 & 5.78e-5 & 22.6\\
     e-6  & e-7 & 0.9999 & 2.47e-5 & 23.2\\
     e-6  & e-8 & 0.9999 & 1.68e-5 & 23.2\\ \bottomrule
 
@@ -445,8 +465,6 @@ As it's routine we used Runge-Kutta RK45, which as stated in the documentation i
 
 \subsection{Comments on heatmap and computational time}
 
-
-\subsection{Runge-Kutta normalization errors and parameters}
 
 
 

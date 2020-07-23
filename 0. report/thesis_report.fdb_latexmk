@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex thesis_report"] 1595276250 "thesis_report.aux" "thesis_report.bbl" "thesis_report" 1595276252
+["bibtex thesis_report"] 1595504022 "thesis_report.aux" "thesis_report.bbl" "thesis_report" 1595504023
   "./apsrev4-2.bst" 1595064284 69611 b535f07e11c1fea03841ef5fe125643f ""
-  "thesis_report.aux" 1595276251 3373 f24361f667760ee6b7bfedd57bde6169 ""
+  "thesis_report.aux" 1595504023 3543 b1e176829c63f0cfc43e3723db531792 ""
   "thesis_report.bcf" 0 -1 0 ""
-  "thesis_reportNotes.bib" 1595276251 104 4d8bb863c86f3d7b03a471e9d4707f34 ""
+  "thesis_reportNotes.bib" 1595504023 104 4d8bb863c86f3d7b03a471e9d4707f34 ""
   (generated)
-  "thesis_report.bbl"
   "thesis_report.blg"
-["pdflatex"] 1595276250 "thesis_report.tex" "thesis_report.pdf" "thesis_report" 1595276252
+  "thesis_report.bbl"
+["pdflatex"] 1595504022 "thesis_report.tex" "thesis_report.pdf" "thesis_report" 1595504023
   "/usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex9.tfm" 1246382020 996 a18840b13b499c08ac2de96a99eda4bc ""
@@ -19,7 +19,6 @@
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmmi9.tfm" 1136768653 1524 d89e2d087a9828407a196f428428ef4a ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmr12.tfm" 1136768653 1288 655e228510b4c2a1abe905c368440826 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmr6.tfm" 1136768653 1300 b62933e007d01cfd073f79b963c01526 ""
-  "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmr8.tfm" 1136768653 1292 21c1c5bfeaebccffdb478fd231a0997d ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmr9.tfm" 1136768653 1292 6b21b9c2c7bebb38aa2273f7ca0fb3af ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmss10.tfm" 1136768653 1316 b636689f1933f24d1294acdf6041daaa ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmss8.tfm" 1136768653 1296 d77f431d10d47c8ea2cc18cf45346274 ""
@@ -42,13 +41,11 @@
   "/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb" 1248133631 31809 8670ca339bf94e56da1fc21c80635e2a ""
   "/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1248133631 32762 224316ccc9ad3ca0423a14971cfa7fc1 ""
-  "/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1248133631 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb" 1248133631 33993 9b89b85fd2d9df0482bd47194d1d3bf3 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb" 1248133631 32716 08e384dc442464e7285e891af9f45947 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb" 1248133631 37944 359e864bd06cde3b1cf57bb20757fb06 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb" 1248133631 36310 f5ddc6715cc60deb16d9db5ded6a9391 ""
-  "/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb" 1248133631 24287 6b803fa9eb1ddff9112e00519b09dd9e ""
   "/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1461363279 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/etexcmds.sty" 1463608860 7612 729a8cc22a1ee0029997c7f74717ae05 ""
   "/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ifluatex.sty" 1463608860 7324 2310d1247db0114eb4726807c8837a0e ""
@@ -128,11 +125,11 @@
   "figures/graph.png" 1595260321 182559 b7a22f34250d9057c429834ec837c8de ""
   "revsymb4-2.sty" 1547816100 5433 fd7fccdc1ca7819d49e5bb1deb9d741b ""
   "revtex4-2.cls" 1547816224 200719 c96794d0e4d320fe9ff0c7147d98a76b ""
-  "thesis_report.aux" 1595276251 3373 f24361f667760ee6b7bfedd57bde6169 ""
-  "thesis_report.bbl" 1595276250 1982 35453d3875d823f0ec9445e740a573d9 "bibtex thesis_report"
-  "thesis_report.tex" 1595276248 31808 49d6c1e65eb11ae1bf9c4f0ded745d8d ""
+  "thesis_report.aux" 1595504023 3543 b1e176829c63f0cfc43e3723db531792 ""
+  "thesis_report.bbl" 1595504022 1982 35453d3875d823f0ec9445e740a573d9 "bibtex thesis_report"
+  "thesis_report.tex" 1595504015 32324 fb38fd4da23978cc849304c9bc82b595 ""
   (generated)
-  "thesis_report.pdf"
-  "thesis_reportNotes.bib"
   "thesis_report.aux"
   "thesis_report.log"
+  "thesis_report.pdf"
+  "thesis_reportNotes.bib"
