@@ -1,4 +1,4 @@
-# Search with adiabatic quantum walk algorithm
+# Quantum Walks with Time-Dependent Hamiltonian
 
 The repository is structured in the following way
 
