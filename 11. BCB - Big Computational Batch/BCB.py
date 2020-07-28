@@ -20,6 +20,7 @@ import ray
 # useful global variables, shouldn't be too inefficient
 global dimension
 global step_function
+global topology
 # error tolerance (relative and absolute) for RK45 intergrator
 global rtolerance, atolerance
 
@@ -264,11 +265,12 @@ if __name__ == '__main__':
 
 
     # Big Computational Batch
-    step_function = 2
+
+
+    step_function = 3
     dimension = 31
     parallel_routine(0, dimension * dimension * 0.5, 0, 3)
 
-    step_function = 3
-    for dim in dims:
-        dimension = dim
-        parallel_routine(0, dimension * dimension * 0.5, 0, 3)
+    step_function = 2
+    dimension = 31
+    parallel_routine(0, dimension * dimension * 0.5, 0, 3)
