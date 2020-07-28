@@ -264,27 +264,11 @@ if __name__ == '__main__':
 
 
     # Big Computational Batch
-    step_function = 0
-    for dim in dims:
-        dimension = dim
-        parallel_routine(0, dimension * (2), 0, 5)
-
-    step_function = 1
-    for dim in dims:
-        dimension = dim
-        parallel_routine(0, dimension * (2), 0, 5)
-
     step_function = 2
-    for dim in dims:
-        dimension = dim
-        parallel_routine(0, dimension * (2), 0, 5)
+    dimension = 31
+    parallel_routine(0, dimension * dimension * 0.5, 0, 3)
 
     step_function = 3
     for dim in dims:
         dimension = dim
-        parallel_routine(0, dimension * (2), 0, 5)
-
-    step_function = 5
-    for dim in dims:
-        dimension = dim
-        parallel_routine(0, dimension * (2), 0, 5)
+        parallel_routine(0, dimension * dimension * 0.5, 0, 3)
