@@ -102,7 +102,7 @@
 % body of paper here - Use proper section commands
 % References should be done using the \cite, \ref, and \label commands
 
-\red{I testi in rosso sono commenti su argomenti mancanti, informazioni da aggiungere e analisi necessarie per completare il lavoro. Una lista piu o meno completa si trova nella Sezione V. Una versione di questo report aggiornata volta per volta si puo trovare qui}\\ {\footnotesize \url{https://github.com/matteogarbellini/Adiabatic-Quantum-Walk/blob/AdiabaticQuantumWalk/0.%20report/thesis_report.pdf}}
+\red{I testi in rosso sono commenti su argomenti mancanti, informazioni da aggiungere e analisi necessarie per completare il lavoro. Una lista piu o meno completa si trova nella Sezione V. Una versione di questo report aggiornata volta per volta si puo trovare qui}\\ {\footnotesize \url{https://github.com/matteogarbellini/Quantum-Walk-Time-Dependent-Hamiltonian/blob/AdiabaticQuantumWalk/0.%20report/thesis_report.pdf}}
 
 % % % % % % % % %
 % INTRODUCTION  %
@@ -114,7 +114,7 @@ This report can be summarized as follows.
 \item In Section III we discuss the Dynamics, focusing on the time dependent and time independent hamiltonian approach to quantum search. A definition of the computational routines used throughout the work is also given.
 \item In Section IV we present results for selected topologies, namely the \textit{worst-case-scenario} Circular Graph and the \textit{best-case-scenario} Complete Graph. For the two selected topologies we compare the known time-independent approach and the time-dependent, in particular defining two qualitative characteristics for results: optimized search and localization.
 \item Section V is a list of things yet to be done/finished.
-\item In the Appendix a discussion on the computational methods, in particular the differential equation solver and the optimization algorithm used. 
+\item In the Appendix a discussion on the computational methods, in particular the differential equation solver and the optimization algorithm used.
 \end{itemize}
 
 %%%%%%%
@@ -302,7 +302,7 @@ Once the N solutions are found, the probability is easily found with $p=|\langle
 Throughout the analysis the goal was to find the maximum probability for the specific scenario, and the procedure varied depending on the graph topology and the hamiltonian considered. We can therefore characterize the three main computational routines used:
 \begin{itemize}
   \item \textbf{$\gamma$-T optimization:} as it might imply, we run an optimization on the probability using $\gamma$ and time as parameters, trying to maximize the probability. This is used for the time-independent search, since it's computationally inexpensive.
-  \item \textbf{T optimization for fixed $\gamma$:} we sample a fix number of $\gamma$ values and optimize on the time variable. This is useful to gain insight on the qualitative probability distribution for varying time. 
+  \item \textbf{T optimization for fixed $\gamma$:} we sample a fix number of $\gamma$ values and optimize on the time variable. This is useful to gain insight on the qualitative probability distribution for varying time.
   \item \textbf{probability grid evaluation:} this technique consists in sampling both time and $\gamma$ and evaluating the probability for all the $(\gamma, T)$ combinations. The advantage of such approach is the much less computational time needed since a single evaluation is much faster than an optimization over the $(\gamma, T)$ space. Secondly true optimization tries to find the absolute maximum, to the expence of having a larger T, while we're interested in a probability trend rather than a very precise maximum. \\ As an example, we might find a probability p=0.95 for T = 10 using the grid evaluation, although the true maximum is p=0.96 for T = 35. It iss indeed clear that the 0.01 in greater probability does not balances the disadvatange of more than double time. \red{this is made up data, might be interesting to show \textit{actual} data.}
 \end{itemize}
 Additional information on the optimization algorithms used can be found in the Appendix.
@@ -312,13 +312,13 @@ Additional information on the optimization algorithms used can be found in the A
 %TOPOLOGIES
 %%%%%%%
 \section{Results for selected topologies}
-In this section we first characterize two classes of results, namely the optimized search and the localization. We then look at search results with the time-independent hamiltonian and compare them to the time-dependent approach. In particular we look at the \textit{best-case-scenario} the \textbf{complete graph} for which we know the analitical solution and the \textit{worst-case-scenario} the \textbf{circular graph} for which no analytical solution is yet known. 
+In this section we first characterize two classes of results, namely the optimized search and the localization. We then look at search results with the time-independent hamiltonian and compare them to the time-dependent approach. In particular we look at the \textit{best-case-scenario} the \textbf{complete graph} for which we know the analitical solution and the \textit{worst-case-scenario} the \textbf{circular graph} for which no analytical solution is yet known.
 
 
 \subsection{Search vs Localization}
 We shall describe the possible outcomes of the quantum search and characterize them as \textbf{localization} and \textbf{optimized search}:
 \begin{itemize}
-\item The first describes the finding with high probability of the solution without particular interest in the time needed to reach that particular solution. As we will later see this is a direct consequence of the adiabatic theorem. 
+\item The first describes the finding with high probability of the solution without particular interest in the time needed to reach that particular solution. As we will later see this is a direct consequence of the adiabatic theorem.
 
 \item The latter describes the finding of the solution with high probability, optimizing for the time as well. In addition as we shall see later we'll also consider the possibility of repeating the search an $n$ amount of times, and get a less than optimal search for each iteration but better time (sum of time, actually) overall.
 \end{itemize}
@@ -354,7 +354,7 @@ These, with the corrisponding time T at which the time-independent probability i
 \begin{itemize}
 	\item Look for any intersection between the dashed contour line and the vertical line
 	\item If it does intersect the intersection point(s) represent a $(\gamma, T)$ combination that is equivalent as the time-independent algorithm in terms of probability
-	\item If the dashed contour line and the vertical line identify a bounded region (\red{might be necessary a figure to explain this}), that particular region represents a $(\gamma, T)$-space for which the time-dependent algorithm performs better than the time-independent one. 
+	\item If the dashed contour line and the vertical line identify a bounded region (\red{might be necessary a figure to explain this}), that particular region represents a $(\gamma, T)$-space for which the time-dependent algorithm performs better than the time-independent one.
 \end{itemize}
 
 
@@ -392,10 +392,10 @@ As we introduced in Section III we're interested in determining how influencial 
 \caption{Delta distrubution for different s(t). Computed for N = 35,47,57,67}
 \end{figure}
 
-As the plot shows however we do not see any speedup for functions that are not linear, on the contrary we do get poorer results. The time-independent implementation remains the best performing one, followed by linear, cubic root and square root. 
+As the plot shows however we do not see any speedup for functions that are not linear, on the contrary we do get poorer results. The time-independent implementation remains the best performing one, followed by linear, cubic root and square root.
 
 \subsubsection{\textbf{Localization}}
-We can clearly see from the heatmap plots that for large T the probabability gets bigger, and it will eventually get to one. This is, as we already mentioned, a direct consequence of the adiabatic theorem. \\ A further analysis is due, focusing on studying the probability distribution with a more quantitative approach. That being said the localization is a key feature of the time-dependent approach to quantum search. 
+We can clearly see from the heatmap plots that for large T the probabability gets bigger, and it will eventually get to one. This is, as we already mentioned, a direct consequence of the adiabatic theorem. \\ A further analysis is due, focusing on studying the probability distribution with a more quantitative approach. That being said the localization is a key feature of the time-dependent approach to quantum search.
 
 \subsection{Complete graph}
 \red{This section should include a comparison between time dependent and time independent approach to quantum search for the complete graph. We're interested in benchmarks to compare to the circular graph. For now the results we have are partial and yet not enough to show what we want\\ It might also be interesting looking into the order of the probability for p=0.9.}
@@ -430,7 +430,7 @@ Most all numerical simulations were performed using \textbf{Python}. Numerical m
 
 \subsection{Optimization Algorithm}
 In Section III a series of benchmark were performed to compare the time-dependent and time independent hamiltonian approach to the search problem. In order to determine which optimization algorithm fitted the best for the task, a number of possible algorithm were tested, such as \textit{shgo, dualannealing, minimize, LHSBH} and \textit{Basin-Hopping}.\\ \\
-Due to the oscillating nature of the probability (\red{a figure is needed}) the scipy native \textbf{Basinhopping algorithm} was used. As the name suggests the algorithm performs a series of randomized hops, i.e. jumps, of the coordinates in order to find the true maximum This fits particularly well with the series of maxima and minima of the probability function (for fixed $\gamma$) in the time-independent hamiltonian. \\\red{Additional information on the parameter used are needed (e.g. step size, number of iterations)} 
+Due to the oscillating nature of the probability (\red{a figure is needed}) the scipy native \textbf{Basinhopping algorithm} was used. As the name suggests the algorithm performs a series of randomized hops, i.e. jumps, of the coordinates in order to find the true maximum This fits particularly well with the series of maxima and minima of the probability function (for fixed $\gamma$) in the time-independent hamiltonian. \\\red{Additional information on the parameter used are needed (e.g. step size, number of iterations)}
 
 \subsection{Schroedinger Solver and Normalization Error}
 In Section II we presented an evolution which is governed by a time-dependent hamiltonian, used to find the evolved state $|\psi(t)\rangle$. This is accomplished by solving the usual Schroedinger equation using Scipy's \textbf{integrate.solve\_ivp}, that provides a wide varieties of integrations methods. \\

@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex thesis_report"] 1595508532 "thesis_report.aux" "thesis_report.bbl" "thesis_report" 1595508533
+["bibtex thesis_report"] 1596010026 "thesis_report.aux" "thesis_report.bbl" "thesis_report" 1596010027
   "./apsrev4-2.bst" 1595064284 69611 b535f07e11c1fea03841ef5fe125643f ""
-  "thesis_report.aux" 1595508533 4697 31389aedd6085b3494d4f4719567612d ""
+  "thesis_report.aux" 1596010027 4697 737249fdf5f4263929af40040fa688e5 ""
   "thesis_report.bcf" 0 -1 0 ""
-  "thesis_reportNotes.bib" 1595508533 104 4d8bb863c86f3d7b03a471e9d4707f34 ""
+  "thesis_reportNotes.bib" 1596010027 104 4d8bb863c86f3d7b03a471e9d4707f34 ""
   (generated)
-  "thesis_report.bbl"
   "thesis_report.blg"
-["pdflatex"] 1595508532 "thesis_report.tex" "thesis_report.pdf" "thesis_report" 1595508533
+  "thesis_report.bbl"
+["pdflatex"] 1596010026 "thesis_report.tex" "thesis_report.pdf" "thesis_report" 1596010027
   "/usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -136,13 +136,13 @@
   "figures/s(t).pdf" 1595508270 30765 24cc3dcdfdcdfbb2abd2cc767580db4d ""
   "revsymb4-2.sty" 1547816100 5433 fd7fccdc1ca7819d49e5bb1deb9d741b ""
   "revtex4-2.cls" 1547816224 200719 c96794d0e4d320fe9ff0c7147d98a76b ""
-  "thesis_report.aux" 1595508533 4697 31389aedd6085b3494d4f4719567612d ""
-  "thesis_report.bbl" 1595508532 1982 35453d3875d823f0ec9445e740a573d9 "bibtex thesis_report"
-  "thesis_report.out" 1595508533 1961 160606e24dcb36f87c6f62d140b48465 ""
-  "thesis_report.tex" 1595508530 32915 beee7dc605644fb3ef536c4ca1370df7 ""
+  "thesis_report.aux" 1596010027 4697 737249fdf5f4263929af40040fa688e5 ""
+  "thesis_report.bbl" 1596010026 1982 35453d3875d823f0ec9445e740a573d9 "bibtex thesis_report"
+  "thesis_report.out" 1596010027 1961 160606e24dcb36f87c6f62d140b48465 ""
+  "thesis_report.tex" 1596010022 32924 ab2a7365fa5fb00367804d7df792630e ""
   (generated)
-  "thesis_report.pdf"
   "thesis_report.out"
-  "thesis_report.aux"
-  "thesis_report.log"
+  "thesis_report.pdf"
   "thesis_reportNotes.bib"
+  "thesis_report.log"
+  "thesis_report.aux"

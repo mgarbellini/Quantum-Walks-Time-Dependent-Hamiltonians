@@ -1,6 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  23 JUL 2020 14:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  29 JUL 2020 10:07
 entering extended mode
  restricted \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
 **thesis_report.tex
 (./thesis_report.tex
@@ -814,8 +815,14 @@ Class revtex4-2 Info: Taking \maketitle back from hyperref on input line 60.
 
 \c__siunitx_mathsf_int=\count188
 \c__siunitx_mathtt_int=\count189
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 113.
 
+Overfull \hbox (6.25739pt too wide) in paragraph at lines 105--106
+[]$\OT1/cmtt/m/n/8 https : / / github . com / matteogarbellini / Quantum-[]Walk
+-[]Time-[]Dependent-[]Hamiltonian / blob / AdiabaticQuantumWalk / 0 . %20report
+ / thesis _
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 113.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
@@ -844,14 +851,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 275--277
 
  []
 
-[5] <./figures/benchmarks.pdf, id=183, 642.4pt x 481.8pt>
+[5] <./figures/benchmarks.pdf, id=184, 642.4pt x 481.8pt>
 File: ./figures/benchmarks.pdf Graphic file (type pdf)
 
 <use ./figures/benchmarks.pdf>
 Package pdftex.def Info: ./figures/benchmarks.pdf used on input line 331.
 (pdftex.def)             Requested size: 284.52756pt x 213.39682pt.
 
-<./figures/example.pdf, id=184, 462.52798pt x 346.89601pt>
+<./figures/example.pdf, id=185, 462.52798pt x 346.89601pt>
 File: ./figures/example.pdf Graphic file (type pdf)
 
 <use ./figures/example.pdf>
@@ -863,25 +870,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 338--344
  []
 
 [6] [7 <./figures/benchmarks.pdf> <./figures/example.pdf>]
-<./figures/11.pdf, id=252, 542.025pt x 413.545pt>
+<./figures/11.pdf, id=253, 542.025pt x 413.545pt>
 File: ./figures/11.pdf Graphic file (type pdf)
  <use ./figures/11.pdf>
 Package pdftex.def Info: ./figures/11.pdf used on input line 363.
 (pdftex.def)             Requested size: 256.0748pt x 195.38211pt.
 
-<./figures/21.pdf, id=253, 552.0625pt x 401.5pt>
+<./figures/21.pdf, id=254, 552.0625pt x 401.5pt>
 File: ./figures/21.pdf Graphic file (type pdf)
  <use ./figures/21.pdf>
 Package pdftex.def Info: ./figures/21.pdf used on input line 363.
 (pdftex.def)             Requested size: 256.0748pt x 186.2422pt.
 
-<./figures/27.pdf, id=254, 551.05875pt x 431.6125pt>
+<./figures/27.pdf, id=255, 551.05875pt x 431.6125pt>
 File: ./figures/27.pdf Graphic file (type pdf)
  <use ./figures/27.pdf>
 Package pdftex.def Info: ./figures/27.pdf used on input line 365.
 (pdftex.def)             Requested size: 256.0748pt x 200.5726pt.
 
-<./figures/29.pdf, id=255, 531.9875pt x 420.57124pt>
+<./figures/29.pdf, id=256, 531.9875pt x 420.57124pt>
 File: ./figures/29.pdf Graphic file (type pdf)
  <use ./figures/29.pdf>
 Package pdftex.def Info: ./figures/29.pdf used on input line 365.
@@ -907,13 +914,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 376--380
 
  []
 
-<./figures/delta.pdf, id=340, 642.4pt x 481.8pt>
+<./figures/delta.pdf, id=341, 642.4pt x 481.8pt>
 File: ./figures/delta.pdf Graphic file (type pdf)
  <use ./figures/delta.pdf>
 Package pdftex.def Info: ./figures/delta.pdf used on input line 382.
 (pdftex.def)             Requested size: 256.0748pt x 192.06227pt.
 
-<./figures/s(t).pdf, id=341, 794.97pt x 614.295pt>
+<./figures/s(t).pdf, id=342, 794.97pt x 614.295pt>
 File: ./figures/s(t).pdf Graphic file (type pdf)
  <use ./figures/s(t).pdf>
 Package pdftex.def Info: ./figures/s(t).pdf used on input line 391.
@@ -940,7 +947,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 438--439
 
  []
 
-<./figures/runge.png, id=402, 291.0875pt x 342.27875pt>
+<./figures/runge.png, id=403, 291.0875pt x 342.27875pt>
 File: ./figures/runge.png Graphic file (type png)
 
 <use ./figures/runge.png>
@@ -956,10 +963,10 @@ Package rerunfilecheck Info: File `thesis_report.out' has not changed.
 (rerunfilecheck)             Checksum: 160606E24DCB36F87C6F62D140B48465;1961.
  ) 
 Here is how much of TeX's memory you used:
- 19720 strings out of 493014
- 359633 string characters out of 6133351
- 521447 words of memory out of 5000000
- 23007 multiletter control sequences out of 15000+600000
+ 19721 strings out of 493014
+ 359642 string characters out of 6133351
+ 523447 words of memory out of 5000000
+ 23008 multiletter control sequences out of 15000+600000
  12952 words of font info for 48 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  38i,17n,42p,10386b,801s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -982,10 +989,10 @@ ve/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2016/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on thesis_report.pdf (11 pages, 1010443 bytes).
+Output written on thesis_report.pdf (11 pages, 1010935 bytes).
 PDF statistics:
- 486 PDF objects out of 1000 (max. 8388607)
- 371 compressed objects within 4 object streams
+ 487 PDF objects out of 1000 (max. 8388607)
+ 372 compressed objects within 4 object streams
  69 named destinations out of 1000 (max. 500000)
  275 words of extra memory for PDF output out of 10000 (max. 10000000)
 
