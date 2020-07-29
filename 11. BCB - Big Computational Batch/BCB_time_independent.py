@@ -185,8 +185,8 @@ if __name__ == '__main__':
     rtolerance = 1e-6
     atolerance = 1e-6
 
-    min_dim = 3
-    max_dim = 31
+    min_dim = 33
+    max_dim = 51
     dims = np.arange(min_dim, max_dim + 1, 2)
     for dim in dims:
         dimension = dim

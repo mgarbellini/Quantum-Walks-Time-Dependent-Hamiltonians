@@ -266,11 +266,12 @@ if __name__ == '__main__':
 
     # Big Computational Batch
 
+    step_function = 5
+    dimension = 41
+    parallel_routine(0, dimension * dimension * 0.5, 0, 1.5)
 
-    step_function = 3
-    dimension = 31
-    parallel_routine(0, dimension * dimension * 0.5, 0, 3)
+    dimension = 51
+    parallel_routine(0, dimension * dimension * 0.5, 0, 1.5)
 
-    step_function = 2
-    dimension = 31
-    parallel_routine(0, dimension * dimension * 0.5, 0, 3)
+    dimension = 61
+    parallel_routine(0, dimension * dimension * 0.5, 0, 1.5)
