@@ -1,0 +1,16 @@
+set xlabel "Lower Bound Time"
+set ylabel "Iters"
+set xlabel font "Helvetica,12"
+set ylabel font "Helvetica,12"
+set key right top Left font ",18" reverse
+set title font "Helvetica Bold,15"
+set title "Iters distribution for cerf s(t) and time-independent implementation \n at varying lower-bound time"
+plot \
+"51_iters.txt" using 1:2 w lp lc rgb "forest-green" lw 1 dt 3 pt 6 ps 2 title "51 time-independent", \
+"51_iters.txt" using 1:5 w lp lc rgb "forest-green" lw 1 dt 3 pt 7 ps 2 title "51 cerf",\
+"53_iters.txt" using 1:2 w lp lc rgb "navy" lw 1 dt 3 pt 6 ps 2 title "53 time-independent", \
+"53_iters.txt" using 1:5 w lp lc rgb "navy" lw 1 dt 3 pt 7 ps 2 title "53 cerf"
+
+
+
+

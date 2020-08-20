@@ -112,7 +112,7 @@ def heatmap2d(probability, time, beta):
     plt.colorbar()
 
 
-    file_name = str(dimension) + '_cg_heatmap_static.pdf'
+    file_name = str(dimension) + '_cg_heatmap_static_small_time.pdf'
     plt.savefig(file_name)
     plt.clf()
     plt.close()
@@ -132,10 +132,12 @@ def grid_eval(time_array, beta_array):
 def parallel_routine():
 
     #load beta and time arrays
-    time_text = str(dimension) + "_circ_time.npy"
+    time_text = str(dimension) + "_circ_time_small_time.npy"
     beta_text = str(dimension) + "_circ_beta.npy"
-    beta = np.load(beta_text)
-    time_array = np.load(time_text)
+    #beta = np.load(beta_text)
+    #time_array = np.load(time_text)
+
+
     # initialize ray multiprocessing
     ray.init()
     tic = time.perf_counter()
@@ -143,8 +145,12 @@ def parallel_routine():
     # useful definitions for multicore computation
     cpu_count = 4
     sampling_per_cpu_count = 6
+    time_sampling_points = 30
     process = []
     probability = []
+
+    beta = np.linspace(0, 1.5, cpu_count*sampling_per_cpu_count)
+    time_array = np.linspace(0,dimension, time_sampling_points)
 
     # parallel processes
     for i in range(cpu_count):
@@ -168,12 +174,15 @@ def parallel_routine():
     # preparing for export and export and miscellanea
     npy = ".npy"
 
-    file_probability = str(dimension) + '_circ_prob_static.npy'
+    file_probability = str(dimension) + '_circ_prob_static_small_time.npy'
 
     # export heatmap plot
     heatmap2d(probability_array, time_array, beta)
 
     np.save(file_probability, probability_array)
+    np.save(str(dimension) + "_circ_small_time.npy", time_array)
+    np.save(str(dimension) + "_circ_small_beta.npy", beta)
+
     toc = time.perf_counter() - tic
 
     print('Success: N ', dimension, ' in ', int(toc / 60), ' min')
@@ -185,7 +194,7 @@ if __name__ == '__main__':
     rtolerance = 1e-6
     atolerance = 1e-6
 
-    min_dim = 33
+    min_dim = 3
     max_dim = 51
     dims = np.arange(min_dim, max_dim + 1, 2)
     for dim in dims:

@@ -17,13 +17,16 @@ import ray
 
 def load_data_file(dim, flag):
 
-    data_type = ["_circ_prob_static.npy","_circ_prob_lin.npy","_circ_prob_sqrt.npy", "_circ_prob_cbrt.npy", "_circ_prob_cerf.npy"]
+    data_type = ["_circ_prob_static.npy","_circ_prob_lin.npy","_circ_prob_sqrt.npy", "_circ_prob_cbrt.npy", "_circ_prob_cerf.npy", "_circ_prob_static_small_time.npy"]
     t = '_circ_time.npy'
     b = '_circ_beta.npy'
 
+    t_small = '_circ_small_time.npy'
+    b_small = '_circ_small_beta.npy'
+
     probability = np.load(str(dim) + data_type[flag])
-    time = np.load(str(dim) + t)
-    beta = np.load(str(dim) + b)
+    time = np.load(str(dim) + t_small)
+    beta = np.load(str(dim) + b_small)
 
     return probability, time, beta
 
@@ -55,8 +58,7 @@ def delta_no_costrains(dim, flag):
 
     min_index = np.unravel_index(probability.argmin(), probability.shape)
     min = probability[min_index[0],min_index[1]]
-    return min
-    #*(1/(time[min_index[1]]))
+    return min*(1/(time[min_index[1]]))
 
 def all_s(dim):
     flag=[]
@@ -70,9 +72,10 @@ def all_s(dim):
 if __name__ == '__main__':
 
     min_dim = 3
-    max_dim = 31
+    max_dim = 51
     dimensions = np.arange(min_dim, max_dim + 1, 2)
 
 
+
     for dim in dimensions:
-        all_s(dim)
+        print(dim, delta_no_costrains(dim, 5))

@@ -1,0 +1,21 @@
+set xlabel "Lower Bound Time"
+set ylabel "min(T/p)"
+set xlabel font "Helvetica,12"
+set ylabel font "Helvetica,12"
+set key left top Left font ",18" reverse
+set title font "Helvetica Bold,15"
+set title "min(T/p) distribution for different shapes of s(t) \n and time-independent at varying lower-bound time"
+plot \
+"31.txt" using 1:2 w lp lc rgb "forest-green" lw 1 dt 3 pt 6 ps 2 title "31 time-independent", \
+"31.txt" using 1:5 w lp lc rgb "forest-green" lw 1 dt 3 pt 7 ps 2 title "31 cerf",\
+"33.txt" using 1:2 w lp lc rgb "navy" lw 1 dt 3 pt 6 ps 2 title "33 time-independent", \
+"33.txt" using 1:5 w lp lc rgb "navy" lw 1 dt 3 pt 7 ps 2 title "33 cerf",\
+"35.txt" using 1:2 w lp lc rgb "brown" lw 1 dt 3 pt 6 ps 2 title "33 time-independent", \
+"35.txt" using 1:5 w lp lc rgb "brown" lw 1 dt 3 pt 7 ps 2 title "33 cerf",\
+"37.txt" using 1:2 w lp lc rgb "dark-orchid" lw 1 dt 3 pt 6 ps 2 title "33 time-independent", \
+"37.txt" using 1:5 w lp lc rgb "dark-orchid" lw 1 dt 3 pt 7 ps 2 title "33 cerf",\
+"39.txt" using 1:2 w lp lc rgb "orange" lw 1 dt 3 pt 6 ps 2 title "33 time-independent", \
+"39.txt" using 1:5 w lp lc rgb "orange" lw 1 dt 3 pt 7 ps 2 title "33 cerf"
+
+
+

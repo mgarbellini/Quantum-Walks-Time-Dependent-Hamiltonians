@@ -1,0 +1,16 @@
+set xlabel "Lower Bound Time"
+set ylabel "min(T/p)"
+set xlabel font "Helvetica,12"
+set ylabel font "Helvetica,12"
+set key left top Left font ",18" reverse
+set title font "Helvetica Bold,15"
+set title "min(T/p) distribution for cerf s(t) and time-independent implementation \n at varying lower-bound time"
+plot \
+"51_delta.txt" using 1:2 w lp lc rgb "brown" lw 1 dt 3 pt 6 ps 2 title "51 time-independent", \
+"51_delta.txt" using 1:5 w lp lc rgb "brown" lw 1 dt 3 pt 7 ps 2 title "51 cerf",\
+"53_delta.txt" using 1:2 w lp lc rgb "orange" lw 1 dt 3 pt 6 ps 2 title "53 time-independent", \
+"53_delta.txt" using 1:5 w lp lc rgb "orange" lw 1 dt 3 pt 7 ps 2 title "53 cerf"
+
+
+
+

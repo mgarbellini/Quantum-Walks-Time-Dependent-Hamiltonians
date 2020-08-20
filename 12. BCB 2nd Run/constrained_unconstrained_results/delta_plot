@@ -1,0 +1,13 @@
+set xlabel "Dimension"
+set ylabel "min(T/p)"
+set xlabel font "Helvetica,12"
+set ylabel font "Helvetica,12"
+set key left top Left font ",18" reverse
+set title font "Helvetica Bold,15"
+set title "Distribution of min(T/p) for different shapes of s(t) and time-independent"
+plot [0:80][0:85] \
+"c_delta.txt" using 1:2 w lp lc rgb "orange" lw 1 dt 3 pt 9 ps 2 title "time-independent",\
+"" using 1:3 w lp lc rgb "orchid" lw 1 dt 3 pt 7 ps 1.5 title "linear",\
+"" using 1:4 w lp lc rgb "brown" lw 1 dt 3 pt 7 ps 1.5 title "sqrt", \
+"" using 1:5 w lp lc rgb "forest-green" lw 1 dt 3 pt 7 ps 1.5 title "cerf"
+
