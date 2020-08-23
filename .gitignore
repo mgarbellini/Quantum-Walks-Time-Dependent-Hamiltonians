@@ -1,2 +1,4 @@
 .DS_Store
 /report/*
+!/report/thesis_report.tex
+!/report/thesis_report.pdf
