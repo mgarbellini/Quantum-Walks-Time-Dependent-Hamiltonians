@@ -131,12 +131,6 @@ def grid_eval(time_array, beta_array):
 
 def parallel_routine():
 
-    #load beta and time arrays
-    time_text = str(dimension) + "_circ_time.npy"
-    beta_text = str(dimension) + "_circ_beta.npy"
-    beta = np.load(beta_text)
-    time_array = np.load(time_text)
-
 
     # initialize ray multiprocessing
     ray.init()
@@ -145,12 +139,12 @@ def parallel_routine():
     # useful definitions for multicore computation
     cpu_count = 4
     sampling_per_cpu_count = 6
-    time_sampling_points = 30
+    time_sampling_points = 60
     process = []
     probability = []
 
-    #beta = np.linspace(0, 1.5, cpu_count*sampling_per_cpu_count)
-    #time_array = np.linspace(0,dimension, time_sampling_points)
+    beta = np.linspace(0, 1.5, cpu_count*sampling_per_cpu_count)
+    time_array = np.linspace(0,dimension*dimension, time_sampling_points)
 
     # parallel processes
     #for i in range(cpu_count):
@@ -181,6 +175,7 @@ def parallel_routine():
     heatmap2d(probability_array, time_array, beta)
 
     np.save(file_probability, probability_array)
+    np.save(str(dimension) + 'time.npy', time_array)
 
     toc = time.perf_counter() - tic
 
@@ -193,9 +188,18 @@ if __name__ == '__main__':
     rtolerance = 1e-6
     atolerance = 1e-6
 
+    """
     min_dim = 3
     max_dim = 71
     dims = np.arange(min_dim, max_dim + 1, 2)
     for dim in dims:
         dimension = dim
         parallel_routine()
+    """
+    dimension = 21
+    gamma = 0.85
+    time = np.linspace(0,450,450)
+
+    for i in range(len(time)):
+        probability = -evaluate_probability([gamma, time[i]])
+        print(time[i], probability[0,0])

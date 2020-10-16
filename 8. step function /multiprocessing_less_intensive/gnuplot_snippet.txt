@@ -6,3 +6,8 @@ plot "cbrt.txt" using 1:2 w lp dt 2 pt 11 ps 2 title "p>0.90", "" using 1:3 w lp
 plot "lin.txt" using 1:4 pt 11 ps 2 title "linear", "sqrt.txt" using 1:4 pt 30 ps 2 title "sqrt", "cbrt.txt" using 1:4 pt 5 ps 2 title "cbrt"
 
 fit
+
+
+plot "cerf_sampled_47.txt" using 1:2 w lp dt 2 pt 11 ps 2 notitle, "" using 1:3 w lp dt 2 pt 11 ps 2 notitle, "" using 1:4 w lp dt 2 pt 11 ps 2 notitle, "" using 1:5 w lp dt 2 pt 11 ps 2 notitle
+
+plot "cerf_sampled_t_over_p_47.txt" using 2:1 w lp dt 2 pt 11 ps 2 notitle, "" using 3:1 w lp dt 2 pt 11 ps 2 notitle, "" using 4:1 w lp dt 2 pt 11 ps 2 notitle, "" using 5:1 w lp dt 2 pt 11 ps 2 notitle

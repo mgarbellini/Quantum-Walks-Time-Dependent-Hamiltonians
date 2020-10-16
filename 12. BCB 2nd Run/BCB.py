@@ -341,6 +341,7 @@ if __name__ == '__main__':
     step_functions = ['lin', 'sqrt', 'cbrt', 'cerf_3', 'cerf_5', 'cerf_7']
 
 
+
     if(input[0] == 'single'):
 
         dimension = int(input[5])

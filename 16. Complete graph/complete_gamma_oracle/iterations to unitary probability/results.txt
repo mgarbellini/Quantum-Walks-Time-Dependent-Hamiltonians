@@ -1,0 +1,16 @@
+
+ 
+ 	*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *
+	*  Quantum Search on Graph with time-dependent Quantum Walks   *
+	*  M. Garbellini, Dept. of Physics, University of Milan        *
+	*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *
+
+
+ 
+ 	*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *
+	*  Quantum Search on Graph with time-dependent Quantum Walks   *
+	*  M. Garbellini, Dept. of Physics, University of Milan        *
+	*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *
+
+31 0.04768848346043496 20.96942337932923
+41 0.034379893891456785 29.086768073140984

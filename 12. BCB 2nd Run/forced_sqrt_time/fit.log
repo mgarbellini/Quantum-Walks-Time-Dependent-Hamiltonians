@@ -1,0 +1,88 @@
+
+
+*******************************************************************************
+Mon Aug 31 10:21:36 2020
+
+
+FIT:    data read from "iters_sqrt.txt" using 1:5
+        format = x:z
+        #datapoints = 35
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = ax**b
+fitted parameters initialized with current variable values
+
+
+
+*******************************************************************************
+Mon Aug 31 10:21:56 2020
+
+
+FIT:    data read from "iters_sqrt.txt" using 1:5
+        format = x:z
+        #datapoints = 35
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*x**b
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a             b            
+   0 4.2161312986e+04   0.00e+00  1.22e+02    1.000000e+00   1.000000e+00
+   6 2.9348117437e+00  -3.70e-04  1.22e-04    4.602420e-01   7.565214e-01
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 2.93481
+rel. change during last iteration : -3.70498e-09
+
+degrees of freedom    (FIT_NDF)                        : 33
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.298218
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0889337
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 0.460242         +/- 0.03049      (6.625%)
+b               = 0.756521         +/- 0.01697      (2.243%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.995  1.000 
+
+
+*******************************************************************************
+Mon Aug 31 10:29:33 2020
+
+
+FIT:    data read from "iters_sqrt.txt" using 1:5
+        format = x:z
+        x range restricted to [0.00000 : 60.0000]
+        #datapoints = 29
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*x**b
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a             b            
+   0 2.3672680114e+00   0.00e+00  1.38e+01    4.602420e-01   7.565214e-01
+   5 1.7157734682e+00  -8.45e-06  1.38e+00    5.335412e-01   7.124782e-01
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 1.71577
+rel. change during last iteration : -8.45488e-11
+
+degrees of freedom    (FIT_NDF)                        : 27
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.252086
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0635472
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 0.533541         +/- 0.03511      (6.58%)
+b               = 0.712478         +/- 0.01774      (2.489%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.994  1.000 
