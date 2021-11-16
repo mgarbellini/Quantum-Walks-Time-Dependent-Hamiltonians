@@ -1,5 +1,6 @@
-# Quantum Walks with Time-Dependent Hamiltonian
+# Quantum Walks with Time-Dependent Hamiltonians
 Bachelor Thesis at the University of Milan, March-September 2020 
+- Full Title: *Quantum Walks with time-dependent Hamiltonians and their application to the search problem on graphs*
 - Supervisors: Prof M.G.A. Paris,  Prof S. Olivares, Dr C. Benedetti 
 
 
