@@ -1,6 +1,5 @@
 # Quantum Walks with Time-Dependent Hamiltonian
 Bachelor Thesis at the University of Milan, March-September 2020 
-
 Supervisors: Prof M.G.A. Paris,  Prof S. Olivares, Dr C. Benedetti 
 
 
