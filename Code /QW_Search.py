@@ -21,7 +21,38 @@ the previous version.
 
 - Robustness of the approach
 - Localization and Multiple iteration search
-
-
-
 """
+
+import sys
+import time
+import numpy as np
+from scipy import linalg
+from scipy.integrate import odeint, solve_ivp
+
+import multiprocessing as mp
+import ray
+
+from numba import njit
+from numba import int32, float64
+from numba import types, typed, typeof, deferred_type
+from numba.experimental import jitclass
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""" CLASS: HAMILTONIAN  """""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+hamiltonian_types = [
+    ('dimension', int32),
+    ('type', int32),
+    ('topology', ??),  #char or numerical id?
+    ('step_function', int32),
+    ('target', int32),
+    ('laplacian', float64[:]),
+    ('hamiltonian', float64[:]),
+]
+
+@jitclass(hamiltonian_types):
+class Hamiltonian:
+    """Hamiltonian class"""
+    def __init__(self, dimension, type, topology, target, step_function):
