@@ -30,7 +30,6 @@ from scipy import linalg
 from scipy.integrate import odeint, solve_ivp
 
 import multiprocessing as mp
-import ray
 
 from numba import njit
 from numba import int32, float64
@@ -43,16 +42,58 @@ from numba.experimental import jitclass
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 hamiltonian_types = [
-    ('dimension', int32),
+    ('dim', int32),
     ('type', int32),
-    ('topology', ??),  #char or numerical id?
-    ('step_function', int32),
+    ('topology', int32),
+    ('step_func', int32),
     ('target', int32),
-    ('laplacian', float64[:]),
-    ('hamiltonian', float64[:]),
+    ('laplacian', float64[:,:]),
+    ('hamiltonian', float64[:,:]),
 ]
 
-@jitclass(hamiltonian_types):
+@jitclass(hamiltonian_types)
 class Hamiltonian:
     """Hamiltonian class"""
-    def __init__(self, dimension, type, topology, target, step_function):
+    def __init__(self, dim, type, topology, target, step_func):
+
+        self.dim = dim
+        self.type = type
+        self.topology = topology
+        self.target = target
+        self.step_func = step_func
+
+
+    def build_laplacian(self):
+        lap = np.empty((self.dim, self.dim))
+        lap.fill(0)
+
+        """Complete graph (0) """
+        if self.topology == 0:
+            lap -= 1
+            for i in range(self.dim):
+                lap[i,i] += self.dim
+
+        """Cycle graph (1) """
+        if self.topology == 1:
+            for i in range(self.dim):
+                lap[i,i] = 2
+                lap[i,(i+1)%self.dim] -= 1
+                lap[i,(i-1)%self.dim] -= 1
+
+        """Random graph (2)"""
+        """Star graph (3)"""
+
+        self.laplacian = lap
+
+    def build_hamiltonian(self):
+
+
+
+if __name__ == '__main__':
+
+    #Test hamiltonian class (dim, type, topology, target, step_func)
+
+    HC = Hamiltonian(5, 0, 0, 1, 1)
+    HC.build_laplacian()
+    HCy = Hamiltonian(5, 0, 1, 1, 1)
+    HCy.build_laplacian()
